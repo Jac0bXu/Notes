@@ -1176,7 +1176,7 @@ The same principle can be used to calculate in the other direction.\\
     Decoupling capacitors allow for reduction of current spikes.\\
     Wires or connections may have an inductance, allowing for voltage drops.\\
 \end{mdframed}
-\section{Tri-State Outputs}
+\subsection{Tri-State Outputs}
     This allows for the creation of a gate that allows for the gate to behave as if it is not in the circuit. That is, it behaves as an open circuit.\\
     This will allow for multiple gates driving a bus, with all but one disconnected, allowing this one to write the output of the bus.\\
     This is essentially adding an enabled/disabled state:
@@ -1189,5 +1189,38 @@ The same principle can be used to calculate in the other direction.\\
     \end{center}
     If enable is 0, the resistance of the circuit goes to a very high value, making it not exist to the rest of the circuit.\\
     The "blackbox" in the circuit is the $(C\land D')\lor(C\land D)'$.\\
-    So, in the situation above, one could enable
+    So, in the situation above, one could enable or disable these at will. When this is disabled, it will act as a third state, that of "nonexistence".\\~\\
+    Tri-State outputs are designed so that the output enable delay is longer than the disable delay. This will allow us to avoid there being two or more inputs into a bus to be enabled at the same time.\\
+    However, this may not always be possible.\\
+    So we create a solution that makes sure there is a disable for everything between any two enables. This will allow us to make sure there is never a conflict due to this.\\
+    \defn{Bus Transceiver}{device used to connect two buses, allowing them to write to each other.}\\
+    The following is an example of transceivers being used:
+    \begin{center}
+        \includegraphics[width = 200px]{images/transcieveruse.png}
+    \end{center}
+    \begin{table}
+        \centering
+        \begin{tabular}{c|c|c}
+            EN-DIR & Mode & Operation\\
+            \hline
+            0-x & disconnect & disconnect\\
+            1-0 & 0 & A writes to B\\
+            1-1 & 1 & B writes to A
+            
+        \end{tabular}
+    \end{table}
+    There is also a leakage current here, that must be taken into account.
+\section{Complex CMOS Gates}
+If we were to analyze the following circuit:
+\begin{center}
+    \includegraphics[width = 75px]{images/complexcmos.png}
+\end{center}
+We must analyze what situations will lead to a connection between $Z$ and $V_{DD}$ or $V_{SS}$. Series basically represents AND ($\land$), while parallel basically represents OR ($\lor$).\\
+So the above function is $(A'\lor B')\land(C'\lor D')$, as those are the combinations that will lead to Z to be connected to HIGH, or $V_{DD}$.
+Transmission gates are essentially switches controlled by enables.\\
+\begin{center}
+    \includegraphics[width = 100px]{images/transmission_gate.png}
+\end{center}
+It is a PMOS connected with and NMOS that are connected through complementing control signals. When EN is LOW, both of them are off, and thus the circuit is disconnected. When EN is HIGH, both of them are on, and thus the circuit is connected.\\
+The reason we have two gates, instead of just one to connect A and B, is because NMOS transistors are not good at transmitting HIGH voltages, and PMOS are not good at transmitting LOW voltages. However, together, both HIGH and LOW can be transmitted.\\
 \end{document}
