@@ -933,4 +933,32 @@ If we have an area S
     \text{area}(T(S)) = \text{area}(S)*\det(\mathbf{A})
 \end{equation*}
 with \textbf{A} being the transform matrix of the transformation.
+\section{Vector Space}
+\defn{Vector Space}{a non-empty set V of vectors on which two operations called addition and multiplication by scalar are defined. This is subject to the ten axioms:}\\
+If $\mathbf{u,v}\in V$, and $c,d\in \mathbb{R}$
+\begin{enumerate}
+    \item $\mathbf{u+v}\in V$
+    \item $\mathbf{u+v=v+u}$
+    \item $\mathbf{(u+v)+u = u+(v+u)}$
+    \item $\mathbf{0+u=u}$
+    \item $\mathbf{\forall u \in \text{$V$}, -u\in \text{$V$}}$
+    \item $c\mathbf{u}\in V$
+    \item $c\mathbf{(u+v)} = c\mathbf{u}+c\mathbf{v}$
+    \item $(c+d)\mathbf{u} = c\mathbf{u}+d\mathbf{u}$
+    \item $c(d\mathbf{u}) = cd(\mathbf{u})$
+    \item $1\mathbf{u=u}$
+\end{enumerate}
+Let $\mathbf{M}_{m\times n}$ be a matrix with real entries.\\
+Addition is the sum of each term with their respective term in another matrix of the same dimensions.\\
+Scalar multiplication is the multiplication of each term with the given scalar.\\
+\defn{Subspace}{A subspace H of a vector space V is a subset that complies with three properties:}\\
+\begin{enumerate}
+    \item $\mathbf{0}\in H$
+    \item $\mathbf{u,v}\in H \implies \mathbf{u+v}\in H$
+    \item $c\in \mathbb{R}, \mathbf{u}\in H \implies c\mathbf{u}\in H$
+\end{enumerate}
+This is, in essence, the generalized form of "Subspaces of $\mathbb{R}^n$".\\
+\begin{center}
+    \textbf{Theorem.} If V is a vector space, and $\mathbf{v_1,v_2,v_3, \ldots, v_n}$ are vectors within V, then $H = span(\mathbf{v_1,v_2,v_3, \ldots, v_n})$ is a subspace of V.
+\end{center}
 \end{document}
