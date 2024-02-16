@@ -1106,84 +1106,88 @@ Based on the aforementioned rules, it will be defined as: \\~\\$(W' \land Z) \lo
     \defn{Dynamic Behavior}{situations with changing inputs.}\\
     \defn{Fan-in}{The maximum number of inputs a gate can have in some predefined logic family, is defined as the fan-in of the logic family.}\\
     So, for the CMOS family, the fan-in would ideally be $\infty$, but, because the resistance of the transistors starts mounting, there is a limit.\\
-In the CMOS family, the fan-in for a NAND gate is 6, and for a NOR it is 4.\\
-If we wanted more inputs, we would need to connect multiple gates.\\
-\subsection{CMOS Static Electrical Behavior}
-Before, we had:
-\begin{table}
-    \centering
-    \begin{tabular}{c|c}
-        $V_{in}$ & $V_{out}$ \\
-        \hline
-        0V       & 5V        \\
-        5V       & 0V
-    \end{tabular}
-\end{table}
-But the graph is actually slanted. This introduces new parameters that the manufacturer provides.\\
-\begin{itemize}
-    \item \defn{$V_{OHmin}$}{The minimum output at HIGH.}
-    \item \defn{$V_{IHmin}$}{The minimum input that will be recognized HIGH.}
-    \item \defn{$V_{OLmax}$}{The maximum output at LOW.}
-    \item \defn{$V_{ILmax}$}{The maximum input to be recognized as LOW.}
-\end{itemize}
-\defn{DC noise margin}{amount of noise to corrupt the worst case output to not be recognized properly.\\
-    \quad For LOW:
-    \begin{equation*}
-        V_{ILMax} - V_{OLmax}
-    \end{equation*}
-    \quad For HIGH:
-    \begin{equation*}
-        V_{OHmin} - V_{IHmin}
-    \end{equation*}
-}
-CMOS gates also have something known as leakage current, which is caused by the input consuming current when it would ideally not be doing so.\\
-\begin{itemize}
-    \item $I_{IL}$: the maximum current flowing when it is LOW.
-    \item $I_{IH}$: the maximum current flowing when it is HIGH.
-\end{itemize}
-If a circuit is not purely CMOS, or if there are high resistances in other parts of the circuit, there would be a need to model the resistance of the output.
-This causes the outputs to be slightly lower or higher than what it should be at that state.\\
-\begin{itemize}
-    \item \defn{$I_{OLmax}$}{Maximum current an output can sink if while maintaining the voltage below $V_{OLmax}$.}
-    \item \defn{$I_{OHmin}$}{Minimum current an output needs to maintain the voltage above $V_{OHmin}$.}
-\end{itemize}
-\defn{Fan-out}{Number of inputs the gate can drive without exceeding worst case specs.}\\
-It is calculated as: $\min((V_{OLMax}/V_{IL}), (V_{OHmax}/V_{IH}))$.\\
-If the fan-out is surpassed, there are several effects, such as longer delays, noise, etc. that will affect the functionality of the circuit.
-\subsection{CMOS Dynamic Electrical Behavior}
-This determines the speed and power consumption of the circuit.\\
-\defn{Transition Time}{amount of time taken to change of one voltage level to another.}\\
-Till now, we had modeled circuits with right angles, but transitions are actually slanted, and, in fact, the slope change is also continuous.\\
-\begin{center}
-    \includegraphics[width = 200px]{images/tdelaygraph.png}
-\end{center}
-These times depend on the resistances of the transistors, the capacitances in the system, among others.\\
-The following equation will allow us to calculate the delay from low to high.
-\begin{align*}
-    V_{OUT} = V_{CC}e^{-t/(R_n C_L)}
-\end{align*}
-The same principle can be used to calculate in the other direction.\\
-\defn{Propagation Delay}{amount of time it takes for a change in the input signal to cause a change in the output signal.}\\
-\defn{$t_{pHL}$}{time between an input change and the corresponding output changes from HIGH to LOW.}\\
-\defn{$t_{pLH}$}{time between an input change and the corresponding output changes from LOW to HIGH.}\\
-\begin{center}
-    \includegraphics[width = 200px]{images/propdelaygraph.png}
-\end{center}
-\begin{mdframed}
-    \textbf{Slight Side topics}\\
-    Power consumption:  If the inputs are not changing, it is called static power consumtpion.\\
-    CMOS circuits have very low power consumption.\\
-    Decoupling capacitors allow for reduction of current spikes.\\
-    Wires or connections may have an inductance, allowing for voltage drops.\\
-\end{mdframed}
-\subsection{Tri-State Outputs}
-    This allows for the creation of a gate that allows for the gate to behave as if it is not in the circuit. That is, it behaves as an open circuit.\\
-    This will allow for multiple gates driving a bus, with all but one disconnected, allowing this one to write the output of the bus.\\
-    This is essentially adding an enabled/disabled state:
+    In the CMOS family, the fan-in for a NAND gate is 6, and for a NOR it is 4.\\
+    If we wanted more inputs, we would need to connect multiple gates.\\
+    \subsection{CMOS Static Electrical Behavior}
+    Before, we had:
+    \begin{table}
+        \centering
+        \begin{tabular}{c|c}
+            $V_{in}$ & $V_{out}$ \\
+            \hline
+            0V       & 5V        \\
+            5V       & 0V
+        \end{tabular}
+    \end{table}
+    But the graph is actually slanted. This introduces new parameters that the manufacturer provides.\\
+    \begin{itemize}
+        \item \defn{$V_{OHmin}$}{The minimum output at HIGH.}
+        \item \defn{$V_{IHmin}$}{The minimum input that will be recognized HIGH.}
+        \item \defn{$V_{OLmax}$}{The maximum output at LOW.}
+        \item \defn{$V_{ILmax}$}{The maximum input to be recognized as LOW.}
+    \end{itemize}
+    \defn{DC noise margin}{amount of noise to corrupt the worst case output to not be recognized properly.\\
+        \quad For LOW:
+        \begin{equation*}
+            V_{ILMax} - V_{OLmax}
+        \end{equation*}
+        \quad For HIGH:
+        \begin{equation*}
+            V_{OHmin} - V_{IHmin}
+        \end{equation*}
+    }
+    CMOS gates also have something known as leakage current, which is caused by the input consuming current when it would ideally not be doing so.\\
+    \begin{itemize}
+        \item $I_{IL}$: the maximum current flowing when it is LOW.
+        \item $I_{IH}$: the maximum current flowing when it is HIGH.
+    \end{itemize}
+    If a circuit is not purely CMOS, or if there are high resistances in other parts of the circuit, there would be a need to model the resistance of the output.
+    This causes the outputs to be slightly lower or higher than what it should be at that state.\\
+    \begin{itemize}
+        \item \defn{$I_{OLmax}$}{Maximum current an output can sink if while maintaining the voltage below $V_{OLmax}$.}
+        \item \defn{$I_{OHmin}$}{Minimum current an output needs to maintain the voltage above $V_{OHmin}$.}
+    \end{itemize}
+    \defn{Fan-out}{Number of inputs the gate can drive without exceeding worst case specs.}\\
+    It is calculated as: $\min((V_{OLMax}/V_{IL}), (V_{OHmax}/V_{IH}))$.\\
+    If the fan-out is surpassed, there are several effects, such as longer delays, noise, etc. that will affect the functionality of the circuit.
+    \subsection{CMOS Dynamic Electrical Behavior}
+    This determines the speed and power consumption of the circuit.\\
+    \defn{Transition Time}{amount of time taken to change of one voltage level to
+        another.}\\ Till now, we had modeled circuits with right angles, but
+    transitions are actually slanted, and, in fact, the slope change is also
+    continuous.\\
+    \begin{center}
+        \includegraphics[width = 200px]{images/tdelaygraph.png}
+    \end{center}
+    These times depend on the resistances of the transistors, the capacitances in the system, among others.\\
+    The following equation will allow us to calculate the delay from low to high.
+    \begin{align*}
+        V_{OUT} = V_{CC}e^{-t/(R_n C_L)}
+    \end{align*}
+    The same principle can be used to calculate in the other direction.\\
+    \defn{Propagation Delay}{amount of time it takes for a change in the input signal to cause a change in the output signal.}\\
+    \defn{$t_{pHL}$}{time between an input change and the corresponding output changes from HIGH to LOW.}\\
+    \defn{$t_{pLH}$}{time between an input change and the corresponding output changes from LOW to HIGH.}\\
+    \begin{center}
+        \includegraphics[width = 200px]{images/propdelaygraph.png}
+    \end{center}
+    \begin{mdframed}
+        \textbf{Slight Side topics}\\
+        Power consumption:  If the inputs are not changing, it is called static power consumtpion.\\
+        CMOS circuits have very low power consumption.\\
+        Decoupling capacitors allow for reduction of current spikes.\\
+        Wires or connections may have an inductance, allowing for voltage drops.\\
+    \end{mdframed}
+    \subsection{Tri-State Outputs}
+    This allows for the creation of a gate that allows for the gate to behave as if
+    it is not in the circuit. That is, it behaves as an open circuit.\\ This will
+    allow for multiple gates driving a bus, with all but one disconnected, allowing
+    this one to write the output of the bus.\\ This is essentially adding an
+    enabled/disabled state:
     \begin{center}
         \includegraphics[width = 200px]{images/enable_gates.png}
     \end{center}
-   The first of the above gates is created through the following circuit:
+    The first of the above gates is created through the following circuit:
     \begin{center}
         \includegraphics[width = 200px]{images/enable_circuit.png}
     \end{center}
@@ -1201,26 +1205,81 @@ The same principle can be used to calculate in the other direction.\\
     \begin{table}
         \centering
         \begin{tabular}{c|c|c}
-            EN-DIR & Mode & Operation\\
+            EN-DIR & Mode       & Operation     \\
             \hline
-            0-x & disconnect & disconnect\\
-            1-0 & 0 & A writes to B\\
-            1-1 & 1 & B writes to A
-            
+            0-x    & disconnect & disconnect    \\
+            1-0    & 0          & A writes to B \\
+            1-1    & 1          & B writes to A
+
         \end{tabular}
     \end{table}
     There is also a leakage current here, that must be taken into account.
-\section{Complex CMOS Gates}
-If we were to analyze the following circuit:
-\begin{center}
-    \includegraphics[width = 75px]{images/complexcmos.png}
-\end{center}
-We must analyze what situations will lead to a connection between $Z$ and $V_{DD}$ or $V_{SS}$. Series basically represents AND ($\land$), while parallel basically represents OR ($\lor$).\\
-So the above function is $(A'\lor B')\land(C'\lor D')$, as those are the combinations that will lead to Z to be connected to HIGH, or $V_{DD}$.
+    \section{Complex CMOS Gates}
+    If we were to analyze the following circuit:
+    \begin{center}
+        \includegraphics[width = 75px]{images/complexcmos.png}
+    \end{center}
+    We must analyze what situations will lead to a connection between $Z$ and $V_{DD}$ or $V_{SS}$. Series basically represents AND ($\land$), while parallel basically represents OR ($\lor$).\\
+    So the above function is $(A'\lor B')\land(C'\lor D')$, as those are the combinations that will lead to Z to be connected to HIGH, or $V_{DD}$.
 Transmission gates are essentially switches controlled by enables.\\
 \begin{center}
     \includegraphics[width = 100px]{images/transmission_gate.png}
 \end{center}
 It is a PMOS connected with and NMOS that are connected through complementing control signals. When EN is LOW, both of them are off, and thus the circuit is disconnected. When EN is HIGH, both of them are on, and thus the circuit is connected.\\
 The reason we have two gates, instead of just one to connect A and B, is because NMOS transistors are not good at transmitting HIGH voltages, and PMOS are not good at transmitting LOW voltages. However, together, both HIGH and LOW can be transmitted.\\
+\section{Verilog Hardware Description Language}
+A Hardware description language (HDL) is the counterpart of a high-level
+programming language in software design. \textbf{It is used for describing
+    hardware}.\\ It comes with:\\
+\begin{itemize}
+    \item Text Editor: to write, edit and save the program.
+    \item Compiler: Produces intermediate description independent of technology. It also
+          detects syntax errors.
+    \item Synthesis tool: Passes the code into the hardware.
+    \item Libraries: premade importable modules with code to fulfill certain functions used in many places.
+\end{itemize}
+Result is a design to be implemented.\\
+If the synthesis is large enough, it is divided into two steps. One is a gate level description, and then the other is the layout description.\\
+There are also:
+\begin{itemize}
+    \item Simulators: takes HDL, determines output. Used for design verification. It can
+          also give you intermediate values of the circuit, allowing debugging.
+    \item Timing analyzer: calculates worst case paths and delays of these.
+    \item Power estimation tool: calculates the worst case power consumption of the
+          design.
+\end{itemize}
+\subsection{Verilog Models and Modules}
+Basic unit of design is a module. It contains declarations and statements.\\
+The declarations describe names and types of inputs, outputs, signals, etc.\\
+Statements are those which manipulate the declarations.\\
+One can specify the module behaviorally, that is it can be given a truth table, and Verilog will figure it out.\\
+It can also be done structurally by describing other modules or individual components, how they are connected, etc. This is equivalent to a logic diagram.\\
+When a module refers to another module it is instantiating it. These modules are defined hierarchically. Higher level modules can instantiate lower level modules as many times as desired. Higher level modules may instantiate the same lower level module.\\
+Every instantiation is a new copy, but if built correctly, the use of a module can be shared.\\
+Definitions inside a module remain local. Modules communicate with each other through declared input and output signals.\\
+Short comments use // and are in effect until newline, longer comments use /* and end at */.\\
+Syntax for module declaration:\\
+\begin{lstlisting}
+    module module-name(port-name,port-name,...);
+        input declarations //list and type of inputs
+        output declarations // list and type of outputs
+        inout declarations
+        net declarations //just a connection
+            wire(default), supply0, supply1, tri
+        variable declarations //
+            reg, integer
+        parameter declarations
+        function declarations
+        task declarations
+        concurrent statements // what the module does
+    endmodule
+\end{lstlisting}
+There are words with special meaning, and cannot be used as names.
+\begin{itemize}
+    \item \defn{input}{signal that is an input to the module}
+    \item \defn{output}{output signal, cannot be read within module}
+    \item \defn{inout}{can be used as both input and output}
+    \item \defn{signal}{single bit number, unless associated with range. Range is defined by [msb:lsb], which is also called a vector}
+    \item 
+\end{itemize}
 \end{document}

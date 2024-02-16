@@ -1239,5 +1239,24 @@ The models for inductors are:
 and they can be placed in the circuit instead of the component with initial conditions to model the whole component, and should be used based on the configuration of the circuit and what it is that will make the circuit easiest to solve. So, in general, for series configurations, you would use the series models, and for parallel configurations, you would use the parallel configuration.\\
 Once this model has been placed, we can, as mentioned before, solve through superposition.
 The superposition part that represents the source is called the zero-state response. The part that takes into account the initial conditions is called the zero-input response. The addition of these two is the complete response.\\
+\section{Decomposition of Complete Response}
+A complete response is that which includes responses from all inputs.\\
+It is composed of Zero-Input Response (ZIR), which is the response to initial conditions with all inputs deactivated, and Zero-State Response (ZSR), which is the response when initial conditions are set to 0.\\
+There are three kinds of responses:\\
+\defn{Forced Response}{response from all components not associated with the roots of the characteristic equation.}\\
+\defn{Natural Response}{response from all components associated with the roots of the characteristic equation.}\\
+\defn{Transient Response}{response that either increases or decays with time, so, not constant or sinusoidal.}\\
+\defn{SSS response}{sinusoidal response.}\\
 
+The steps to solve a circuit are the following:\\
+\begin{enumerate}
+    \item Transform the circuit into the Laplace domain while accounting for the initial condition created by the energy storing component(s). If it is a parallel circuit, use parallel transformation, and if it is a series circuit, use the series transfromation.
+    \item Turn of all initial conditions. If there is more than one input, account for that by turning off all but one.
+    \item Solve the circuit based on this input, for the relevant parameter of the relevant component.
+    \item Cycle through all inputs and initial conditions and add their responses. The sum of all the input responses will be the ZSR, and the sum of all the initial condition responses will be ZIR.
+    \item If it is necessary to calculate the voltage and what has been calculated till now is the current, perform relevant operations, that is multiply or divide by impedance of component as needed.
+    \item Transform back to time domain.
+\end{enumerate}
+Note how there will likely be some components in the equation with sinusoidal responses and some with transient response.\\
+By following these steps, the whole circuit, regardless of the number of components and inputs, can be solved.
 \end{document}
