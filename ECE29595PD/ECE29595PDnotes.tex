@@ -1236,7 +1236,8 @@ programming language in software design. \textbf{It is used for describing
     \item Compiler: Produces intermediate description independent of technology. It also
           detects syntax errors.
     \item Synthesis tool: Passes the code into the hardware.
-    \item Libraries: premade importable modules with code to fulfill certain functions used in many places.
+    \item Libraries: premade importable modules with code to fulfill certain functions
+          used in many places.
 \end{itemize}
 Result is a design to be implemented.\\
 If the synthesis is large enough, it is divided into two steps. One is a gate level description, and then the other is the layout description.\\
@@ -1251,14 +1252,19 @@ There are also:
 \subsection{Verilog Models and Modules}
 Basic unit of design is a module. It contains declarations and statements.\\
 The declarations describe names and types of inputs, outputs, signals, etc.\\
-Statements are those which manipulate the declarations.\\
-One can specify the module behaviorally, that is it can be given a truth table, and Verilog will figure it out.\\
-It can also be done structurally by describing other modules or individual components, how they are connected, etc. This is equivalent to a logic diagram.\\
-When a module refers to another module it is instantiating it. These modules are defined hierarchically. Higher level modules can instantiate lower level modules as many times as desired. Higher level modules may instantiate the same lower level module.\\
-Every instantiation is a new copy, but if built correctly, the use of a module can be shared.\\
-Definitions inside a module remain local. Modules communicate with each other through declared input and output signals.\\
-Short comments use // and are in effect until newline, longer comments use /* and end at */.\\
-Syntax for module declaration:\\
+Statements are those which manipulate the declarations.\\ One can specify the
+module behaviorally, that is it can be given a truth table, and Verilog will
+figure it out.\\ It can also be done structurally by describing other modules
+or individual components, how they are connected, etc. This is equivalent to a
+logic diagram.\\ When a module refers to another module it is instantiating it.
+These modules are defined hierarchically. Higher level modules can instantiate
+lower level modules as many times as desired. Higher level modules may
+instantiate the same lower level module.\\ Every instantiation is a new copy,
+but if built correctly, the use of a module can be shared.\\ Definitions inside
+a module remain local. Modules communicate with each other through declared
+input and output signals.\\ Short comments use // and are in effect until
+newline, longer comments use /* and end at */.\\ Syntax for module
+declaration:\\
 \begin{lstlisting}
     module module-name(port-name,port-name,...);
         input declarations //list and type of inputs
@@ -1274,12 +1280,80 @@ Syntax for module declaration:\\
         concurrent statements // what the module does
     endmodule
 \end{lstlisting}
-There are words with special meaning, and cannot be used as names.
+There are words with special meaning, and cannot be used as names, such as
+module, endmodule, among others.
 \begin{itemize}
-    \item \defn{input}{signal that is an input to the module}
-    \item \defn{output}{output signal, cannot be read within module}
-    \item \defn{inout}{can be used as both input and output}
-    \item \defn{signal}{single bit number, unless associated with range. Range is defined by [msb:lsb], which is also called a vector}
-    \item 
+    \item \defn{input}{signal that is an input to the module.}
+    \item \defn{output}{output signal, cannot be read within module.} Can have type net or reg. reg can be assigned values as the code is being processed. That is, it can be modified in the procedural portion of the code. For nets, it is possible to write a reg, modify them, and assign the result to the net.
+    \item \defn{inout}{can be used as both input and output.}
+    \item \defn{signal}{single bit number, unless associated with range. Range is defined by [msb:lsb], which is also called a vector.}
+    \item \defn{nets}{items to provide connectivity. A signal that is not output or input is assumed to be a wire.}\\ supply0, supply1 connect to GND and HIGH respectively.\\ Tri is used for thee state wires. Can use [msb:lsb] syntax as well.
+    \item \defn{variables}{used during execution, that do not necessarily have physical presence within the circuit. They cannot be changed from outside the module.}\\Can be either register (reg), or integer (int). reg can be any of teh below 1-but signal values. int is the 2-complement of a number.\\ Numbers can be represented through the following syntax : $n'Bdd\ldots d$. The B can be changed for the required base, where:
+          \begin{itemize}
+              \item B, b = binary
+              \item O, o = octal
+              \item H, h = hexadecimal
+              \item D, d = decimal
+          \end{itemize}
+          and the d's are strings of one or more digits in the given base. If the number is longer, the excess is discarded, if it is shorter, the remaining spaces are 0.
+    \item \defn{parameter}{allows constants to be defined} The value can be a number or an expression.
 \end{itemize}
+A 1-bit signal can have one of four values:
+\begin{itemize}
+    \item 0, false
+    \item 1, true
+    \item x, unknown
+    \item z, high impedance
+\end{itemize}
+and there are some operators:
+\begin{itemize}
+    \item \&, AND
+    \item |, OR
+    \item $\sim$, NOT
+    \item ˆ, XOR\\
+    The above can also be used on buses, performing the operation on all the bits of said bus.
+    \item The [msb:lsb] notation is known as a vector.\\
+    \item \{\} is used for concatenation through comma divided signals. One can also multiply inputs and make them appear multiple times, for example \{2\{byte1\}, byte2, byte3\}.
+    \item Arithmetic operators:
+    \begin{itemize}
+        \item +
+        \item -
+        \item $*$
+        \item /
+        \item \%
+        \item $**$, exponent
+        \item $<<$, logical left shift
+        \item $>>$, logical right shift
+        \item $<<<$, arithmetic left shift
+        \item $>>>$, arithmetic right shift
+    \end{itemize}
+    Each of these will cause a module that can run this operation to be synthesized. 
+    \item Logical Operators:
+    \begin{itemize}
+        \item \&\&
+        \item ||
+        \item !
+        \item ==
+        \item !=
+        \item >
+        \item >=
+        \item <
+        \item <=
+    \end{itemize}
+    The bottom 6 create comparator modules.\\   
+    \textit{Note: if there is one unsigned and one signed number, they will both be considered unsigned, effectively modifying the signed number.}
+    \item "Bitwise comparators"
+    \begin{itemize}
+        \item ===
+        \item !==
+    \end{itemize}
+    Compare the two operands bit by bit. These cannot be synthesized.
+\end{itemize}
+\subsection{Arrays}
+Ordered set of variables with the same type. Elements are selected by index. Syntax like the following:
+\begin{lstlisting}
+    reg [7:0] mem [0:255]
+\end{lstlisting}
+allows for the creation of a 256 byte array that can be accessed through mem[a][b]\\
+
 \end{document}

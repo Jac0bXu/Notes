@@ -1272,5 +1272,14 @@ the following:\\
 \end{enumerate}
 Note how there will likely be some components in the equation with sinusoidal responses and some with transient response.\\
 By following these steps, the whole circuit, regardless of the number of components and inputs, can be solved.\\
-
+\section{Transfer Function}
+We know that 
+\begin{align*}
+    y(t) &= x(t)*h(t)\\
+    \implies Y(s) &= X(s)H(s)\\
+    \implies H(s) &= \frac{Y(s)}{X(s)}
+\end{align*}
+This $H(s)$ is the transfer function. This works under the premise of no independent sources and the circuit being at rest.\\
+In essence, it can be found by transforming all components to the frequency domain, and finding the proportion between the input and the output. This can then be used for any other inputs by simple multiplication with the transformation of said input. This value can then be returned to the time domain, effectively finding the output for the aforementioned voltage.\\
+ 
 \end{document}
