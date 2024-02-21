@@ -1348,12 +1348,56 @@ and there are some operators:
         \item !==
     \end{itemize}
     Compare the two operands bit by bit. These cannot be synthesized.
+    \item Conditional Operator: <statement> ? <true> : <false>
 \end{itemize}
+Compiler directives:\\
+'include <filename> - allows for the file to be immediately read and processed.\\
+'define <identifier text> - allows for repeatedly used expressions to be easily rewritten.
 \subsection{Arrays}
 Ordered set of variables with the same type. Elements are selected by index. Syntax like the following:
 \begin{lstlisting}
     reg [7:0] mem [0:255]
 \end{lstlisting}
 allows for the creation of a 256 byte array that can be accessed through mem[a][b]\\
-
+\subsection{Concurrent Statements}
+There are three types:\\
+\begin{itemize}
+    \item Instance (structural model):\\
+    Individual gates and other components are instantiated and connected using nets. There are built-in components which need not be instantiated.\\
+    Syntax for instantiation (not declaration):
+    \begin{lstlisting}
+component-name instance-identifier (expr,expr,...,expr);
+component-name instance-identifier
+    (.port-name(expr),
+    .port-name(expr), ...,
+    .port-name(expr));
+    \end{lstlisting}
+    The first format is the only one allowed for the built-in gates.\\ Ports must be given in the order (output, input, input...). If they were three state buffers, the order would be (output, data input, enable input).\\
+    Parameters can be used to parametrize a module to handle inputs and outputs of any width. 
+    \begin{lstlisting}
+        module Maj(OUT,I0,I1,I2);
+            parameter WID=1;
+            input [WID-1:0] I0,I1,I2;
+            output [WID-1:0] OUT;
+            assign OUT = (I0&I1)|(I0&I2)|(I1&I2);
+        endmodule
+    \end{lstlisting}
+    This will turn each of the inputs and outputs into an array of size WID.\\
+    When instantiating, one can use the syntax Maj \#(8) U1(W,X,Y,Z), and this will change the parameter value to 8.\\
+    If we were to have several parameters, we would need to mention which parameter we are changing. For example:\\
+    \begin{center}
+        Maj \#(.WID(8)) U1(W,X,Y,Z)
+    \end{center}
+    \item continuous-assignment(dataflow model)
+    \item always, initial (behavioral or procedural)
+\end{itemize}
 \end{document}
+
+
+% \begin{circuitikz} \draw
+%     (0,2) node[and port] (myand1) {}
+%     (0,0) node[and port] (myand2) {}
+%     (2,1) node[xnor port] (myxnor) {}
+%     (myand1.out) -- (myxnor.in 1)
+%     (myand2.out) -- (myxnor.in 2);
+% \end{circuitikz}

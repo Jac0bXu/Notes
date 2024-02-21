@@ -491,6 +491,30 @@ typedef struct _Header
     Node *tail;
 } Header;
 \end{lstlisting}
+So, a linked list can be represented as the following:\\
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        $6$ & $\rightarrow$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $3$ & $\rightarrow$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $4$ & $\rightarrow$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        $\emptyset$\\
+        \hline
+    \end{tabular}
+\end{table}
 Need to have Head, without it, we cannot do anything.\\
 One can also have the tail, if we so wanted.\\
 The header may contain the addresses of the head, tail, and other useful information for easy access.\\
@@ -530,6 +554,34 @@ This code allows us to insert values into their correct sorted position with eas
 A linked list that has the last node pointing at the first node is called a circular-linked list. It allows us to access everything from the position of tail instead.\\
 Next, we will learn to search with sentinel. That is, it lets us traverse the list without checking if it is NULL. This is done by assigning an external node to a node, and advancing from there, repointing the new node at the next of it, and comparing the value.\\
 A doubly linked list is a linked list that allows traversal in both directions.\\
+\begin{table}
+    \centering
+    \begin{tabular}{|c|}
+        \hline
+        $\emptyset$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        $\leftarrow$ & $6$ & $\rightarrow$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        $\leftarrow$ & $3$ & $\rightarrow$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|c|}
+        \hline
+        $\leftarrow$ & $4$ & $\rightarrow$\\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        $\emptyset$\\
+        \hline
+    \end{tabular}
+\end{table}
 It works almost entirely the same as a singly linked list, but has some more complications that arise when inserting or deleting nodes from the middle of the array. An example would be deleting, as shown here:
 \begin{lstlisting}
 List-Delete(header, x):
@@ -542,7 +594,7 @@ List-Delete(header, x):
     else
     header->tail  =  x->prev
 \end{lstlisting}
-As can be observed, the process involves a lot of back and forth.\\
+As can be observed, the process involves a lot of back and forth, specially since we need to verify the existence of several nodes node.\\
 But, if it were a circular-linked list as well, the code could be reduced to:
 \begin{lstlisting}
 List-Delete(x):
@@ -628,9 +680,54 @@ Similar trees can be built for any recursive algorithm.
 \begin{center}
     "As an engineer, you must look for patterns. You won't see until you start looking."\\ - Prof. Koh
 \end{center}
-However, if there are nodes with non-constant time complexity, one cannot move forward under this assumption.
-
-
+However, if there are nodes with non-constant time complexity, one cannot move forward under this assumption.\\
+The recursive code snippet provided above uses two recursive calls. However, this can be reduced to a while loop.\\
+That is, we can turn recursive functions into tail removal functions.\\For example, the function:
+\begin{lstlisting}
+    function(a, b, c) {
+        if (stopping_condition)
+            base_case_body;
+        other_divide_and_conquer_body;
+        function(x, y, z);
+    }
+\end{lstlisting}
+Can instead be turned into:
+\begin{lstlisting}
+    function_tr(a, b, c) {
+        while (not stopping_condition) {
+            other_divide_and_conquer_body
+            a = x, b = y, c = z;
+        }
+        base_case_body;
+    }
+\end{lstlisting}
+Now, let us look at the strategy for calculating time complexity of recursive calls.\\
+We know that recursion takes a scenario, divides it into $a$ sub-scenarios of size $\frac{n}{b}$, which it solves in the same way, and returns to combine the result of each of the sub-scenarios.\\
+This means the time complexity of the full method will be: $T(n) = aT(\frac{n}{b})+f(n)$ where $f(n)$ is the time complexity of the operations to combine the returned results. We also know that $T(1) = \Theta (1)$.\\
+Let $c = \log_b(a)$.\\ This means that the number of leaf  nodes will be $n^c$. \\ Since $T(1) = \Theta(1)$, leaf node computation will be $\Theta(n^c)$.\\
+Now we will divide this into three cases:
+\begin{enumerate}
+    \item $f(n) = O(n^{c-\epsilon}) \implies T(n) = \Theta(n^c)$
+    \item $f(n) = \Theta (n^c) \implies T(n) = \Theta (n^c \log(n))$\\
+    More generally, if $f(n) = \Theta (n^c \log^k(n))$:
+    \begin{itemize}
+        \item $k>-1 \implies T(n) = \Theta (n^c \log^{k+1}(n))$
+        \item $k = -1 \implies T(n) = \Theta (n^c \log(\log(n)))$
+        \item $k<-1 \implies T(n) = \Theta (n^c)$
+    \end{itemize}
+    \item $f(n) = \Omega(n^{c+\epsilon}) \implies \Theta (f(n))$
+\end{enumerate}
+\section{Stacks}
+\defn{Stack}{Collection of items of which only the top item can be accessed.}\\
+Works on the Last In First Out (LIFO) rule.\\
+It has four primitive operations, all of which have $O(1)$ time complexity:
+\begin{itemize}
+    \item Push(S,i): adds item to top of stack
+    \item Pop(S): remove top item from stack and return it
+    \item Stacktop(S): return top stack item
+    \item Empty(S): returns whether the stack is empty
+\end{itemize}
+A stack can be simulated as a linked list, with the head of the linked list being the top of the stack.
 \end{document}
 
 %\begin{center}
