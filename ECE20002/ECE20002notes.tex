@@ -1296,7 +1296,7 @@ If we were to plot $\sigma \text{ v. } j\omega$, we can observe different behavi
 \end{center}
 Poles represent the natural response of the circuit. If the order of a pole is higher than 1, the term will be multiplied by $t^n$.
 \begin{center}
-    \begin{tikzpicture}[scale = 0.8]
+    \begin{tikzpicture}[scale = 1]
         \begin{axis}[
                 axis lines = left,
                 xlabel = $t$,
@@ -1305,7 +1305,8 @@ Poles represent the natural response of the circuit. If the order of a pole is h
                 xmax = 10,
                 ymin = 0,
                 xmin = 0,
-                legend entries = {$\frac{A}{s}$-stable}
+                width = 0.45\textwidth ,
+                title = $A/s$
             ]
             \addplot [
                 domain=0:10,
@@ -1315,9 +1316,7 @@ Poles represent the natural response of the circuit. If the order of a pole is h
             {2};
         \end{axis}
     \end{tikzpicture}
-\end{center}
-\begin{center}
-    \begin{tikzpicture}[scale = 0.8]
+    \begin{tikzpicture}[scale = 1]
         \begin{axis}[
                 axis lines = left,
                 xlabel = $t$,
@@ -1326,7 +1325,8 @@ Poles represent the natural response of the circuit. If the order of a pole is h
                 xmax = 10,
                 ymin = 0,
                 xmin = 0,
-                legend entries = {$\frac{A}{s^k}$-unstable}
+                title = $A/s^k$,
+                width = 0.45\textwidth
             ]
             \addplot [
                 domain=0:10,
@@ -1337,9 +1337,9 @@ Poles represent the natural response of the circuit. If the order of a pole is h
         \end{axis}
     \end{tikzpicture}
 \end{center}
-If $p_i>0$
+If $p>0$ (unstable) and $p<0$ (stable) respectively:
 \begin{center}
-    \begin{tikzpicture}[scale = 0.8]
+    \begin{tikzpicture}[scale = 1]
         \begin{axis}[
                 axis lines = left,
                 xlabel = $t$,
@@ -1348,7 +1348,8 @@ If $p_i>0$
                 xmax = 10,
                 ymin = 0,
                 xmin = 0,
-                legend entries = {$\frac{A}{s-p_i}$-unstable}
+                title = ${A}/{(s-p)}$ with p>0,
+                width = 0.45\textwidth
             ]
             \addplot [
                 domain=0:10,
@@ -1358,10 +1359,7 @@ If $p_i>0$
             {e^(0.5*x)};
         \end{axis}
     \end{tikzpicture}
-\end{center}
-Otherwise if $p_i<0$:
-\begin{center}
-    \begin{tikzpicture}[scale = 0.8]
+    \begin{tikzpicture}[scale = 1]
         \begin{axis}[
                 axis lines = left,
                 xlabel = $t$,
@@ -1370,7 +1368,8 @@ Otherwise if $p_i<0$:
                 xmax = 10,
                 ymin = 0,
                 xmin = 0,
-                legend entries = {$\frac{A}{s-p_i}$-stable}
+                title = ${A}/{(s-p)}$ with p<0,
+                width = 0.45\textwidth
             ]
             \addplot [
                 domain=0:10,
@@ -1381,6 +1380,7 @@ Otherwise if $p_i<0$:
         \end{axis}
     \end{tikzpicture}
 \end{center}
+Undamped sinusoid (marginally stable):
 \begin{center}
     \begin{tikzpicture}[scale = 1]
         \begin{axis}[
@@ -1391,7 +1391,8 @@ Otherwise if $p_i<0$:
                 xmax = 10,
                 ymin = -5,
                 xmin = 0,
-                legend entries = {$\frac{As+B}{s^2+\omega^2}$-marginally stable}
+                title = ${(As+b)}/{(s^2+\omega^2)}$,
+                legend entries = {$\frac{As+B}{s^2+\omega^2}$}
             ]
             \addplot [
                 domain=0:10,
@@ -1402,7 +1403,7 @@ Otherwise if $p_i<0$:
         \end{axis}
     \end{tikzpicture}
 \end{center}
-If $a>0$:
+If $a>0$ (stable) and $a<0$ (unstable) respectively:
 \begin{center}
     \begin{tikzpicture}[scale = 1]
         \begin{axis}[
@@ -1413,7 +1414,8 @@ If $a>0$:
                 xmax = 10,
                 ymin = -5,
                 xmin = 0,
-                legend entries = {$\frac{As+B}{(s+a)^2+\omega^2}$-stable}
+                title = ${(As+b)}/{((s+a)^2+\omega^2)}$ with a>0,
+                width = 0.45\textwidth
             ]
             \addplot [
                 domain=0:10,
@@ -1423,9 +1425,6 @@ If $a>0$:
             {3*sin((180*x/pi)+35)*e^(-0.3*x)};
         \end{axis}
     \end{tikzpicture}
-\end{center}
-Which is different to the unstable response for $a<0$:
-\begin{center}
     \begin{tikzpicture}[scale = 1]
         \begin{axis}[
                 axis lines = center,
@@ -1435,7 +1434,8 @@ Which is different to the unstable response for $a<0$:
                 xmax = 10,
                 ymin = -5,
                 xmin = 0,
-                legend entries = {$\frac{As+B}{(s+a)^2+\omega^2}$-unstable}
+                title = ${(As+b)}/{((s+a)^2+\omega^2)}$ with a<0,
+                width = 0.45\textwidth
             ]
             \addplot [
                 domain=0:10,
@@ -1446,8 +1446,11 @@ Which is different to the unstable response for $a<0$:
         \end{axis}
     \end{tikzpicture}
 \end{center}
+
 We will only be considering stable and marginally stable inputs and outputs for this course.\\
-The zeros, on the other hand allow us to know if the excitation will be cancelled out. That is, if the input exponent is the same value as that which will cause a 0 in the transfer function, there will be no forced response term.
+The zeros, on the other hand allow us to know if the excitation will be cancelled out. That is, if the input exponent is the same value as that which will cause a 0 in the transfer function, there will be no forced response term.\\
+If the input is bounded, the Forced Response must also be bounded. Thus, the unstability can only come from the poles from the transfer function.\\
+A system will be unstable if the pole, when plotted, is in the first or fourth quadrant.
 \end{document}
 
 % \begin{center}
