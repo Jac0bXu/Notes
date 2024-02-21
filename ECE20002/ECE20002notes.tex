@@ -31,6 +31,7 @@
 \author[Shubham Saluja Kumar Agarwal]{Shubham Saluja Kumar Agarwal}
 \date{\today}  % if the \date{} command is left out, the current date will be used
 
+\usepackage{pgfplots}
 % The following package makes prettier tables.  We're all about the bling!
 \usepackage{booktabs}
 
@@ -1087,7 +1088,8 @@ Let us take a look at each of three cases separately:
           If there are more than two repeated roots, multiply by the highest exponent, and make everything fall out. Solve as mentioned above. For the rest of the coefficients, a system of equations will have to be solved.
 \end{itemize}
 Once everything is in partial fraction form, we can easily use the lookup table to take it back to the time-domain.
-\section{Impedance, Admittance, and Zero-State Response}
+\section{Circuit Analysis in Frequency Domain}
+\subsection{Impedance, Admittance, and Zero-State Response}
 \begin{center}
     "You will now begin to understand the beauty of frequency domain analysis" - Prof. Byunghoo Jung
 \end{center}
@@ -1138,7 +1140,7 @@ Which leads to:
 \end{align*}
 These terms can be used to turn RC, RL, LC and RLC circuits into circuits equivalent to solely Z circuits. These circuits can then be solved using strategies like current division, voltage division, among others learned in earlier courses.\\
 We have successfully reduced a linear circuit with inductors and capacitors which initially needed differential equations, into a circuit that is equivalent to one that only has resistances.\\
-\section{Initial Conditions in Laplace Transform}
+\subsection{Initial Conditions in Laplace Transform}
 We will now analyze what happens when the initial conditions are non-zero. Let
 us take the following circuit as an example:\\
 \begin{center}
@@ -1239,7 +1241,7 @@ The models for inductors are:
 and they can be placed in the circuit instead of the component with initial conditions to model the whole component, and should be used based on the configuration of the circuit and what it is that will make the circuit easiest to solve. So, in general, for series configurations, you would use the series models, and for parallel configurations, you would use the parallel configuration.\\
 Once this model has been placed, we can, as mentioned before, solve through superposition.
 The superposition part that represents the source is called the zero-state response. The part that takes into account the initial conditions is called the zero-input response. The addition of these two is the complete response.\\
-\section{Decomposition of Complete Response}
+\subsection{Decomposition of Complete Response}
 A complete response is that which includes responses from all inputs.\\ It is
 composed of Zero-Input Response (ZIR), which is the response to initial
 conditions with all inputs deactivated, and Zero-State Response (ZSR), which is
@@ -1272,14 +1274,208 @@ the following:\\
 \end{enumerate}
 Note how there will likely be some components in the equation with sinusoidal responses and some with transient response.\\
 By following these steps, the whole circuit, regardless of the number of components and inputs, can be solved.\\
-\section{Transfer Function}
-We know that 
+\subsection{Transfer Function}
+We know that
 \begin{align*}
-    y(t) &= x(t)*h(t)\\
-    \implies Y(s) &= X(s)H(s)\\
-    \implies H(s) &= \frac{Y(s)}{X(s)}
+    y(t)          & = x(t)*h(t)         \\
+    \implies Y(s) & = X(s)H(s)          \\
+    \implies H(s) & = \frac{Y(s)}{X(s)}
 \end{align*}
 This $H(s)$ is the transfer function. This works under the premise of no independent sources and the circuit being at rest.\\
 In essence, it can be found by transforming all components to the frequency domain, and finding the proportion between the input and the output. This can then be used for any other inputs by simple multiplication with the transformation of said input. This value can then be returned to the time domain, effectively finding the output for the aforementioned voltage.\\
- 
+\section{Complex Plane and Stability}
+Any transfer function $H(s)$ can be represented as:
+\begin{equation*}
+    H(S) = K\frac{(s-z_1)^{q_1}(s-z_2)^{q_2}(s-z_3)^{q_3}\cdots(s-z_m)^{q_m}}{(s-p_1)^{r_1}(s-p_2)^{r_2}(s-p_3)^{r_3}\cdots(s-p_n)^{r_n}}
+\end{equation*}
+with $p_n$ being the pole and $z_m$ the zeros. $K$ is the gain constant. The exponents represent repetitions.\\
+Complex plain analysis is analyzed by setting $s=\sigma + j\omega$. By setting $s$ to this value, we can find the magnitude of the transfer function at any point in the complex plane.\\
+If we were to plot $\sigma \text{ v. } j\omega$, we can observe different behaviors at different coordinate points of the plane.\\
+\begin{center}
+    \includegraphics[width = 200px]{images/complex_plane.png}
+\end{center}
+Poles represent the natural response of the circuit. If the order of a pole is higher than 1, the term will be multiplied by $t^n$.
+\begin{center}
+    \begin{tikzpicture}[scale = 0.8]
+        \begin{axis}[
+                axis lines = left,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 10,
+                xmax = 10,
+                ymin = 0,
+                xmin = 0,
+                legend entries = {$\frac{A}{s}$-stable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {2};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}[scale = 0.8]
+        \begin{axis}[
+                axis lines = left,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 10,
+                xmax = 10,
+                ymin = 0,
+                xmin = 0,
+                legend entries = {$\frac{A}{s^k}$-unstable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {0.05*x^3};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+If $p_i>0$
+\begin{center}
+    \begin{tikzpicture}[scale = 0.8]
+        \begin{axis}[
+                axis lines = left,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 10,
+                xmax = 10,
+                ymin = 0,
+                xmin = 0,
+                legend entries = {$\frac{A}{s-p_i}$-unstable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {e^(0.5*x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+Otherwise if $p_i<0$:
+\begin{center}
+    \begin{tikzpicture}[scale = 0.8]
+        \begin{axis}[
+                axis lines = left,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 10,
+                xmax = 10,
+                ymin = 0,
+                xmin = 0,
+                legend entries = {$\frac{A}{s-p_i}$-stable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {e^(-0.3*x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}[scale = 1]
+        \begin{axis}[
+                axis lines = center,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 5,
+                xmax = 10,
+                ymin = -5,
+                xmin = 0,
+                legend entries = {$\frac{As+B}{s^2+\omega^2}$-marginally stable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {3*cos((180*x/pi)+75)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+If $a>0$:
+\begin{center}
+    \begin{tikzpicture}[scale = 1]
+        \begin{axis}[
+                axis lines = center,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 5,
+                xmax = 10,
+                ymin = -5,
+                xmin = 0,
+                legend entries = {$\frac{As+B}{(s+a)^2+\omega^2}$-stable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {3*sin((180*x/pi)+35)*e^(-0.3*x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+Which is different to the unstable response for $a<0$:
+\begin{center}
+    \begin{tikzpicture}[scale = 1]
+        \begin{axis}[
+                axis lines = center,
+                xlabel = $t$,
+                ylabel = Magnitude,
+                ymax = 5,
+                xmax = 10,
+                ymin = -5,
+                xmin = 0,
+                legend entries = {$\frac{As+B}{(s+a)^2+\omega^2}$-unstable}
+            ]
+            \addplot [
+                domain=0:10,
+                samples=100,
+                color=blue,
+            ]
+            {0.5*sin((180*x/pi)-30)*e^(0.2*x)};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+We will only be considering stable and marginally stable inputs and outputs for this course.\\
+The zeros, on the other hand allow us to know if the excitation will be cancelled out. That is, if the input exponent is the same value as that which will cause a 0 in the transfer function, there will be no forced response term.
 \end{document}
+
+% \begin{center}
+%     \begin{tikzpicture}[scale = 1]
+%         \begin{axis}[
+%                 axis lines = center,
+%                 xlabel = Quantity,
+%                 ylabel = Price,
+%                 ymax = 10,
+%                 xmax = 10,
+%                 ymin = -10,
+%                 xmin = -10,
+%                 legend entries = {DC, Undamped, Overdamped}
+%             ]
+%             \addplot [
+%                 domain=-4:0,
+%                 samples=100,
+%                 color=blue,
+%             ]
+%             {(16-x^2)^0.5};
+%             \addplot [black, dotted] coordinates {(0,26) (6,26)};
+%             \addplot [cyan, fill = cyan, fill opacity = 0.15] coordinates {(0,14) (2,26) (0,26)} \closedcycle;
+%             \addplot [
+%                 domain=-4:0,
+%                 samples=100,
+%                 color=blue,
+%             ]
+%             {-(16-x^2)^0.5};
+%         \end{axis}
+%     \end{tikzpicture}
+% \end{center}
