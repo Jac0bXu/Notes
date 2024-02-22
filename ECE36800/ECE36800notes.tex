@@ -10,6 +10,7 @@
 \usepackage{color}
 \usepackage{steinmetz}
 \usepackage{placeins}
+\usepackage{adjustbox}
 % Fixes captions and images being cut off
 \usepackage{marginfix}
 \usepackage{array}
@@ -19,6 +20,7 @@
 \usetikzlibrary{positioning}
 \usepackage{listings}
 \usepackage{forest}
+\usepackage{colortbl}
 \usepackage{caption}
 \DeclareCaptionFont{white}{\color{white}}
 \DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
@@ -426,10 +428,10 @@ For $g(n)$ to be useful, it should be simpler than $f(n)$ such as $1,n,n^2$, $n\
 However, once we go to exponential functions or above, the algorithms cease to be useful.\\
 Some properties of asymptotic notation are:
 \begin{align*}
-    f(n)&=O(f(n))\\
-    f(n)=O(g(n))\quad &\& \quad g(n) = O(h(n)) \implies f(n)=O(h(n))\\
-    f(n)=O(g(n))\quad &\& \quad g(n) = O(h(n)) \implies f(n)+g(n)=O(h(n))\\
-    f_1(n)=O(g_1(n))\quad &\& \quad f_2(n) = O(g_2(n)) \implies f_1(n)*f_2(n)=O(g_1(n)*g_2(n))\\
+    f(n)                  & =O(f(n))                                                            \\
+    f(n)=O(g(n))\quad     & \& \quad g(n) = O(h(n)) \implies f(n)=O(h(n))                       \\
+    f(n)=O(g(n))\quad     & \& \quad g(n) = O(h(n)) \implies f(n)+g(n)=O(h(n))                  \\
+    f_1(n)=O(g_1(n))\quad & \& \quad f_2(n) = O(g_2(n)) \implies f_1(n)*f_2(n)=O(g_1(n)*g_2(n)) \\
 \end{align*}
 Hierarchy of $O(n)$ (in this section, we will show what possible asymptotic notations functions can have.):\\
 \begin{enumerate}
@@ -451,25 +453,25 @@ Hierarchy of $O(n)$ (in this section, we will show what possible asymptotic nota
 \end{enumerate}
 There is a notation that goes hang in hand with $O(n)$:
 \begin{align*}
-    f(n)=O(g(n))&\implies g(n)=\Omega(f(n))\\
-    \exists c, n_0 \mid f(n)\leq g(n) & \implies \exists c', n_0' \mid g(n)\geq f(n)\\
-    &\implies \lim_{n\rightarrow\infty}\frac{f(n)}{g(n)}=0
+    f(n)=O(g(n))                      & \implies g(n)=\Omega(f(n))                            \\
+    \exists c, n_0 \mid f(n)\leq g(n) & \implies \exists c', n_0' \mid g(n)\geq f(n)          \\
+                                      & \implies \lim_{n\rightarrow\infty}\frac{f(n)}{g(n)}=0
 \end{align*}
 And another, the Theta Notation:
 \begin{align*}
-    f(n)=\Theta(g(n)) &\iff \exists(c_1,c_2,n_0)\quad c_1g(n)\leq f(n)\leq c_2g(n)\\
-    &\iff \lim_{n\rightarrow\infty}\frac{f(n)}{g(n)}\neq 0,\infty\\
-    &\iff [f(n) = O(g(n))] \land [g(n) = O(f(n))]
+    f(n)=\Theta(g(n)) & \iff \exists(c_1,c_2,n_0)\quad c_1g(n)\leq f(n)\leq c_2g(n)  \\
+                      & \iff \lim_{n\rightarrow\infty}\frac{f(n)}{g(n)}\neq 0,\infty \\
+                      & \iff [f(n) = O(g(n))] \land [g(n) = O(f(n))]
 \end{align*}
 And finally the little-o notation:
 \begin{align*}
-    f(n) = o(g(n)) &\iff \lim_{n\rightarrow\infty}\frac{f(n)}{g(n)} = 0\\
-    &\iff \forall c,\exists n_0 \mid f(n)\leq cg(n) \quad \forall n\geq n_0
+    f(n) = o(g(n)) & \iff \lim_{n\rightarrow\infty}\frac{f(n)}{g(n)} = 0                    \\
+                   & \iff \forall c,\exists n_0 \mid f(n)\leq cg(n) \quad \forall n\geq n_0
 \end{align*}
 Which leads to the little-omega notation:
 \begin{align*}
-    g(n) = \omega(f(n)) &\iff f(n) = o(g(n))\\
-    &\iff \lim_{n\rightarrow\infty}\frac{g(n)}{f(n)} = \infty
+    g(n) = \omega(f(n)) & \iff f(n) = o(g(n))                                      \\
+                        & \iff \lim_{n\rightarrow\infty}\frac{g(n)}{f(n)} = \infty
 \end{align*}
 \textit{For most cases, if f is $O(g)$, but not $\Theta(g)$, it is $o(g)$. Exceptional cases would be like $f(n) = n^{|\sin(n)|}$, which seldom exist.}
 \section{Linked Lists}
@@ -496,22 +498,22 @@ So, a linked list can be represented as the following:\\
     \centering
     \begin{tabular}{|c|c|}
         \hline
-        $6$ & $\rightarrow$\\
+        $6$ & $\rightarrow$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|}
         \hline
-        $3$ & $\rightarrow$\\
+        $3$ & $\rightarrow$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|}
         \hline
-        $4$ & $\rightarrow$\\
+        $4$ & $\rightarrow$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|}
         \hline
-        $\emptyset$\\
+        $\emptyset$ \\
         \hline
     \end{tabular}
 \end{table}
@@ -520,10 +522,10 @@ One can also have the tail, if we so wanted.\\
 The header may contain the addresses of the head, tail, and other useful information for easy access.\\
 They have primitive operations:
 \begin{itemize}
-    \item Empty: return true/false 
-    \item First: return address to first node 
-    \item Last: return address to lat node 
-    \item Insert at head: insert as the first node of the list 
+    \item Empty: return true/false
+    \item First: return address to first node
+    \item Last: return address to lat node
+    \item Insert at head: insert as the first node of the list
     \item Insert at tail: insert as last node
     \item Remove at head
     \item etc.
@@ -533,8 +535,8 @@ For linked list, or structs in general, this is relevant because their manipulat
 \begin{lstlisting}
     func(**head)
 \end{lstlisting}
-This allows us to point and modify the list through the address of the struct instead of a copy of it.\\
-For example:
+This allows us to point and modify the list through the address of the struct
+instead of a copy of it.\\ For example:
 \begin{lstlisting}
 void List_insert_in_order(Node **head_addr, Node *node) {
     Node dummy;
@@ -550,35 +552,41 @@ void List_insert_in_order(Node **head_addr, Node *node) {
     *head_addr = dummy.next;
 }
 \end{lstlisting}
-This code allows us to insert values into their correct sorted position with ease, and have those changes reflected in the linked list itself. It makes the dummy node equal to the head of the list (not a copy of the list), and works forward from there.\\
-A linked list that has the last node pointing at the first node is called a circular-linked list. It allows us to access everything from the position of tail instead.\\
-Next, we will learn to search with sentinel. That is, it lets us traverse the list without checking if it is NULL. This is done by assigning an external node to a node, and advancing from there, repointing the new node at the next of it, and comparing the value.\\
-A doubly linked list is a linked list that allows traversal in both directions.\\
+This code allows us to insert values into their correct sorted position with
+ease, and have those changes reflected in the linked list itself. It makes the
+dummy node equal to the head of the list (not a copy of the list), and works
+forward from there.\\ A linked list that has the last node pointing at the
+first node is called a circular-linked list. It allows us to access everything
+from the position of tail instead.\\ Next, we will learn to search with
+sentinel. That is, it lets us traverse the list without checking if it is NULL.
+This is done by assigning an external node to a node, and advancing from there,
+repointing the new node at the next of it, and comparing the value.\\ A doubly
+linked list is a linked list that allows traversal in both directions.\\
 \begin{table}
     \centering
     \begin{tabular}{|c|}
         \hline
-        $\emptyset$\\
+        $\emptyset$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|c|}
         \hline
-        $\leftarrow$ & $6$ & $\rightarrow$\\
+        $\leftarrow$ & $6$ & $\rightarrow$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|c|}
         \hline
-        $\leftarrow$ & $3$ & $\rightarrow$\\
+        $\leftarrow$ & $3$ & $\rightarrow$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|c|c|}
         \hline
-        $\leftarrow$ & $4$ & $\rightarrow$\\
+        $\leftarrow$ & $4$ & $\rightarrow$ \\
         \hline
     \end{tabular}
     \begin{tabular}{|c|}
         \hline
-        $\emptyset$\\
+        $\emptyset$ \\
         \hline
     \end{tabular}
 \end{table}
@@ -594,8 +602,9 @@ List-Delete(header, x):
     else
     header->tail  =  x->prev
 \end{lstlisting}
-As can be observed, the process involves a lot of back and forth, specially since we need to verify the existence of several nodes node.\\
-But, if it were a circular-linked list as well, the code could be reduced to:
+As can be observed, the process involves a lot of back and forth, specially
+since we need to verify the existence of several nodes node.\\ But, if it were
+a circular-linked list as well, the code could be reduced to:
 \begin{lstlisting}
 List-Delete(x):
     (x->prev)->next = x->next
@@ -618,13 +627,17 @@ int main(int argc, char **argv)
 }
 
 \end{lstlisting}
-One might think that the first add is called by the fprintf function, however, that is not true. C needs to prepare all the inputs of a function before sending them into the function. \\
-So, what actually happens is, main calls the inner add, takes that result, gives it to the outer add as a parameter, and finally takes that output and passes it to the fprintf function.\\
-This process can be represented through a computation tree, which is, in fact, also very useful when analyzing recursive code.\\
+One might think that the first add is called by the fprintf function, however,
+that is not true. C needs to prepare all the inputs of a function before
+sending them into the function. \\ So, what actually happens is, main calls the
+inner add, takes that result, gives it to the outer add as a parameter, and
+finally takes that output and passes it to the fprintf function.\\ This process
+can be represented through a computation tree, which is, in fact, also very
+useful when analyzing recursive code.\\
 \begin{center}
     \begin{forest}
         [main [add][add][fprintf]]
-    \end{forest}    
+    \end{forest}
 \end{center}
 Post-order traversal of these allow us to understand how these are used. So, in this case, the traversal will be:
 \begin{equation*}
@@ -634,7 +647,7 @@ Let us take recursive Fibonacci, for example:\\
 \begin{center}
     \begin{forest}
         [4 [3 [2 [1] [0]] [1]][2 [1] [0]]]
-    \end{forest}    
+    \end{forest}
 \end{center}
 By conducting post-order traversal on this tree, we can see how the results will run, or in what order each value will be added.\\
 The tallest stack in a recursive algorithm (or longest path in computational tree) is the space complexity. It is the additional memory necessary to store the data. This is because each call is allocating an additional constant amount of memory.\\
@@ -643,11 +656,11 @@ Let us look back at our Fibonacci tree once more. Let n be the number of sequenc
 \begin{table}
     \centering
     \begin{tabular}{c c c}
-        n & T & L\\
+        n & T & L \\
         \hline
-        0 & 1 & 1\\
-        1 & 1 & 1\\
-        2 & 3 & 2\\
+        0 & 1 & 1 \\
+        1 & 1 & 1 \\
+        2 & 3 & 2 \\
         3 & 5 & 3
     \end{tabular}
 \end{table}
@@ -657,7 +670,7 @@ A binary search tree for an array will have the following computation tree, for 
 \begin{center}
     \begin{forest}
         [0.8 [0.3 [0.0 [\underline{0.-1}] [\underline{1.0}]] [2.3 [\underline{2.1}] [3.3 [\underline{3.2}] [\underline{4.3}]]]][5.8 [5.5 [\underline{5.4}] [\underline{6.5}]] [7.8 [\underline{7.6}] [8.8 [\underline{8.7}] [\underline{9.8}]]]]]
-    \end{forest}    
+    \end{forest}
 \end{center}
 if the code that defines it is:
 \begin{lstlisting}
@@ -675,8 +688,11 @@ Tnode *Build_BST(int *a, int lidx, int ridx)
     return root;
 }
 \end{lstlisting}
-This has a space complexity of O(log(n)). That is because at any given moment, there will be at most log(n) stacks (the height of the computational tree is O(log(n)). It will have a time complexity of O(n), as it is the number of non-leaf nodes in the computation tree.\\
-Similar trees can be built for any recursive algorithm.
+This has a space complexity of O(log(n)). That is because at any given moment,
+there will be at most log(n) stacks (the height of the computational tree is
+O(log(n)). It will have a time complexity of O(n), as it is the number of
+non-leaf nodes in the computation tree.\\ Similar trees can be built for any
+recursive algorithm.
 \begin{center}
     "As an engineer, you must look for patterns. You won't see until you start looking."\\ - Prof. Koh
 \end{center}
@@ -701,20 +717,25 @@ Can instead be turned into:
         base_case_body;
     }
 \end{lstlisting}
-Now, let us look at the strategy for calculating time complexity of recursive calls.\\
-We know that recursion takes a scenario, divides it into $a$ sub-scenarios of size $\frac{n}{b}$, which it solves in the same way, and returns to combine the result of each of the sub-scenarios.\\
-This means the time complexity of the full method will be: $T(n) = aT(\frac{n}{b})+f(n)$ where $f(n)$ is the time complexity of the operations to combine the returned results. We also know that $T(1) = \Theta (1)$.\\
-Let $c = \log_b(a)$.\\ This means that the number of leaf  nodes will be $n^c$. \\ Since $T(1) = \Theta(1)$, leaf node computation will be $\Theta(n^c)$.\\
-Now we will divide this into three cases:
+Now, let us look at the strategy for calculating time complexity of recursive
+calls.\\ We know that recursion takes a scenario, divides it into $a$
+sub-scenarios of size $\frac{n}{b}$, which it solves in the same way, and
+returns to combine the result of each of the sub-scenarios.\\ This means the
+time complexity of the full method will be: $T(n) = aT(\frac{n}{b})+f(n)$ where
+$f(n)$ is the time complexity of the operations to combine the returned
+results. We also know that $T(1) = \Theta (1)$.\\ Let $c = \log_b(a)$.\\ This
+means that the number of leaf nodes will be $n^c$. \\ Since $T(1) = \Theta(1)$,
+leaf node computation will be $\Theta(n^c)$.\\ Now we will divide this into
+three cases:
 \begin{enumerate}
     \item $f(n) = O(n^{c-\epsilon}) \implies T(n) = \Theta(n^c)$
     \item $f(n) = \Theta (n^c) \implies T(n) = \Theta (n^c \log(n))$\\
-    More generally, if $f(n) = \Theta (n^c \log^k(n))$:
-    \begin{itemize}
-        \item $k>-1 \implies T(n) = \Theta (n^c \log^{k+1}(n))$
-        \item $k = -1 \implies T(n) = \Theta (n^c \log(\log(n)))$
-        \item $k<-1 \implies T(n) = \Theta (n^c)$
-    \end{itemize}
+          More generally, if $f(n) = \Theta (n^c \log^k(n))$:
+          \begin{itemize}
+              \item $k>-1 \implies T(n) = \Theta (n^c \log^{k+1}(n))$
+              \item $k = -1 \implies T(n) = \Theta (n^c \log(\log(n)))$
+              \item $k<-1 \implies T(n) = \Theta (n^c)$
+          \end{itemize}
     \item $f(n) = \Omega(n^{c+\epsilon}) \implies \Theta (f(n))$
 \end{enumerate}
 \section{Stacks}
@@ -727,7 +748,531 @@ It has four primitive operations, all of which have $O(1)$ time complexity:
     \item Stacktop(S): return top stack item
     \item Empty(S): returns whether the stack is empty
 \end{itemize}
-A stack can be simulated as a linked list, with the head of the linked list being the top of the stack.
+A stack can be simulated as a linked list, with the head of the linked list being the top of the stack.\\
+Another method is to use an array, with a struct defining the address of the array, the size of the array, and the index of the stack top.\\
+It behaves as the following:\\
+\begin{table}
+    \centering
+    \begin{tabular}{c}
+        top = 2            \\
+        func = $\emptyset$ \\
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}{c}
+        top = 1    \\
+        func = pop \\
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        3          \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}{c}
+        top = 2        \\
+        func = push(4) \\
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+\end{table}
+A stack should be grown if the number of elements to be stored in the stack is greater than the memory available. A good way to do so is to double the size each time the limit is reached, allowing for allocation of several new terms without allocating too large or too small an amount of memory.\\
+\begin{table}
+    \centering
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{5} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{5} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{7} \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{5} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{8} \\
+        \hline
+        \textbf{7} \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{5} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\cdots$
+\end{table}
+On the other hand, one should shrink only when it has gone an exponent below the limit, that is, if we had expanded to 5, and shrink to 4, we should not shrink it instantly, we should instead wait until it has reached to two. This will allow us to not have to shrink and expand repeatedly if we push and pop many times in a row around the transition value.\\
+\begin{table}
+    \centering
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{6} \\
+        \hline
+        \textbf{5} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{5} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{4} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{3} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{2} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{?} \\
+        \hline
+        \textbf{1} \\
+        \hline
+    \end{tabular}
+\end{table}
+\section{Queues}
+Queues, unlike stacks, which work on the LIFO rule, work on the FIFO rule. That is, you can add only at the end, but pop or remove and access at the beginning.\\ 
+The primitive operators are:
+\begin{itemize}
+    \item enqueue(Q,i): add item at end of queues
+    \item dequeue(Q): remove and return item from front of queue
+    \item Front(Q): return front of queue
+    \item Rear(Q): return end of queue
+    \item Empty(Q): return whether or not the queue is empty
+\end{itemize}
+Once again, these can be represented through linked lists. The primitive operations will have $O(1)$ complexity since the tail and head are previously stored.\\
+
+\begin{table}
+    \centering
+    \begin{tabular}{|c|}
+        \hline
+        f \\
+        \hline
+        $\downarrow$\\
+        \hline
+    \end{tabular}
+    \hspace{6.3em}
+    \begin{tabular}{|c|}
+        \hline
+        r \\
+        \hline
+        $\downarrow$\\
+        \hline
+    \end{tabular}
+    \hspace{3.5em} \quad \hspace{1em}
+    \\
+    \begin{tabular}{|c|c|}
+        \hline
+        $6$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $3$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $4$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        $\emptyset$ \\
+        \hline
+    \end{tabular}
+\end{table}
+If we were to dequeue:\\
+\begin{table}
+    \centering
+    \begin{tabular}{|c|}
+        \hline
+        f \\
+        \hline
+        $\downarrow$\\
+        \hline
+    \end{tabular}
+    \hspace{2em}
+    \begin{tabular}{|c|}
+        \hline
+        r \\
+        \hline
+        $\downarrow$\\
+        \hline
+    \end{tabular}
+    \hspace{3em} \quad \hspace{1em}
+    \\
+    \begin{tabular}{|c|c|}
+        \hline
+        $3$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $4$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        $\emptyset$ \\
+        \hline
+    \end{tabular}
+\end{table}
+If were to enqueue(1) from there:\\
+\begin{table}
+    \centering
+    \begin{tabular}{|c|}
+        \hline
+        f \\
+        \hline
+        $\downarrow$\\
+        \hline
+    \end{tabular}
+    \hspace{6.3em}
+    \begin{tabular}{|c|}
+        \hline
+        r \\
+        \hline
+        $\downarrow$\\
+        \hline
+    \end{tabular}
+    \hspace{3.5em} \quad \hspace{1em}
+    \\
+    \begin{tabular}{|c|c|}
+        \hline
+        $3$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $4$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|c|}
+        \hline
+        $1$ & $\rightarrow$ \\
+        \hline
+    \end{tabular}
+    \begin{tabular}{|c|}
+        \hline
+        $\emptyset$ \\
+        \hline
+    \end{tabular}
+\end{table}
+\FloatBarrier
+This can also be implemented with arrays.\\
+We will store the address of the array, the size of the array, the front and the rear of the array.\\
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \cellcolor{cyan}\textbf{1}&\cellcolor{cyan}\textbf{2}&\cellcolor{cyan}\textbf{3}&\textit{?}\\
+        \hline
+    \end{tabular}\\
+    f=0, r=3\\
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \cellcolor{cyan}\textbf{1}&\cellcolor{cyan}\textbf{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \hline
+    \end{tabular}\\
+    f=0, r=4\\
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textit{1}&\cellcolor{cyan}\textbf{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \hline
+    \end{tabular}\\
+    f=1, r=4\\
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textit{1}&\textit{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \hline
+    \end{tabular}\\
+    f=2, r=4\\
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \cellcolor{cyan}\textbf{5}&\textit{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \hline
+    \end{tabular}\\
+    f=2, r=1\\
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \cellcolor{cyan}\textbf{5}&\cellcolor{cyan}\textbf{6}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \hline
+    \end{tabular}\\
+    f=2, r=2\\
+    How to enqueue now?\\
+    Option 1:\\
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \cellcolor{cyan}\textbf{5}&\cellcolor{cyan}\textbf{6}&\textit{3}&\textit{4}&\textit{?}&\textit{?}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \hline
+    \end{tabular}\\
+    f=6, r=2\\
+    Option 2:\\
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+        \hline
+        \textit{5}&\textit{6}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}&\cellcolor{cyan}\textbf{5}&\cellcolor{cyan}\textbf{6}&\textit{?}&\textit{?}\\
+        \hline
+    \end{tabular}\\
+    f=2, r=6\\
+    Continue as before...
+\end{table}
+Queues can also be double ended. These are known as dequeues. They are implemented similarly, however, the linked list is changed for a doubly linked list. \\
+There also exist priority queues, in which items are added or removed in order of priority. For these, the time complexities to enqueue and dequeue are O(1) and O(n) respectively. However, if it were ordered, it would be O(n) and O(1).\\
+\section{Trees}
+A tree is a graph such that there exist no cycles between its nodes. Have an algorithmic reduction in time complexity of searching and sorting elements.\\
+\begin{center}
+   \begin{forest}
+       [A [B [D][]][C [E [] [H]] [F] [G]]]
+   \end{forest}    
+\end{center}
+In which A is a root node.\\
+B and C are sibling nodes, as they are on the same level.\\
+E is a child of C, and C is a parent of E.\\
+F is a descendant of A.\\
+D and H are both leaf nodes.\\
+A is on level 0, B and C are on level 1, etc.\\~\\
+Had there been more than one method to get from any node to another, this would not be a list.\\
+A complete binary tree is that which has all levels completely filled:
+\begin{center}
+    \begin{forest}
+        [A [B [D [H] [I]][E [J] [K]]][C [F [L] [M]] [G [N] [O]]]]
+    \end{forest}    
+ \end{center}
+ At level L, there will be $2^L$ nodes, the total number of nodes, in terms of the height h will be $2^{h+1}-1$. This means the height will be O(log(n)).\\
+ An almost complete binary tree is one that is full on all levels except the last:\\
+ \begin{center}
+     \begin{forest}
+         [A [B [D [H] []][E [J] [K]]][C [F [L] []] [G [N] [O]]]]
+     \end{forest}    
+  \end{center}
+Will have at least $2^h$ nodes, and at most $2^{h+1}-2$.
+A strictly binary tree is one in which each node has either 0 or 2 nodes.\\
+\begin{center}
+    \begin{forest}
+        [A [B [D][E [J] [K]]][C [F] [G]]]
+    \end{forest}    
+ \end{center}
+If there are n leaf nodes, there will be 2n-1 non-leaf nodes.\\
+It is defined as following:\\
+\begin{lstlisting}
+    typedef struct _Tnode
+    {
+        int data;
+        struct _Tnode *left;
+        struct _Tnode *right;
+    } Tnode;
+\end{lstlisting}
+This can in fact also be implemented with arrays.\\
+There are four kinds of list tree traversal:
+\begin{enumerate}
+    \item Preorder: root, left, right
+    \item Inorder: left, root, right
+    \item Postorder: left, right, root
+    \item Breadth first: by level, right to left.
+\end{enumerate}
 \end{document}
 
 %\begin{center}
