@@ -1388,9 +1388,86 @@ component-name instance-identifier
     \begin{center}
         Maj \#(.WID(8)) U1(W,X,Y,Z)
     \end{center}
-    \item continuous-assignment(dataflow model)
-    \item always, initial (behavioral or procedural)
+    \item continuous-assignment(dataflow model):\\
+    Syntax:
+    \begin{lstlisting}
+    assign net-name:expression;
+    assign net-name[msb:lsb] = expression;
+    \end{lstlisting}
+    The right-hand side is evaluated, and then assigned to the left-hand side continuously. That is, it assigns a new value every time the expression changes.\\
+    The order is not important, as they are all re-evaluated. So, all values need to be consistent.\\
+    \item always, initial (behavioral or procedural):\\
+    Syntax:
+    \begin{lstlisting}
+    always @(signal_name or signal_name...)
+        procedural statement
+    always @(signal_name, signal_name...)
+        procedural statement
+    always @(signal_name, signal_name...)
+        procedural statement
+    always @(posedge signal_name)
+        procedural statement
+    always @*
+        procedural statement
+    always
+        procedural statement
+    \end{lstlisting}
+    These statements execute sequentially, that is, within the statements, the order matters. However, separate statements are evaluated at the same time.\\
+    If any of the signals changes, the statement must be reevaluated. If none of them are changing, the block is not executed and is held suspended.\\
+    If the evaluation of the statement changes any of the input signals, then it will reevaluate the statement. It will keep doing so until none of the inputs have changed.\\
+    When using conditional statements, it is important that every variable is assigned a value in every pass.\\
+    Assignment statements have two syntaxes:
+    \begin{lstlisting}
+    variable-name = expression; //combinational
+    variable-name <= expression; //sequential
+    \end{lstlisting}
+    The first syntax is an instant assignment, while the second does not assign until the end of the statement.\\
+    Another procedural statement syntax is:
+    \begin{lstlisting}
+    begin
+        procedural statement
+        ...
+        procedural statement
+    end
+    begin block-name
+        variable declarations
+        parameter declarations
+        procedural statement
+        ... 
+        procedural statement
+    end
+    \end{lstlisting}
+    Begin-end blocks allow us to create procedural statements that contain several single statements within.\\
+    If statements have the following syntax:
+    \begin{lstlisting}
+    if(condition)procedural statement
+    else procedural-statement
+    \end{lstlisting}
+    Any of the procedural statements can have more if statements within.\\
+    There is then a case statement:
+    \begin{lstlisting}
+    case(selection-expression)
+        choice,...,choice:procedural statement
+        ... 
+        choice,...,choice:procedural statement
+        default:procedural-statement
+    endcase
+    \end{lstlisting}
+    Each of the choices is compared with the selection expression, and the first one that evaluates as true is implemented.\\
+    Next are for loops:
+    \begin{lstlisting}
+    for(loop-index=first-expr;logical-expression;loop-index=next-expr)
+        procedural-statement
+    \end{lstlisting}
+    For synthesis to be possible, a few conditions must be met:
+    \begin{itemize}
+        \item first-expr must be constant
+        \item logical-expression must be evaluatable
+        \item next-expr must be simple increments or decrements
+    \end{itemize}
+
 \end{itemize}
+    
 \end{document}
 
 
