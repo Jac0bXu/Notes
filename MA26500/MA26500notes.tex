@@ -970,5 +970,10 @@ So, if were to be given a system of $m$ equations and $n$ variables (with no con
 \begin{center}
     \textbf{Theorem.} If \textbf{A} is an $m \times n$ matrix, Col(\textbf{A}) will be a subspace of $\mathbb{R}^m$.\\
 \end{center}
-
+\defn{Linear Transformation from vector space V to W}{a rule that assigns to each vector $\mathbf{v}\in V$ a unique vector $\mathbf{w} = T(\mathbf{v}) \in W$.} It must also have the properties:\\
+\begin{itemize}
+    \item $T(\mathbf{u+v}) = T(\mathbf{u})+T(\mathbf{v})$
+    \item $T(c\mathbf{u}) = cT(\mathbf{u})$ 
+\end{itemize}
+An example of a linear transformation is $\mathbb{P}_2 \mapsto \mathbb{R}^2$. This means that we need to find a standard basis, like we did for the matrix transformations. We will find that the standard matrix is in fact $\{1,x,x^2\}$. So, to find the transformation matrix, we need to find the values of the basis at the given condition.
 \end{document}
