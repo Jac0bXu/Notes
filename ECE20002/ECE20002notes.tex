@@ -1450,7 +1450,87 @@ If $a>0$ (stable) and $a<0$ (unstable) respectively:
 We will only be considering stable and marginally stable inputs and outputs for this course.\\
 The zeros, on the other hand allow us to know if the excitation will be cancelled out. That is, if the input exponent is the same value as that which will cause a 0 in the transfer function, there will be no forced response term.\\
 If the input is bounded, the Forced Response must also be bounded. Thus, the unstability can only come from the poles from the transfer function.\\
-A system will be unstable if the pole, when plotted, is in the first or fourth quadrant.
+A system will be unstable if the pole, when plotted, is in the first or fourth quadrant.\\
+A passive circuit can only ever be stable.\\
+\section{Resonance and $2^{nd}$ Order Systems}
+For a system to resonate, it needs at least two energy storing elements.\\
+The most commonly observed system is an LC circuit.\\
+We will analyze the following circuit:\\
+\begin{center}
+    \begin{circuitikz}[american voltages]
+        \draw (0,2)
+        to[V, l=$V_{in}$] (0,0);
+        \draw (0,2)
+        to [L, l=$L$] (2,2)
+        to [C, l=$C$] (2,0)
+        to [short, -] (0,0);
+    \end{circuitikz}
+\end{center}
+In the example above:
+\begin{align*}
+    H_1(s) = \frac{I_L(s)}{V_{IN}(s)} &= \frac{1}{Z(s)} = \frac{\frac{s}{L}}{s^2+\frac{1}{LC}}\\
+    &= \frac{\frac{j\omega}{L}}{-\omega^2+\frac{1}{LC}} \text{ at SSS}\\
+    [H_1(j\omega)]_{\omega = \frac{1}{\sqrt{LC}}} &= \infty
+\end{align*}
+The impedance at the given frequency is 0, which causes the current to go to infinity.\\ If a circuit, as seen by a source has 0 impedance, it will be in a resonant state.\\
+We will now look at an RLC circuit, which is more realistic than the previous case:
+\begin{center}
+    \begin{circuitikz}[american voltages]
+        \draw (0,2)
+        to[V, l=$V_{in}$] (0,0);
+        \draw (0,2)
+        to [R, l=$R$] (2,2)
+        to [L, l=$L$] (4,2)
+        to [C, l=$C$] (4,0)
+        to [short, -] (0,0);
+    \end{circuitikz}
+\end{center}
+When provided with a resonant frequency, that is, $\omega = \frac{1}{\sqrt{LC}}$, the capacitor and inductor will behave like a short, causing the total impedance of the circuit to be $R$.\\
+Note that the voltage drop across the capacitor and inductor is not in fact zero. The voltages across the inductor and capacitor are actually:
+\begin{align*}
+    V_L &= \frac{-1}{j\omega_0RC}\\
+    V_C &= \frac{1}{j\omega_0RC}\\
+    \implies V_L+V_C &= 0
+\end{align*}
+The voltages across them are not necessarily smaller than the input, and thus they can be used to amplify voltages.\\ In resonance, the capacitor and inductor voltages will be exactly 180 degrees out of phase.\\
+Let us instead look at the following circuit:
+\begin{center}
+    \begin{circuitikz}[american voltages, american currents]
+        \draw (0,0)
+        to[I, l=$I_{in}$] (0,2);
+        \draw (0,2)
+        to [short, -] (1,2)
+        to [L, l^=$L$] (1,0)
+        to [short, -] (2,0)
+        to [C, l_=$C$] (2,2);
+        \draw (0,0) to [short, -] (1,0);
+        \draw (1,2) to [short, -] (2,2);
+    \end{circuitikz}
+\end{center}
+At resonant frequency, the impedance becomes infinite, or an open circuit. That is, the voltage across them becomes $\infty$.
+If it were instead RLC:\\
+\begin{center}
+    \begin{circuitikz}[american voltages, american currents]
+        \draw (0,0)
+        to[I, l=$I_{in}$] (0,2);
+        \draw (0,2)
+        to [short, -] (1,2)
+        to [R, l^=$R$] (1,0)
+        to [short, -] (2,0)
+        to [L, l_=$L$] (2,2)
+        to [short, -] (3,2)
+        to [C, l=$C$] (3,0);
+        \draw (0,0) to [short, -] (3,0);
+        \draw (1,2) to [short, -] (2,2);
+    \end{circuitikz}
+\end{center}
+The current through the resistor will be the input, however, currents through the capacitor and inductor will not be null. Once again, they will be equal in magnitude but with opposite signs:
+\begin{align*}
+    I_L &= \frac{1}{j\omega_0\frac{L}{R}}\\
+    I_C &= \frac{-1}{j\omega_0\frac{L}{R}}\\
+    I_L+I_C &= 0
+\end{align*}
+Once again, this can be used as an amplifier, this time for current.
 \end{document}
 
 % \begin{center}
