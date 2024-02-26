@@ -222,7 +222,7 @@ This can be done for more inputs, by combining multiple gates.\\ There are two m
             0 & 1 & 1                   \\
             1 & 0 & 1                   \\
             1 & 1 & 0
-        \end{tabular}                &
+        \end{tabular}            &
         \begin{tabular}{c c|c}
             x & y & {$\lnot(x\lor y)$} \\
             \hline
@@ -848,27 +848,27 @@ The above map will have the following combinations:\\
                     \underline{1} & 1 & 0 & 1 \\
                     \underline{1} & 0 & 0 & 0 \\
                 };
-            \end{tikzpicture}                                                                     \\
-            $W'\land Z$                                                & $X\land Y' \land Z$ & $X'\land Y\land Z$ & $W'\land X'\land Y$ \\
+            \end{tikzpicture}                                                                         \\
+            $W'\land Z$                                                        & $X\land Y' \land Z$ & $X'\land Y\land Z$ & $W'\land X'\land Y$ \\
             \hline
             \begin{tabular}{c|c}
                 W & 00 \\
                 X & 01 \\
                 Y & 10 \\
                 Z & 11
-            \end{tabular}                                       &
+            \end{tabular}                                               &
             \begin{tabular}{c|c}
                 W & 01 \\
                 X & 11 \\
                 Y & 0  \\
                 Z & 1
-            \end{tabular}                                       &
+            \end{tabular}                                               &
             \begin{tabular}{c|c}
                 W & 10 \\
                 X & 00 \\
                 Y & 1  \\
                 Z & 1
-            \end{tabular}                                       &
+            \end{tabular}                                               &
             \begin{tabular}{c|c}
                 W & 0  \\
                 X & 0  \\
@@ -1311,70 +1311,74 @@ and there are some operators:
     \item |, OR
     \item $\sim$, NOT
     \item ˆ, XOR\\
-    The above can also be used on buses, performing the operation on all the bits of said bus.
+          The above can also be used on buses, performing the operation on all the bits of said bus.
     \item The [msb:lsb] notation is known as a vector.\\
     \item \{\} is used for concatenation through comma divided signals. One can also multiply inputs and make them appear multiple times, for example \{2\{byte1\}, byte2, byte3\}.
     \item Arithmetic operators:
-    \begin{itemize}
-        \item +
-        \item -
-        \item $*$
-        \item /
-        \item \%
-        \item $**$, exponent
-        \item $<<$, logical left shift
-        \item $>>$, logical right shift
-        \item $<<<$, arithmetic left shift
-        \item $>>>$, arithmetic right shift
-    \end{itemize}
-    Each of these will cause a module that can run this operation to be synthesized. 
+          \begin{itemize}
+              \item +
+              \item -
+              \item $*$
+              \item /
+              \item \%
+              \item $**$, exponent
+              \item $<<$, logical left shift
+              \item $>>$, logical right shift
+              \item $<<<$, arithmetic left shift
+              \item $>>>$, arithmetic right shift
+          \end{itemize}
+          Each of these will cause a module that can run this operation to be synthesized.
     \item Logical Operators:
-    \begin{itemize}
-        \item \&\&
-        \item ||
-        \item !
-        \item ==
-        \item !=
-        \item >
-        \item >=
-        \item <
-        \item <=
-    \end{itemize}
-    The bottom 6 create comparator modules.\\   
-    \textit{Note: if there is one unsigned and one signed number, they will both be considered unsigned, effectively modifying the signed number.}
+          \begin{itemize}
+              \item \&\&
+              \item ||
+              \item !
+              \item ==
+              \item !=
+              \item >
+              \item >=
+              \item <
+              \item <=
+          \end{itemize}
+          The bottom 6 create comparator modules.\\
+          \textit{Note: if there is one unsigned and one signed number, they will both be considered unsigned, effectively modifying the signed number.}
     \item "Bitwise comparators"
-    \begin{itemize}
-        \item ===
-        \item !==
-    \end{itemize}
-    Compare the two operands bit by bit. These cannot be synthesized.
+          \begin{itemize}
+              \item ===
+              \item !==
+          \end{itemize}
+          Compare the two operands bit by bit. These cannot be synthesized.
     \item Conditional Operator: <statement> ? <true> : <false>
 \end{itemize}
 Compiler directives:\\
 'include <filename> - allows for the file to be immediately read and processed.\\
 'define <identifier text> - allows for repeatedly used expressions to be easily rewritten.
 \subsection{Arrays}
-Ordered set of variables with the same type. Elements are selected by index. Syntax like the following:
+Ordered set of variables with the same type. Elements are selected by index.
+Syntax like the following:
 \begin{lstlisting}
     reg [7:0] mem [0:255]
 \end{lstlisting}
-allows for the creation of a 256 byte array that can be accessed through mem[a][b]\\
+allows for the creation of a 256 byte array that can be accessed through
+mem[a][b]\\
 \subsection{Concurrent Statements}
 There are three types:\\
 \begin{itemize}
-    \item Instance (structural model):\\
-    Individual gates and other components are instantiated and connected using nets. There are built-in components which need not be instantiated.\\
-    Syntax for instantiation (not declaration):
-    \begin{lstlisting}
+    \item Instance (structural model):\\ Individual gates and other components are
+          instantiated and connected using nets. There are built-in components which need
+          not be instantiated.\\ Syntax for instantiation (not declaration):
+          \begin{lstlisting}
 component-name instance-identifier (expr,expr,...,expr);
 component-name instance-identifier
     (.port-name(expr),
     .port-name(expr), ...,
     .port-name(expr));
     \end{lstlisting}
-    The first format is the only one allowed for the built-in gates.\\ Ports must be given in the order (output, input, input...). If they were three state buffers, the order would be (output, data input, enable input).\\
-    Parameters can be used to parametrize a module to handle inputs and outputs of any width. 
-    \begin{lstlisting}
+          The first format is the only one allowed for the built-in gates.\\ Ports must
+          be given in the order (output, input, input...). If they were three state
+          buffers, the order would be (output, data input, enable input).\\ Parameters
+          can be used to parametrize a module to handle inputs and outputs of any width.
+          \begin{lstlisting}
         module Maj(OUT,I0,I1,I2);
             parameter WID=1;
             input [WID-1:0] I0,I1,I2;
@@ -1382,23 +1386,24 @@ component-name instance-identifier
             assign OUT = (I0&I1)|(I0&I2)|(I1&I2);
         endmodule
     \end{lstlisting}
-    This will turn each of the inputs and outputs into an array of size WID.\\
-    When instantiating, one can use the syntax Maj \#(8) U1(W,X,Y,Z), and this will change the parameter value to 8.\\
-    If we were to have several parameters, we would need to mention which parameter we are changing. For example:\\
-    \begin{center}
-        Maj \#(.WID(8)) U1(W,X,Y,Z)
-    \end{center}
-    \item continuous-assignment(dataflow model):\\
-    Syntax:
-    \begin{lstlisting}
+          This will turn each of the inputs and outputs into an array of size WID.\\ When
+          instantiating, one can use the syntax Maj \#(8) U1(W,X,Y,Z), and this will
+          change the parameter value to 8.\\ If we were to have several parameters, we
+          would need to mention which parameter we are changing. For example:\\
+          \begin{center}
+              Maj \#(.WID(8)) U1(W,X,Y,Z)
+          \end{center}
+    \item continuous-assignment(dataflow model):\\ Syntax:
+          \begin{lstlisting}
     assign net-name:expression;
     assign net-name[msb:lsb] = expression;
     \end{lstlisting}
-    The right-hand side is evaluated, and then assigned to the left-hand side continuously. That is, it assigns a new value every time the expression changes.\\
-    The order is not important, as they are all re-evaluated. So, all values need to be consistent.\\
-    \item always, initial (behavioral or procedural):\\
-    Syntax:
-    \begin{lstlisting}
+          The right-hand side is evaluated, and then assigned to the left-hand side
+          continuously. That is, it assigns a new value every time the expression
+          changes.\\ The order is not important, as they are all re-evaluated. So, all
+          values need to be consistent.\\
+    \item always, initial (behavioral or procedural):\\ Syntax:
+          \begin{lstlisting}
     always @(signal_name or signal_name...)
         procedural statement
     always @(signal_name, signal_name...)
@@ -1412,18 +1417,22 @@ component-name instance-identifier
     always
         procedural statement
     \end{lstlisting}
-    These statements execute sequentially, that is, within the statements, the order matters. However, separate statements are evaluated at the same time.\\
-    If any of the signals changes, the statement must be reevaluated. If none of them are changing, the block is not executed and is held suspended.\\
-    If the evaluation of the statement changes any of the input signals, then it will reevaluate the statement. It will keep doing so until none of the inputs have changed.\\
-    When using conditional statements, it is important that every variable is assigned a value in every pass.\\
-    Assignment statements have two syntaxes:
-    \begin{lstlisting}
+          These statements execute sequentially, that is, within the statements, the
+          order matters. However, separate statements are evaluated at the same time.\\
+          If any of the signals changes, the statement must be reevaluated. If none of
+          them are changing, the block is not executed and is held suspended.\\ If the
+          evaluation of the statement changes any of the input signals, then it will
+          reevaluate the statement. It will keep doing so until none of the inputs have
+          changed.\\ When using conditional statements, it is important that every
+          variable is assigned a value in every pass.\\ Assignment statements have two
+          syntaxes:
+          \begin{lstlisting}
     variable-name = expression; //combinational
     variable-name <= expression; //sequential
     \end{lstlisting}
-    The first syntax is an instant assignment, while the second does not assign until the end of the statement.\\
-    Another procedural statement syntax is:
-    \begin{lstlisting}
+          The first syntax is an instant assignment, while the second does not assign
+          until the end of the statement.\\ Another procedural statement syntax is:
+          \begin{lstlisting}
     begin
         procedural statement
         ...
@@ -1437,15 +1446,15 @@ component-name instance-identifier
         procedural statement
     end
     \end{lstlisting}
-    Begin-end blocks allow us to create procedural statements that contain several single statements within.\\
-    If statements have the following syntax:
-    \begin{lstlisting}
+          Begin-end blocks allow us to create procedural statements that contain several
+          single statements within.\\ If statements have the following syntax:
+          \begin{lstlisting}
     if(condition)procedural statement
     else procedural-statement
     \end{lstlisting}
-    Any of the procedural statements can have more if statements within.\\
-    There is then a case statement:
-    \begin{lstlisting}
+          Any of the procedural statements can have more if statements within.\\ There is
+          then a case statement:
+          \begin{lstlisting}
     case(selection-expression)
         choice,...,choice:procedural statement
         ... 
@@ -1453,23 +1462,47 @@ component-name instance-identifier
         default:procedural-statement
     endcase
     \end{lstlisting}
-    Each of the choices is compared with the selection expression, and the first one that evaluates as true is implemented.\\
-    Next are for loops:
-    \begin{lstlisting}
+          Each of the choices is compared with the selection expression, and the first
+          one that evaluates as true is implemented.\\ Next are for loops:
+          \begin{lstlisting}
     for(loop-index=first-expr;logical-expression;loop-index=next-expr)
         procedural-statement
     \end{lstlisting}
-    For synthesis to be possible, a few conditions must be met:
-    \begin{itemize}
-        \item first-expr must be constant
-        \item logical-expression must be evaluatable
-        \item next-expr must be simple increments or decrements
-    \end{itemize}
-
+          For synthesis to be possible, a few conditions must be met:
+          \begin{itemize}
+              \item first-expr must be constant
+              \item logical-expression must be evaluatable
+              \item next-expr must be simple increments or decrements
+          \end{itemize}
+          Other loop statements are repeat, while, forever.
 \end{itemize}
-    
+\section{Basic Combinational Logic Elements}
+There are two perspectives this can be analyzed from:
+\begin{itemize}
+    \item Read-only memories (ROM) which allow us to implement any truth table, with a
+          number of inputs and outputs predefined by the ROM.\\ When a function has too
+          many inputs, they can be decomposed into smaller functions to make more
+          manageable truth tables. This is the basis for FPGAs.
+    \item Commonly occurring operations (decoding, selecting, comparing) are used to
+          implement functions.
+\end{itemize}
+\subsection{Read-Only Memory}
+\defn{ROM}{a combinational circuit with $n$ inputs and $b$ outputs}.\\
+It is a two-dimensional array with $2^n$ rows.\\ 
+The inputs are stored in a vector A, known as address, and the outputs are stored in the output D, known as data output.\\
+\begin{center}
+    \includegraphics[width = 100px]{images/combinational_representation.png}
+\end{center}
+It works by taking in a "number", finding the output stored at the index of the input, and assigning this output to the data outputs.\\
+The ROM needs to be pre-programmed with the truth table.\\
+An FPGA consists of small ROMs, known as lookup tables, which are used to implement logic functions.\\
+A $2^n\times 1$ look-up table can turn any set of $n$ inputs, and give you an output. Smaller values of n allow for this to be viable. So, the actual problem is knowing how to decompose a function into as few LUTs, with as few inputs as possible.\\
+\subsection{Decoding and Selecting}
+A decoder allows us to select a component based on its address.
+$n$ address bits allow us to select certain outputs. The most standard of outputs is to select one from $2^n$, known as a binary decoder.\\
+It is, however, far less flexible than a ROM. The specialty of them is that they are not programmable, they are predefined. So, one cannot load a new truth table onto it. The advantage is that it is simpler, using only some gates, and more economic than a ROM.\\
+There are many kinds of codes that can be placed into decoders, such as 1-out-of-10, or gray code, which were mentioned before.\\
 \end{document}
-
 
 % \begin{circuitikz} \draw
 %     (0,2) node[and port] (myand1) {}
