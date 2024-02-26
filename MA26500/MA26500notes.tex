@@ -975,5 +975,48 @@ So, if were to be given a system of $m$ equations and $n$ variables (with no con
     \item $T(\mathbf{u+v}) = T(\mathbf{u})+T(\mathbf{v})$
     \item $T(c\mathbf{u}) = cT(\mathbf{u})$ 
 \end{itemize}
-An example of a linear transformation is $\mathbb{P}_2 \mapsto \mathbb{R}^2$. This means that we need to find a standard basis, like we did for the matrix transformations. We will find that the standard matrix is in fact $\{1,x,x^2\}$. So, to find the transformation matrix, we need to find the values of the basis at the given condition.
+An example of a linear transformation is $\mathbb{P}_2 \mapsto \mathbb{R}^2$. This means that we need to find a standard basis, like we did for the matrix transformations. We will find that the standard matrix is in fact $\{1,x,x^2\}$. So, to find the transformation matrix, we need to find the values of the basis at the given condition.\\
+\defn{Kernel}{set of all \textbf{v} in V, such that $T(\textbf{v})=0$}\\
+\defn{Range}{set of all $\{\mathbf{w}\in W\quad |\quad \exists \quad\mathbf{v} \in V \quad\&\quad T(\mathbf{v}) = \mathbf{w}\}$}\\
+\begin{center}
+    \textbf{Theorem.} Let $\mathbf{v_1, v_2, v_3, \ldots, v_n}$ be vectors in a vector space V. They are linearly independent if and only if the equation
+    \begin{equation*}
+        x_1\mathbf{v_1}+x_2\mathbf{v_2}+\cdots+x_n\mathbf{v_n}= 0
+    \end{equation*}
+    has only the trivial solution.
+\end{center}
+\defn{Basis of V}{set of vectors such that they are linearly independent and span V. Must have the exact same amount of elements as unknowns}.\\
+That is $\mathbb{P}_n$ will have exactly $n+1$ elements in its basis. On the other hand $\mathbf{M}_{n\times m}$ will have $mn$.\\
+The standard basis, on the other hand, is the value that is used to find the transformation matrix. For polynomials, it is:
+\begin{equation*}
+    \begin{bmatrix}
+        1\\
+        0\\
+        0\\
+        \vdots\\
+        0
+    \end{bmatrix},
+    \begin{bmatrix}
+        0\\
+        1\\
+        0\\
+        \vdots\\
+        0
+    \end{bmatrix},\cdots,
+    \begin{bmatrix}
+        0\\
+        0\\
+        0\\
+        \vdots\\
+        1
+    \end{bmatrix}
+\end{equation*}
+with $n+1$ terms in each vector.\\
+For the matrix, it will be the set of all unique matrices with a 1 in a position within it, and 0 in every other position.\\
+\begin{center}
+    \textbf{Theorem.} The columns of an invertible matrix of side $n$ will be a basis for $\mathbb{R}^n$.
+\end{center}
+\begin{center}
+    \textbf{Theorem.} If there is a set of vectors that spans a vector space, all vectors that are linear combinations of others can be removed (sequentially), and what remains will be a basis for said vector space.
+\end{center}
 \end{document}
