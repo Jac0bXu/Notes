@@ -1453,7 +1453,8 @@ If the input is bounded, the Forced Response must also be bounded. Thus, the uns
 A system will be unstable if the pole, when plotted, is in the first or fourth quadrant.\\
 A passive circuit can only ever be stable.\\
 \section{Resonance and $2^{nd}$ Order Systems}
-For a system to resonate, it needs at least two energy storing elements.\\
+For a system to resonate, it needs at least two energy storing elements.
+It must also be an Underdamped System.\\
 The most commonly observed system is an LC circuit.\\
 We will analyze the following circuit:\\
 \begin{center}
@@ -1493,6 +1494,8 @@ Note that the voltage drop across the capacitor and inductor is not in fact zero
     \implies V_L+V_C &= 0
 \end{align*}
 The voltages across them are not necessarily smaller than the input, and thus they can be used to amplify voltages.\\ In resonance, the capacitor and inductor voltages will be exactly 180 degrees out of phase.\\
+The voltage they output is in fact known as the voltage response, and it is proportional to the resistance of the circuit, because the resistor is the only passive component that has a completely real impedance.\\
+\defn{Bandwidth($B_\omega$)}{The difference between the two frequencies at which the voltage response of the circuit is $\frac{1}{\sqrt{2}}$ of the voltage response at the resonant frequency.}\\
 Let us instead look at the following circuit:
 \begin{center}
     \begin{circuitikz}[american voltages, american currents]
@@ -1530,7 +1533,19 @@ The current through the resistor will be the input, however, currents through th
     I_C &= \frac{-1}{j\omega_0\frac{L}{R}}\\
     I_L+I_C &= 0
 \end{align*}
-Once again, this can be used as an amplifier, this time for current.
+Once again, this can be used as an amplifier, this time for current.\\
+Resonant frequency ($\omega_r$) can be defined as the frequency at which the impedance of a circuit becomes purely real.\\
+It is directly related to the natural frequency $\omega_0 = \frac{1}{\sqrt{LC}}$, and the damped resonance frequency $\omega_d$.
+\section{Frequency Response}
+We know that:
+\begin{equation*}
+    |V_{in}(j\omega)|=|Z_{in}(j\omega)||I_{in}(j\omega)| 
+\end{equation*}
+We can also define gain as the following:
+\begin{equation*}
+    |H(j\omega)|_{dB} = 20\log_{10}|H(j\omega)|
+\end{equation*}
+This means that the point at which the dB gain is $-3$, is the same as the limits of the bandwidth mentioned in the previous section. This frequency is known as the half-power frequency.\\
 \end{document}
 
 % \begin{center}

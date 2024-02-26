@@ -473,7 +473,17 @@ Which leads to the little-omega notation:
     g(n) = \omega(f(n)) & \iff f(n) = o(g(n))                                      \\
                         & \iff \lim_{n\rightarrow\infty}\frac{g(n)}{f(n)} = \infty
 \end{align*}
-\textit{For most cases, if f is $O(g)$, but not $\Theta(g)$, it is $o(g)$. Exceptional cases would be like $f(n) = n^{|\sin(n)|}$, which seldom exist.}
+\textit{For most cases, if f is $O(g)$, but not $\Theta(g)$, it is $o(g)$. Exceptional cases would be like $f(n) = n^{|\sin(n)|}$, which seldom exist.}\\
+There are some implications that come from these relationships:
+\begin{align*}
+    f(n) = \Theta(g(n)) &\\
+    &\implies f(n) = \Omega(g(n)), f(n)= O(g(n)),\\
+    &\implies g(n) =\Omega(f(n)), g(n) = O(f(n))\\
+    f(n) = o(g(n)) &\\
+    &\implies f(n) = O(g(n))\\
+    f(n) = \omega(g(n)) &\\
+    &\implies f(n) = \Omega(g(n))
+\end{align*}
 \section{Linked Lists}
 \textit{NOTE: my notes on this section are not great, as much of the explanation was done through images and drawings upon them. If you have better notes for this section, please feel free to improve them.}\\
 A list is a linear collection of items that can be inserted and removed at any position.\\
@@ -1273,6 +1283,64 @@ There are four kinds of list tree traversal:
     \item Postorder: left, right, root
     \item Breadth first: by level, right to left.
 \end{enumerate}
+A tree can also be traversed through by creating a stack:\\
+\begin{table}
+    \centering
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{} \\
+        \hline
+        \textbf{} \\
+        \hline
+        \textbf{} \\
+        \hline
+        \textbf{A} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{} \\
+        \hline
+        \textbf{} \\
+        \hline
+        \textbf{B} \\
+        \hline
+        \textbf{C} \\
+        \hline
+    \end{tabular}
+    $\rightarrow$
+    \begin{tabular}[b]{|c|}
+        \hline
+        \textbf{} \\
+        \hline
+        \textbf{D} \\
+        \hline
+        \textbf{E} \\
+        \hline
+        \textbf{C} \\
+        \hline
+    \end{tabular}
+    $\rightarrow \cdots$
+\end{table}
+With each pop from a stack printing and adding the two children into the stack.\\
+Alongside that, a queue can be used to conduct breadth traversal.\\
+\subsection{"Fixes"}
+Prefix, postfix, and infix notations are those which come from preorder, postorder, and inorder traversals of the following tree:
+\begin{center}
+    \begin{forest}
+        [-[/[+[a][b]][c]][*[d][e]]]
+    \end{forest}
+\end{center}
+\begin{table}
+    \centering
+    \begin{tabular}{c|c|c}
+        preorder & inorder & postorder \\
+        \hline
+        -(/(+(ab)c)*(de))& ((a+b)/c)-(d*e) & ab+c/de*-
+    \end{tabular}
+\end{table}
+These expressions allow a computer to easily evaluate mathematical inputs it receives.
 \end{document}
 
 %\begin{center}
