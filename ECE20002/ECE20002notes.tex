@@ -1535,17 +1535,73 @@ The current through the resistor will be the input, however, currents through th
 \end{align*}
 Once again, this can be used as an amplifier, this time for current.\\
 Resonant frequency ($\omega_r$) can be defined as the frequency at which the impedance of a circuit becomes purely real.\\
-It is directly related to the natural frequency $\omega_0 = \frac{1}{\sqrt{LC}}$, and the damped resonance frequency $\omega_d$.
+It is directly related to the natural frequency $\omega_0 = \frac{1}{\sqrt{LC}}$, and the damped resonance frequency $\omega_d$.\\
+\textit{Note: $\omega_d$ will always be smaller that $\frac{1}{\sqrt{LC}}$}.\\
+If we were to have a circuit that was not purely parallel nor series, we would have to refer to the definition of resonant frequency.\\
+That is, the steps to solving for resonant frequency in a circuit are:
+\begin{enumerate}
+    \item Turn everything into frequency domain, using Laplace transform\\
+    \item Substitute $s=j\omega$
+    \item Calculate impedance from perspective of voltage or current supply, and set all supplies to zeor.
+    \item Make denominator of resulting expression purely real by multiplying by conjugate.
+    \item Group all imaginary terms (and take out as many common factors as possible)
+    \item Equate sum of imaginary terms to zero and solve for $\omega$.
+\end{enumerate}
+\textit{Note: SSS analysis is not the same as s-domain analysis. It only gives us the particular solution.}
 \section{Frequency Response}
 We know that:
 \begin{equation*}
     |V_{in}(j\omega)|=|Z_{in}(j\omega)||I_{in}(j\omega)| 
 \end{equation*}
+
+\begin{align*}
+    H(j\omega) &= \frac{V_{OUT}}{V_{IN}}\\
+    \text{if Input}= v_{IN}(t) &= A_{IN}\cos(\omega t+\theta_{IN})\\
+    |H(j\omega)| = \frac{A_{OUT}}{A_{IN}},\\
+    \phase{H(j\omega)} = \frac{\phase{A_{IN}}}{\phase{A_{OUT}}}
+\end{align*}
+The Bode plot allows us to move between a time-variable function and complex variable function.\\
+They look like the following:
+\begin{center}
+    \includegraphics[width = 150px]{images/bode_plot.png}
+\end{center}
+% \begin{center}
+%     \begin{tikzpicture}[scale = 1]
+%         \begin{axis}[
+%                 xmode = log,
+%                 axis lines = center,
+%                 xlabel = Frequency,
+%                 ylabel = Magnitude of H,
+%                 ymax = 0.25,
+%                 xmax = 100,
+%                 ymin = 0,
+%                 xmin = 0.01,
+%             ]
+%             \addplot [
+%                 domain=0:100,
+%                 samples=100,
+%                 color=blue,
+%             ]
+%             {(1/(2*(4+x^2)^0.5))};
+%             % \addplot [black, dotted] coordinates {(0,26) (6,26)};
+%             % \addplot [cyan, fill = cyan, fill opacity = 0.15] coordinates {(0,14) (2,26) (0,26)} \closedcycle;
+%             % \addplot [
+%             %     domain=-4:0,
+%             %     samples=100,
+%             %     color=blue,
+%             % ]
+%             % {-(16-x^2)^0.5};
+%         \end{axis}
+%     \end{tikzpicture}
+% \end{center}
 We can also define gain as the following:
 \begin{equation*}
     |H(j\omega)|_{dB} = 20\log_{10}|H(j\omega)|
 \end{equation*}
 This means that the point at which the dB gain is $-3$, is the same as the limits of the bandwidth mentioned in the previous section. This frequency is known as the half-power frequency.\\
+\textit{Note: $a+jb = \sqrt{a^2+b^2}\phase{\tan^{-1}(\frac{b}{a})}$}.\\
+From a Bode plot, one can find the magnitude and phase of the output as long as one knows the input.\\
+
 \end{document}
 
 % \begin{center}
