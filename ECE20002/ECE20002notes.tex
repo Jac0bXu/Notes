@@ -1565,6 +1565,7 @@ They look like the following:
 \begin{center}
     \includegraphics[width = 150px]{images/bode_plot.png}
 \end{center}
+\textit{Note: One can create a filter, and, depending on what it is connected to, it will act as a low pass filter or a high pass filter.}\\
 % \begin{center}
 %     \begin{tikzpicture}[scale = 1]
 %         \begin{axis}[
@@ -1601,7 +1602,58 @@ We can also define gain as the following:
 This means that the point at which the dB gain is $-3$, is the same as the limits of the bandwidth mentioned in the previous section. This frequency is known as the half-power frequency.\\
 \textit{Note: $a+jb = \sqrt{a^2+b^2}\phase{\tan^{-1}(\frac{b}{a})}$}.\\
 From a Bode plot, one can find the magnitude and phase of the output as long as one knows the input.\\
+\textit{For intents and purposes of this course,  we will use dB and rad/sec.}\\
+The pole can be found from the dB based Bode plot as the point at which the slope begins to change, or the point at which the gain is 3dB lower than the pass band. This is only true if there are no other nearby poles and the pole itself is real.\\ 
+The pole will also be the point at which the phase shift is 45 degrees less than the initial phase. A zero will be at 45 degrees higher than the initial. The slope of the phase plot will be shifted by 45 degrees per decade.\\  
 
+
+NEED TO ADD PLOTS AND BETTER EXPLANATION OF POLES AND THEIR EFFECT ON BODE PLOTS.
+
+
+The Bode plot is also represented through partial fractions:
+\begin{align*}
+    H(s) = \frac{1}{as+b} &= \frac{1}{a(s+b/a)} = \frac{1}{a}\frac{1}{s+p}
+\end{align*}
+
+
+\section{Circuit Scaling}
+There are two kinds of scaling.
+\subsection{Magnitude Scaling}
+It is that which scales the values of the components in the circuit.\\
+For example, the transfer function of the following two circuits is the same:
+\begin{center}
+    \begin{circuitikz}[american voltages]
+        \draw (0,2)
+        to[V, l=$V_{in}$] (0,0);
+        \draw (0,2)
+        to [R, l=$1$] (2,2)
+        to [R, l=$2$] (2,0)
+        to [short, -] (0,0);
+    \end{circuitikz} \quad\quad
+    \begin{circuitikz}[american voltages]
+        \draw (0,2)
+        to[V, l=$V_{in}$] (0,0);
+        \draw (0,2)
+        to [R, l=$1k$] (2,2)
+        to [R, l=$2k$] (2,0)
+        to [short, -] (0,0);
+    \end{circuitikz}
+\end{center}
+In essence, scaling is to multiply the impedances of the components by the same factor.\\
+\begin{align*}
+    R&\rightarrow K_mR\\
+    L&\rightarrow K_m L\\
+    C&\rightarrow \frac{C}{K_m}
+\end{align*}
+If all components in the circuit are scaled as shown above, the poles and zeros will remain the same. However, they could modify the magnitude of the transfer function.\\
+Let us consider the following kinds of transfer functions:\\
+\begin{align*}
+    H = \frac{V_o}{V_{in}} &\rightarrow_{K_m}\quad H\\
+    H = \frac{I_o}{I_{in}} &\rightarrow_{K_m}\quad H\\
+    H = \frac{V_o}{I_{in}} &\rightarrow_{K_m}\quad K_mH\\
+    H = \frac{I_o}{V_{in}} &\rightarrow_{K_m}\quad \frac{H}{K_m}
+\end{align*}
+So, the poles will remain the same, but the curve will move up or down.\\
 \end{document}
 
 % \begin{center}

@@ -1221,51 +1221,51 @@ Based on the aforementioned rules, it will be defined as: \\~\\$(W' \land Z) \lo
     \end{center}
     We must analyze what situations will lead to a connection between $Z$ and $V_{DD}$ or $V_{SS}$. Series basically represents AND ($\land$), while parallel basically represents OR ($\lor$).\\
     So the above function is $(A'\lor B')\land(C'\lor D')$, as those are the combinations that will lead to Z to be connected to HIGH, or $V_{DD}$.
-Transmission gates are essentially switches controlled by enables.\\
-\begin{center}
-    \includegraphics[width = 100px]{images/transmission_gate.png}
-\end{center}
-It is a PMOS connected with and NMOS that are connected through complementing control signals. When EN is LOW, both of them are off, and thus the circuit is disconnected. When EN is HIGH, both of them are on, and thus the circuit is connected.\\
-The reason we have two gates, instead of just one to connect A and B, is because NMOS transistors are not good at transmitting HIGH voltages, and PMOS are not good at transmitting LOW voltages. However, together, both HIGH and LOW can be transmitted.\\
-\section{Verilog Hardware Description Language}
-A Hardware description language (HDL) is the counterpart of a high-level
-programming language in software design. \textbf{It is used for describing
-    hardware}.\\ It comes with:\\
-\begin{itemize}
-    \item Text Editor: to write, edit and save the program.
-    \item Compiler: Produces intermediate description independent of technology. It also
-          detects syntax errors.
-    \item Synthesis tool: Passes the code into the hardware.
-    \item Libraries: premade importable modules with code to fulfill certain functions
-          used in many places.
-\end{itemize}
-Result is a design to be implemented.\\
-If the synthesis is large enough, it is divided into two steps. One is a gate level description, and then the other is the layout description.\\
-There are also:
-\begin{itemize}
-    \item Simulators: takes HDL, determines output. Used for design verification. It can
-          also give you intermediate values of the circuit, allowing debugging.
-    \item Timing analyzer: calculates worst case paths and delays of these.
-    \item Power estimation tool: calculates the worst case power consumption of the
-          design.
-\end{itemize}
-\subsection{Verilog Models and Modules}
-Basic unit of design is a module. It contains declarations and statements.\\
-The declarations describe names and types of inputs, outputs, signals, etc.\\
-Statements are those which manipulate the declarations.\\ One can specify the
-module behaviorally, that is it can be given a truth table, and Verilog will
-figure it out.\\ It can also be done structurally by describing other modules
-or individual components, how they are connected, etc. This is equivalent to a
-logic diagram.\\ When a module refers to another module it is instantiating it.
-These modules are defined hierarchically. Higher level modules can instantiate
-lower level modules as many times as desired. Higher level modules may
-instantiate the same lower level module.\\ Every instantiation is a new copy,
-but if built correctly, the use of a module can be shared.\\ Definitions inside
-a module remain local. Modules communicate with each other through declared
-input and output signals.\\ Short comments use // and are in effect until
-newline, longer comments use /* and end at */.\\ Syntax for module
-declaration:\\
-\begin{lstlisting}
+    Transmission gates are essentially switches controlled by enables.\\
+    \begin{center}
+        \includegraphics[width = 100px]{images/transmission_gate.png}
+    \end{center}
+    It is a PMOS connected with and NMOS that are connected through complementing control signals. When EN is LOW, both of them are off, and thus the circuit is disconnected. When EN is HIGH, both of them are on, and thus the circuit is connected.\\
+    The reason we have two gates, instead of just one to connect A and B, is because NMOS transistors are not good at transmitting HIGH voltages, and PMOS are not good at transmitting LOW voltages. However, together, both HIGH and LOW can be transmitted.\\
+    \section{Verilog Hardware Description Language}
+    A Hardware description language (HDL) is the counterpart of a high-level
+    programming language in software design. \textbf{It is used for describing
+        hardware}.\\ It comes with:\\
+    \begin{itemize}
+        \item Text Editor: to write, edit and save the program.
+        \item Compiler: Produces intermediate description independent of technology. It also
+              detects syntax errors.
+        \item Synthesis tool: Passes the code into the hardware.
+        \item Libraries: premade importable modules with code to fulfill certain functions
+              used in many places.
+    \end{itemize}
+    Result is a design to be implemented.\\
+    If the synthesis is large enough, it is divided into two steps. One is a gate level description, and then the other is the layout description.\\
+    There are also:
+    \begin{itemize}
+        \item Simulators: takes HDL, determines output. Used for design verification. It can
+              also give you intermediate values of the circuit, allowing debugging.
+        \item Timing analyzer: calculates worst case paths and delays of these.
+        \item Power estimation tool: calculates the worst case power consumption of the
+              design.
+    \end{itemize}
+    \subsection{Verilog Models and Modules}
+    Basic unit of design is a module. It contains declarations and statements.\\
+    The declarations describe names and types of inputs, outputs, signals, etc.\\
+    Statements are those which manipulate the declarations.\\ One can specify the
+    module behaviorally, that is it can be given a truth table, and Verilog will
+    figure it out.\\ It can also be done structurally by describing other modules
+    or individual components, how they are connected, etc. This is equivalent to a
+    logic diagram.\\ When a module refers to another module it is instantiating it.
+    These modules are defined hierarchically. Higher level modules can instantiate
+    lower level modules as many times as desired. Higher level modules may
+    instantiate the same lower level module.\\ Every instantiation is a new copy,
+    but if built correctly, the use of a module can be shared.\\ Definitions inside
+    a module remain local. Modules communicate with each other through declared
+    input and output signals.\\ Short comments use // and are in effect until
+    newline, longer comments use /* and end at */.\\ Syntax for module
+    declaration:\\
+    \begin{lstlisting}
     module module-name(port-name,port-name,...);
         input declarations //list and type of inputs
         output declarations // list and type of outputs
@@ -1280,105 +1280,105 @@ declaration:\\
         concurrent statements // what the module does
     endmodule
 \end{lstlisting}
-There are words with special meaning, and cannot be used as names, such as
-module, endmodule, among others.
-\begin{itemize}
-    \item \defn{input}{signal that is an input to the module.}
-    \item \defn{output}{output signal, cannot be read within module.} Can have type net or reg. reg can be assigned values as the code is being processed. That is, it can be modified in the procedural portion of the code. For nets, it is possible to write a reg, modify them, and assign the result to the net.
-    \item \defn{inout}{can be used as both input and output.}
-    \item \defn{signal}{single bit number, unless associated with range. Range is defined by [msb:lsb], which is also called a vector.}
-    \item \defn{nets}{items to provide connectivity. A signal that is not output or input is assumed to be a wire.}\\ supply0, supply1 connect to GND and HIGH respectively.\\ Tri is used for thee state wires. Can use [msb:lsb] syntax as well.
-    \item \defn{variables}{used during execution, that do not necessarily have physical presence within the circuit. They cannot be changed from outside the module.}\\Can be either register (reg), or integer (int). reg can be any of teh below 1-but signal values. int is the 2-complement of a number.\\ Numbers can be represented through the following syntax : $n'Bdd\ldots d$. The B can be changed for the required base, where:
-          \begin{itemize}
-              \item B, b = binary
-              \item O, o = octal
-              \item H, h = hexadecimal
-              \item D, d = decimal
-          \end{itemize}
-          and the d's are strings of one or more digits in the given base. If the number is longer, the excess is discarded, if it is shorter, the remaining spaces are 0.
-    \item \defn{parameter}{allows constants to be defined} The value can be a number or an expression.
-\end{itemize}
-A 1-bit signal can have one of four values:
-\begin{itemize}
-    \item 0, false
-    \item 1, true
-    \item x, unknown
-    \item z, high impedance
-\end{itemize}
-and there are some operators:
-\begin{itemize}
-    \item \&, AND
-    \item |, OR
-    \item $\sim$, NOT
-    \item ˆ, XOR\\
-          The above can also be used on buses, performing the operation on all the bits of said bus.
-    \item The [msb:lsb] notation is known as a vector.\\
-    \item \{\} is used for concatenation through comma divided signals. One can also multiply inputs and make them appear multiple times, for example \{2\{byte1\}, byte2, byte3\}.
-    \item Arithmetic operators:
-          \begin{itemize}
-              \item +
-              \item -
-              \item $*$
-              \item /
-              \item \%
-              \item $**$, exponent
-              \item $<<$, logical left shift
-              \item $>>$, logical right shift
-              \item $<<<$, arithmetic left shift
-              \item $>>>$, arithmetic right shift
-          \end{itemize}
-          Each of these will cause a module that can run this operation to be synthesized.
-    \item Logical Operators:
-          \begin{itemize}
-              \item \&\&
-              \item ||
-              \item !
-              \item ==
-              \item !=
-              \item >
-              \item >=
-              \item <
-              \item <=
-          \end{itemize}
-          The bottom 6 create comparator modules.\\
-          \textit{Note: if there is one unsigned and one signed number, they will both be considered unsigned, effectively modifying the signed number.}
-    \item "Bitwise comparators"
-          \begin{itemize}
-              \item ===
-              \item !==
-          \end{itemize}
-          Compare the two operands bit by bit. These cannot be synthesized.
-    \item Conditional Operator: <statement> ? <true> : <false>
-\end{itemize}
-Compiler directives:\\
-'include <filename> - allows for the file to be immediately read and processed.\\
-'define <identifier text> - allows for repeatedly used expressions to be easily rewritten.
-\subsection{Arrays}
-Ordered set of variables with the same type. Elements are selected by index.
-Syntax like the following:
-\begin{lstlisting}
+    There are words with special meaning, and cannot be used as names, such as
+    module, endmodule, among others.
+    \begin{itemize}
+        \item \defn{input}{signal that is an input to the module.}
+        \item \defn{output}{output signal, cannot be read within module.} Can have type net or reg. reg can be assigned values as the code is being processed. That is, it can be modified in the procedural portion of the code. For nets, it is possible to write a reg, modify them, and assign the result to the net.
+        \item \defn{inout}{can be used as both input and output.}
+        \item \defn{signal}{single bit number, unless associated with range. Range is defined by [msb:lsb], which is also called a vector.}
+        \item \defn{nets}{items to provide connectivity. A signal that is not output or input is assumed to be a wire.}\\ supply0, supply1 connect to GND and HIGH respectively.\\ Tri is used for thee state wires. Can use [msb:lsb] syntax as well.
+        \item \defn{variables}{used during execution, that do not necessarily have physical presence within the circuit. They cannot be changed from outside the module.}\\Can be either register (reg), or integer (int). reg can be any of teh below 1-but signal values. int is the 2-complement of a number.\\ Numbers can be represented through the following syntax : $n'Bdd\ldots d$. The B can be changed for the required base, where:
+              \begin{itemize}
+                  \item B, b = binary
+                  \item O, o = octal
+                  \item H, h = hexadecimal
+                  \item D, d = decimal
+              \end{itemize}
+              and the d's are strings of one or more digits in the given base. If the number is longer, the excess is discarded, if it is shorter, the remaining spaces are 0.
+        \item \defn{parameter}{allows constants to be defined} The value can be a number or an expression.
+    \end{itemize}
+    A 1-bit signal can have one of four values:
+    \begin{itemize}
+        \item 0, false
+        \item 1, true
+        \item x, unknown
+        \item z, high impedance
+    \end{itemize}
+    and there are some operators:
+    \begin{itemize}
+        \item \&, AND
+        \item |, OR
+        \item $\sim$, NOT
+        \item ˆ, XOR\\
+              The above can also be used on buses, performing the operation on all the bits of said bus.
+        \item The [msb:lsb] notation is known as a vector.\\
+        \item \{\} is used for concatenation through comma divided signals. One can also multiply inputs and make them appear multiple times, for example \{2\{byte1\}, byte2, byte3\}.
+        \item Arithmetic operators:
+              \begin{itemize}
+                  \item +
+                  \item -
+                  \item $*$
+                  \item /
+                  \item \%
+                  \item $**$, exponent
+                  \item $<<$, logical left shift
+                  \item $>>$, logical right shift
+                  \item $<<<$, arithmetic left shift
+                  \item $>>>$, arithmetic right shift
+              \end{itemize}
+              Each of these will cause a module that can run this operation to be synthesized.
+        \item Logical Operators:
+              \begin{itemize}
+                  \item \&\&
+                  \item ||
+                  \item !
+                  \item ==
+                  \item !=
+                  \item >
+                  \item >=
+                  \item <
+                  \item <=
+              \end{itemize}
+              The bottom 6 create comparator modules.\\
+              \textit{Note: if there is one unsigned and one signed number, they will both be considered unsigned, effectively modifying the signed number.}
+        \item "Bitwise comparators"
+              \begin{itemize}
+                  \item ===
+                  \item !==
+              \end{itemize}
+              Compare the two operands bit by bit. These cannot be synthesized.
+        \item Conditional Operator: <statement> ? <true> : <false>
+    \end{itemize}
+    Compiler directives:\\
+    'include <filename> - allows for the file to be immediately read and processed.\\
+    'define <identifier text> - allows for repeatedly used expressions to be easily rewritten.
+    \subsection{Arrays}
+    Ordered set of variables with the same type. Elements are selected by index.
+    Syntax like the following:
+    \begin{lstlisting}
     reg [7:0] mem [0:255]
 \end{lstlisting}
-allows for the creation of a 256 byte array that can be accessed through
-mem[a][b]\\
-\subsection{Concurrent Statements}
-There are three types:\\
-\begin{itemize}
-    \item Instance (structural model):\\ Individual gates and other components are
-          instantiated and connected using nets. There are built-in components which need
-          not be instantiated.\\ Syntax for instantiation (not declaration):
-          \begin{lstlisting}
+    allows for the creation of a 256 byte array that can be accessed through
+    mem[a][b]\\
+    \subsection{Concurrent Statements}
+    There are three types:\\
+    \begin{itemize}
+        \item Instance (structural model):\\ Individual gates and other components are
+              instantiated and connected using nets. There are built-in components which need
+              not be instantiated.\\ Syntax for instantiation (not declaration):
+              \begin{lstlisting}
 component-name instance-identifier (expr,expr,...,expr);
 component-name instance-identifier
     (.port-name(expr),
     .port-name(expr), ...,
     .port-name(expr));
     \end{lstlisting}
-          The first format is the only one allowed for the built-in gates.\\ Ports must
-          be given in the order (output, input, input...). If they were three state
-          buffers, the order would be (output, data input, enable input).\\ Parameters
-          can be used to parametrize a module to handle inputs and outputs of any width.
-          \begin{lstlisting}
+              The first format is the only one allowed for the built-in gates.\\ Ports must
+              be given in the order (output, input, input...). If they were three state
+              buffers, the order would be (output, data input, enable input).\\ Parameters
+              can be used to parametrize a module to handle inputs and outputs of any width.
+              \begin{lstlisting}
         module Maj(OUT,I0,I1,I2);
             parameter WID=1;
             input [WID-1:0] I0,I1,I2;
@@ -1386,24 +1386,24 @@ component-name instance-identifier
             assign OUT = (I0&I1)|(I0&I2)|(I1&I2);
         endmodule
     \end{lstlisting}
-          This will turn each of the inputs and outputs into an array of size WID.\\ When
-          instantiating, one can use the syntax Maj \#(8) U1(W,X,Y,Z), and this will
-          change the parameter value to 8.\\ If we were to have several parameters, we
-          would need to mention which parameter we are changing. For example:\\
-          \begin{center}
-              Maj \#(.WID(8)) U1(W,X,Y,Z)
-          \end{center}
-    \item continuous-assignment(dataflow model):\\ Syntax:
-          \begin{lstlisting}
+              This will turn each of the inputs and outputs into an array of size WID.\\ When
+              instantiating, one can use the syntax Maj \#(8) U1(W,X,Y,Z), and this will
+              change the parameter value to 8.\\ If we were to have several parameters, we
+              would need to mention which parameter we are changing. For example:\\
+              \begin{center}
+                  Maj \#(.WID(8)) U1(W,X,Y,Z)
+              \end{center}
+        \item continuous-assignment(dataflow model):\\ Syntax:
+              \begin{lstlisting}
     assign net-name:expression;
     assign net-name[msb:lsb] = expression;
     \end{lstlisting}
-          The right-hand side is evaluated, and then assigned to the left-hand side
-          continuously. That is, it assigns a new value every time the expression
-          changes.\\ The order is not important, as they are all re-evaluated. So, all
-          values need to be consistent.\\
-    \item always, initial (behavioral or procedural):\\ Syntax:
-          \begin{lstlisting}
+              The right-hand side is evaluated, and then assigned to the left-hand side
+              continuously. That is, it assigns a new value every time the expression
+              changes.\\ The order is not important, as they are all re-evaluated. So, all
+              values need to be consistent.\\
+        \item always, initial (behavioral or procedural):\\ Syntax:
+              \begin{lstlisting}
     always @(signal_name or signal_name...)
         procedural statement
     always @(signal_name, signal_name...)
@@ -1417,22 +1417,22 @@ component-name instance-identifier
     always
         procedural statement
     \end{lstlisting}
-          These statements execute sequentially, that is, within the statements, the
-          order matters. However, separate statements are evaluated at the same time.\\
-          If any of the signals changes, the statement must be reevaluated. If none of
-          them are changing, the block is not executed and is held suspended.\\ If the
-          evaluation of the statement changes any of the input signals, then it will
-          reevaluate the statement. It will keep doing so until none of the inputs have
-          changed.\\ When using conditional statements, it is important that every
-          variable is assigned a value in every pass.\\ Assignment statements have two
-          syntaxes:
-          \begin{lstlisting}
+              These statements execute sequentially, that is, within the statements, the
+              order matters. However, separate statements are evaluated at the same time.\\
+              If any of the signals changes, the statement must be reevaluated. If none of
+              them are changing, the block is not executed and is held suspended.\\ If the
+              evaluation of the statement changes any of the input signals, then it will
+              reevaluate the statement. It will keep doing so until none of the inputs have
+              changed.\\ When using conditional statements, it is important that every
+              variable is assigned a value in every pass.\\ Assignment statements have two
+              syntaxes:
+              \begin{lstlisting}
     variable-name = expression; //combinational
     variable-name <= expression; //sequential
     \end{lstlisting}
-          The first syntax is an instant assignment, while the second does not assign
-          until the end of the statement.\\ Another procedural statement syntax is:
-          \begin{lstlisting}
+              The first syntax is an instant assignment, while the second does not assign
+              until the end of the statement.\\ Another procedural statement syntax is:
+              \begin{lstlisting}
     begin
         procedural statement
         ...
@@ -1446,15 +1446,15 @@ component-name instance-identifier
         procedural statement
     end
     \end{lstlisting}
-          Begin-end blocks allow us to create procedural statements that contain several
-          single statements within.\\ If statements have the following syntax:
-          \begin{lstlisting}
+              Begin-end blocks allow us to create procedural statements that contain several
+              single statements within.\\ If statements have the following syntax:
+              \begin{lstlisting}
     if(condition)procedural statement
     else procedural-statement
     \end{lstlisting}
-          Any of the procedural statements can have more if statements within.\\ There is
-          then a case statement:
-          \begin{lstlisting}
+              Any of the procedural statements can have more if statements within.\\ There is
+              then a case statement:
+              \begin{lstlisting}
     case(selection-expression)
         choice,...,choice:procedural statement
         ... 
@@ -1462,46 +1462,97 @@ component-name instance-identifier
         default:procedural-statement
     endcase
     \end{lstlisting}
-          Each of the choices is compared with the selection expression, and the first
-          one that evaluates as true is implemented.\\ Next are for loops:
-          \begin{lstlisting}
+              Each of the choices is compared with the selection expression, and the first
+              one that evaluates as true is implemented.\\ Next are for loops:
+              \begin{lstlisting}
     for(loop-index=first-expr;logical-expression;loop-index=next-expr)
         procedural-statement
     \end{lstlisting}
-          For synthesis to be possible, a few conditions must be met:
-          \begin{itemize}
-              \item first-expr must be constant
-              \item logical-expression must be evaluatable
-              \item next-expr must be simple increments or decrements
-          \end{itemize}
-          Other loop statements are repeat, while, forever.
-\end{itemize}
-\section{Basic Combinational Logic Elements}
-There are two perspectives this can be analyzed from:
-\begin{itemize}
-    \item Read-only memories (ROM) which allow us to implement any truth table, with a
-          number of inputs and outputs predefined by the ROM.\\ When a function has too
-          many inputs, they can be decomposed into smaller functions to make more
-          manageable truth tables. This is the basis for FPGAs.
-    \item Commonly occurring operations (decoding, selecting, comparing) are used to
-          implement functions.
-\end{itemize}
-\subsection{Read-Only Memory}
-\defn{ROM}{a combinational circuit with $n$ inputs and $b$ outputs}.\\
-It is a two-dimensional array with $2^n$ rows.\\ 
-The inputs are stored in a vector A, known as address, and the outputs are stored in the output D, known as data output.\\
+              For synthesis to be possible, a few conditions must be met:
+              \begin{itemize}
+                  \item first-expr must be constant
+                  \item logical-expression must be evaluatable
+                  \item next-expr must be simple increments or decrements
+              \end{itemize}
+              Other loop statements are repeat, while, forever.
+    \end{itemize}
+    \section{Basic Combinational Logic Elements}
+    There are two perspectives this can be analyzed from:
+    \begin{itemize}
+        \item Read-only memories (ROM) which allow us to implement any truth table, with a
+              number of inputs and outputs predefined by the ROM.\\ When a function has too
+              many inputs, they can be decomposed into smaller functions to make more
+              manageable truth tables. This is the basis for FPGAs.
+        \item Commonly occurring operations (decoding, selecting, comparing) are used to
+              implement functions.
+    \end{itemize}
+    \subsection{Read-Only Memory}
+    \defn{ROM}{a combinational circuit with $n$ inputs and $b$ outputs}.\\
+    It is a two-dimensional array with $2^n$ rows.\\
+    The inputs are stored in a vector A, known as address, and the outputs are stored in the output D, known as data output.\\
+    \begin{center}
+        \includegraphics[width = 100px]{images/combinational_representation.png}
+    \end{center}
+    It works by taking in a "number", finding the output stored at the index of the input, and assigning this output to the data outputs.\\
+    The ROM needs to be pre-programmed with the truth table.\\
+    An FPGA consists of small ROMs, known as lookup tables, which are used to implement logic functions.\\
+    A $2^n\times 1$ look-up table can turn any set of $n$ inputs, and give you an output. Smaller values of n allow for this to be viable. So, the actual problem is knowing how to decompose a function into as few LUTs, with as few inputs as possible.\\
+    \subsection{Decoding and Selecting}
+    A decoder allows us to select a component based on its address. $n$ address
+    bits allow us to select certain outputs. The most standard of outputs is to
+    select one from $2^n$, known as a binary decoder.\\ It is, however, far less
+    flexible than a ROM. The specialty of them is that they are not programmable,
+    they are predefined. So, one cannot load a new truth table onto it. The
+    advantage is that it is simpler, using only some gates, and more economic than
+    a ROM.\\ There are many kinds of codes that can be placed into decoders, such
+    as 1-out-of-10, or gray code, which were mentioned before.\\ As mentioned
+    before, a binary decoder allows us to select one out of $2^n$ outputs. It can
+    also have an enable input that will allow us to activate or deactivate the
+    decoder.\\ Any n-variable function can be represented through an n-to-$2^n$
+decoder by collecting all the minterms into an or gate.\\ It is very wasteful,
+however, as there are many minterms that are still created, but are left
+unused.\\ Decoders can be connected to each other to make higher order
+decoders. This is done by breaking this into two truth tables of lower order,
+with all the terms with a selected variable as 0 in one table, and all the ones
+with that variable as 1 in the other table. Finally, they are both connected to
+enables, with the 0 truth table's enable connected to the inverse of the
+selected input, and the 1 truth table's enable connected to the selected
+variable.\\
+This can be done to increase to even higher orders, with an increase in the inputs to the enables.\\
+This can be implemented in Verilog through the following "code":
+\begin{lstlisting}
+    module VrDecoder(A,EN,Y);
+    parameter N=3, S=8;
+        input [N-1:0] A;
+        input EN;
+        output reg [S-1:0] Y;
+        always @(*)
+        begin
+            Y=0;
+            if(EN==1) Y[A]=1;
+        end
+    endmodule
+\end{lstlisting}
+
+An encoder is the opposite of a decoder. For example, a binary encoder takes $2^n$ inputs, and turns them into $n$ outputs.\\
+That is, it "enumerates" the $2^n$ inputs, and the output is the number corresponding to the single input that is turned on, and outputs it in binary.\\
+\subsection{Multiplexers and Demultiplexers}
+A multiplexer connects data from one of its inputs to the output. That is, based on the input defined at its select area, it will select one of the inputs to connect to the output.\\
 \begin{center}
-    \includegraphics[width = 100px]{images/combinational_representation.png}
+    \includegraphics[height = 150px]{images/multiplexer2.png}
 \end{center}
-It works by taking in a "number", finding the output stored at the index of the input, and assigning this output to the data outputs.\\
-The ROM needs to be pre-programmed with the truth table.\\
-An FPGA consists of small ROMs, known as lookup tables, which are used to implement logic functions.\\
-A $2^n\times 1$ look-up table can turn any set of $n$ inputs, and give you an output. Smaller values of n allow for this to be viable. So, the actual problem is knowing how to decompose a function into as few LUTs, with as few inputs as possible.\\
-\subsection{Decoding and Selecting}
-A decoder allows us to select a component based on its address.
-$n$ address bits allow us to select certain outputs. The most standard of outputs is to select one from $2^n$, known as a binary decoder.\\
-It is, however, far less flexible than a ROM. The specialty of them is that they are not programmable, they are predefined. So, one cannot load a new truth table onto it. The advantage is that it is simpler, using only some gates, and more economic than a ROM.\\
-There are many kinds of codes that can be placed into decoders, such as 1-out-of-10, or gray code, which were mentioned before.\\
+A multiplexer will have $nb$ data inputs (D0, D1, D2, D3, ..., Dn-1), and $b$ outputs(Y). It will have $s=\lceil\log_2(n)\rceil$ SEL inputs to select the input that connects to the output.\\
+This can be simplified if there are less inputs, inputs that relate to each other, or constant inputs. That is, instead of using an nth order multiplexer, we might be able to reduce it to logic gates or to a lower order multiplexer.\\
+Like encoders, multiplexers can be combined, as shown in the following image:
+\begin{center}
+    \includegraphics[height = 180px]{images/bigmux.png}
+\end{center}
+where each of the first layer multiplexers corresponds to S1=1, and S1=0 respectively.\\
+A demultiplexer, on the other hand, is basically a decoder, with the only difference being that, instead of making the output 1, it makes the output equivalent to the input corresponding to the SEL.\\
+\subsection{Other Combinational Building Blocks}
+Priority encoders are those which "accept requests for service" from multiple devices. As these requests can be made at the same time, it will select those with the highest value, and allow it to write to the bus.\\
+
+
 \end{document}
 
 % \begin{circuitikz} \draw
