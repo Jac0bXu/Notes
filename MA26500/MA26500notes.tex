@@ -1019,4 +1019,27 @@ For the matrix, it will be the set of all unique matrices with a 1 in a position
 \begin{center}
     \textbf{Theorem.} If there is a set of vectors that spans a vector space, all vectors that are linear combinations of others can be removed (sequentially), and what remains will be a basis for said vector space.
 \end{center}
+\section{Dimensions of Linear Transformations}
+We already know the definitions of 
+\section{Eigenvectors and Eigenvalues}
+\defn{Eigenvector}{for an $n\times n$ matrix \textbf{A}, is a non-zero vector such that $\mathbf{Ax=}\lambda\mathbf{x}$ for some scalar $\lambda$.}\\
+\defn{Eigenvalue}{scalar value mentioned in the above definition: $\lambda$.}\\
+The steps to finding these are:
+\begin{enumerate}
+    \item Find all values $\lambda$ such that $\det(\mathbf{A-I}\lambda)=0$. These are your eigenvalues.
+    \item For each $\lambda$, find the Null Space of $\mathbf{A-I}\lambda$, that is, find the non-zero vector such that $(\mathbf{A-I}\lambda)\mathbf{x=0}$. Each of these will be your eigenvectors.
+\end{enumerate}
+\defn{Eigenspace}{for an $n\times n$ matrix \textbf{A}, is the subspace of $\mathbb{R}^n$ that contains all the eigenvectors of \textbf{A} and $\mathbf{0}$. It is denoted by $E_\lambda$}.
+\begin{equation*}
+    E_\lambda = \{\mathbf{v|Av =}\lambda\mathbf{v}\} = \{ \mathbf{v}|(\mathbf{A}-\lambda\mathbf{I})\mathbf{v=0} \}
+\end{equation*}
+\begin{center}
+    \textbf{Theorem.} The eigenvalues of a triangular matrix are its main diagonal.
+\end{center}
+\begin{center}
+    \textbf{Theorem.} $0$ is an eigenvalue if and only if the determinant of the matrix is already $0$
+\end{center}
+\begin{center}
+    \textbf{Theorem.} If all eigenvalues are distinct, the corresponding eigenvectors will be linearly independent.
+\end{center}
 \end{document}

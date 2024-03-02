@@ -1654,6 +1654,70 @@ Let us consider the following kinds of transfer functions:\\
     H = \frac{I_o}{V_{in}} &\rightarrow_{K_m}\quad \frac{H}{K_m}
 \end{align*}
 So, the poles will remain the same, but the curve will move up or down.\\
+To find the passband gain, one needs to discern whether this is a low pass filter or a high pass filter. If it is a low pass filter, evaluate the gain of the transfer function at $s=0$, while if it is a high pass filter, evaluate the gain at $s=\infty$ and do the same.\\
+The passband gain will change for the bottom two scalings shown above.\\
+\subsection{Frequency Scaling}
+Let us take the following Bode plot:\\
+~\\~\\TO ADD: BODE PLOT!!!\\~\\
+% \begin{center}
+%     \begin{tikzpicture}
+%         \begin{semilogxaxis}[
+%             xlabel=$\omega$,
+%             ylabel=$20\log_{10}|H(j\omega)|$,
+%             grid=both,
+%             xmin=0.1, xmax=10,
+%             ymin=-40, ymax=20,
+%             xtick={0.1, 1, 10},
+%             ytick={-40, -30, -20, -10, 0, 10, 20},
+%             minor xtick={0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 2, 3, 4, 5, 6, 7, 8, 9},
+%             minor ytick={-35, -25, -15, -5, 5, 15},
+%             grid style={dotted},
+%             width=10cm,
+%             height=6cm,
+%             legend pos=outer north east,
+%         ]
+%         % Magnitude response plot
+%         \addplot[blue, mark=none, domain=0.1:10, samples=100] {20*log10(1/sqrt(1 + x^2))};
+%         \legend{$|H(j\omega)|$}
+%         \end{semilogxaxis}
+        
+%         \begin{semilogxaxis}[
+%             xlabel=$\omega$,
+%             ylabel=$\angle H(j\omega)$,
+%             grid=both,
+%             xmin=0.1, xmax=10,
+%             ymin=-90, ymax=0,
+%             xtick={0.1, 1, 10},
+%             ytick={-90, -80, -70, -60, -50, -40, -30, -20, -10, 0},
+%             minor xtick={0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 2, 3, 4, 5, 6, 7, 8, 9},
+%             minor ytick={-85, -75, -65, -55, -45, -35, -25, -15, -5},
+%             grid style={dotted},
+%             width=10cm,
+%             height=6cm,
+%             legend pos=outer north east,
+%         ]
+%         % Phase response plot
+%         \addplot[red, mark=none, domain=0.1:10, samples=100] {-atan(x)};
+%         \legend{$\angle H(j\omega)$}
+%         \end{semilogxaxis}
+%     \end{tikzpicture}
+% \end{center}
+If we wanted to shift all zeros and poles within it\\
+A resistive circuit cannot have frequency scaling.\\
+Note that for RC and RL circuits, the poles are at $\frac{1}{\tau}$. \\
+To reliably scale it, one cannot change the resistance, as it would behave differently for RL and RC. Instead, we scale L and C:
+\begin{align*}
+    L &\rightarrow_{K_f} \frac{L}{K_f}\\
+    C &\rightarrow_{K_f} \frac{C}{K_f}
+\end{align*}
+\subsection{Combined Scaling}
+If we wanted to scale both at the same time, the following transformations would be necessary:
+\begin{align*}
+    R &\rightarrow K_mR\\
+    C&\rightarrow \frac{C}{K_mK_f}\\
+    L&\rightarrow \frac{K_mL}{K_f}
+\end{align*}
+If the input and output are different (in terms of units), the passband gain will change, despite these transformations. This is the same as what is shown in the magnitude scaling section.
 \end{document}
 
 % \begin{center}
