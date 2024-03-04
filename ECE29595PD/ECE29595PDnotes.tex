@@ -1549,10 +1549,36 @@ Like encoders, multiplexers can be combined, as shown in the following image:
 \end{center}
 where each of the first layer multiplexers corresponds to S1=1, and S1=0 respectively.\\
 A demultiplexer, on the other hand, is basically a decoder, with the only difference being that, instead of making the output 1, it makes the output equivalent to the input corresponding to the SEL.\\
-\subsection{Other Combinational Building Blocks}
+\subsection{Priority Encoders}
 Priority encoders are those which "accept requests for service" from multiple devices. As these requests can be made at the same time, it will select those with the highest value, and allow it to write to the bus.\\
-
-
+Its equations are defined as following:
+\begin{align*}
+    H_N &=I_N\\
+    H_{N-1} &=I_N' \land I_{N-1}\\
+    H_{N-2} &=I_N' \land I_{N-1}' \land I_{N-2}\\
+    &\vdots
+\end{align*}
+With $I_N$ being the highest priority input.\\
+Among priority encoders, exist the cascading priority encoders.\\
+If there are groups of priority encoders that we want writing to the same bus we would input each of the devices into their own priority encoder with enables allowing us to decide which of these priority encoders are activated.
+\section{XOR gates}
+An XOR gate can compare two bits for equality. It can be used to add, to compare, to check difference, to count, and to generate random numbers.\\
+It can be implemented through a MUX.\\
+Properties:\\
+\begin{itemize}
+    \item $X\oplus 0 = X$
+    \item $X\oplus 1 = X'$
+    \item $(X\oplus Y)' = X'\oplus Y = X\oplus Y'$
+    \item $X\oplus Y = X' \oplus Y'$
+    \item $X \oplus Y = Y\oplus X$
+    \item $X \oplus Y \oplus Z = (X\oplus Y) \oplus Z = X\oplus(Y\oplus Z)$
+\end{itemize}
+The output of an n-input XOR function is 1 iff the number of high inputs is odd.\\
+The k-map of an XOR gate cannot be minimized.\\
+Also:
+\begin{equation*}
+    C=A \oplus B \implies A = B\oplus C
+\end{equation*}
 \end{document}
 
 % \begin{circuitikz} \draw

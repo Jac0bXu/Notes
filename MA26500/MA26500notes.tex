@@ -973,7 +973,7 @@ So, if were to be given a system of $m$ equations and $n$ variables (with no con
 \defn{Linear Transformation from vector space V to W}{a rule that assigns to each vector $\mathbf{v}\in V$ a unique vector $\mathbf{w} = T(\mathbf{v}) \in W$.} It must also have the properties:\\
 \begin{itemize}
     \item $T(\mathbf{u+v}) = T(\mathbf{u})+T(\mathbf{v})$
-    \item $T(c\mathbf{u}) = cT(\mathbf{u})$ 
+    \item $T(c\mathbf{u}) = cT(\mathbf{u})$
 \end{itemize}
 An example of a linear transformation is $\mathbb{P}_2 \mapsto \mathbb{R}^2$. This means that we need to find a standard basis, like we did for the matrix transformations. We will find that the standard matrix is in fact $\{1,x,x^2\}$. So, to find the transformation matrix, we need to find the values of the basis at the given condition.\\
 \defn{Kernel}{set of all \textbf{v} in V, such that $T(\textbf{v})=0$}\\
@@ -990,24 +990,24 @@ That is $\mathbb{P}_n$ will have exactly $n+1$ elements in its basis. On the oth
 The standard basis, on the other hand, is the value that is used to find the transformation matrix. For polynomials, it is:
 \begin{equation*}
     \begin{bmatrix}
-        1\\
-        0\\
-        0\\
-        \vdots\\
+        1      \\
+        0      \\
+        0      \\
+        \vdots \\
         0
     \end{bmatrix},
     \begin{bmatrix}
-        0\\
-        1\\
-        0\\
-        \vdots\\
+        0      \\
+        1      \\
+        0      \\
+        \vdots \\
         0
     \end{bmatrix},\cdots,
     \begin{bmatrix}
-        0\\
-        0\\
-        0\\
-        \vdots\\
+        0      \\
+        0      \\
+        0      \\
+        \vdots \\
         1
     \end{bmatrix}
 \end{equation*}
@@ -1020,14 +1020,17 @@ For the matrix, it will be the set of all unique matrices with a 1 in a position
     \textbf{Theorem.} If there is a set of vectors that spans a vector space, all vectors that are linear combinations of others can be removed (sequentially), and what remains will be a basis for said vector space.
 \end{center}
 \section{Dimensions of Linear Transformations}
-We already know the definitions of 
+We already know the definitions of
 \section{Eigenvectors and Eigenvalues}
 \defn{Eigenvector}{for an $n\times n$ matrix \textbf{A}, is a non-zero vector such that $\mathbf{Ax=}\lambda\mathbf{x}$ for some scalar $\lambda$.}\\
 \defn{Eigenvalue}{scalar value mentioned in the above definition: $\lambda$.}\\
 The steps to finding these are:
 \begin{enumerate}
-    \item Find all values $\lambda$ such that $\det(\mathbf{A-I}\lambda)=0$. These are your eigenvalues.
-    \item For each $\lambda$, find the Null Space of $\mathbf{A-I}\lambda$, that is, find the non-zero vector such that $(\mathbf{A-I}\lambda)\mathbf{x=0}$. Each of these will be your eigenvectors.
+    \item Find all values $\lambda$ such that $\det(\mathbf{A-I}\lambda)=0$. These are
+          your eigenvalues.
+    \item For each $\lambda$, find the Null Space of $\mathbf{A-I}\lambda$, that is, find
+          the non-zero vector such that $(\mathbf{A-I}\lambda)\mathbf{x=0}$. Each of
+          these will be your eigenvectors.
 \end{enumerate}
 \defn{Eigenspace}{for an $n\times n$ matrix \textbf{A}, is the subspace of $\mathbb{R}^n$ that contains all the eigenvectors of \textbf{A} and $\mathbf{0}$. It is denoted by $E_\lambda$}.
 \begin{equation*}
@@ -1042,4 +1045,7 @@ The steps to finding these are:
 \begin{center}
     \textbf{Theorem.} If all eigenvalues are distinct, the corresponding eigenvectors will be linearly independent.
 \end{center}
+\defn{Characteristic equation}{$\det(\mathbf{A}-\lambda\mathbf{I})=0$}\\
+The characteristic equation is an $n$ degree polynomial with $n$ roots, taking into account the multiplicities of the roots themselves.\\
+
 \end{document}
