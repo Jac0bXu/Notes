@@ -1509,18 +1509,18 @@ component-name instance-identifier
     before, a binary decoder allows us to select one out of $2^n$ outputs. It can
     also have an enable input that will allow us to activate or deactivate the
     decoder.\\ Any n-variable function can be represented through an n-to-$2^n$
-decoder by collecting all the minterms into an or gate.\\ It is very wasteful,
-however, as there are many minterms that are still created, but are left
-unused.\\ Decoders can be connected to each other to make higher order
-decoders. This is done by breaking this into two truth tables of lower order,
-with all the terms with a selected variable as 0 in one table, and all the ones
-with that variable as 1 in the other table. Finally, they are both connected to
-enables, with the 0 truth table's enable connected to the inverse of the
-selected input, and the 1 truth table's enable connected to the selected
-variable.\\
-This can be done to increase to even higher orders, with an increase in the inputs to the enables.\\
-This can be implemented in Verilog through the following "code":
-\begin{lstlisting}
+    decoder by collecting all the minterms into an or gate.\\ It is very wasteful,
+    however, as there are many minterms that are still created, but are left
+    unused.\\ Decoders can be connected to each other to make higher order
+    decoders. This is done by breaking this into two truth tables of lower order,
+    with all the terms with a selected variable as 0 in one table, and all the ones
+    with that variable as 1 in the other table. Finally, they are both connected to
+    enables, with the 0 truth table's enable connected to the inverse of the
+    selected input, and the 1 truth table's enable connected to the selected
+    variable.\\ This can be done to increase to even higher orders, with an
+    increase in the inputs to the enables.\\ This can be implemented in Verilog
+    through the following "code":
+    \begin{lstlisting}
     module VrDecoder(A,EN,Y);
     parameter N=3, S=8;
         input [N-1:0] A;
@@ -1534,37 +1534,44 @@ This can be implemented in Verilog through the following "code":
     endmodule
 \end{lstlisting}
 
-An encoder is the opposite of a decoder. For example, a binary encoder takes $2^n$ inputs, and turns them into $n$ outputs.\\
-That is, it "enumerates" the $2^n$ inputs, and the output is the number corresponding to the single input that is turned on, and outputs it in binary.\\
-\subsection{Multiplexers and Demultiplexers}
-A multiplexer connects data from one of its inputs to the output. That is, based on the input defined at its select area, it will select one of the inputs to connect to the output.\\
-\begin{center}
-    \includegraphics[height = 150px]{images/multiplexer2.png}
-\end{center}
-A multiplexer will have $nb$ data inputs (D0, D1, D2, D3, ..., Dn-1), and $b$ outputs(Y). It will have $s=\lceil\log_2(n)\rceil$ SEL inputs to select the input that connects to the output.\\
-This can be simplified if there are less inputs, inputs that relate to each other, or constant inputs. That is, instead of using an nth order multiplexer, we might be able to reduce it to logic gates or to a lower order multiplexer.\\
-Like encoders, multiplexers can be combined, as shown in the following image:
-\begin{center}
-    \includegraphics[height = 180px]{images/bigmux.png}
-\end{center}
-where each of the first layer multiplexers corresponds to S1=1, and S1=0 respectively.\\
-A demultiplexer, on the other hand, is basically a decoder, with the only difference being that, instead of making the output 1, it makes the output equivalent to the input corresponding to the SEL.\\
-\subsection{Priority Encoders}
-Priority encoders are those which "accept requests for service" from multiple devices. As these requests can be made at the same time, it will select those with the highest value, and allow it to write to the bus.\\
-Its equations are defined as following:
-\begin{align*}
-    H_N &=I_N\\
-    H_{N-1} &=I_N' \land I_{N-1}\\
-    H_{N-2} &=I_N' \land I_{N-1}' \land I_{N-2}\\
-    &\vdots
-\end{align*}
-With $I_N$ being the highest priority input.\\
+    An encoder is the opposite of a decoder. For example, a binary encoder takes
+$2^n$ inputs, and turns them into $n$ outputs.\\ That is, it "enumerates" the
+$2^n$ inputs, and the output is the number corresponding to the single input
+    that is turned on, and outputs it in binary.\\
+    \subsection{Multiplexers and Demultiplexers}
+    A multiplexer connects data from one of its inputs to the output. That is,
+    based on the input defined at its select area, it will select one of the inputs
+    to connect to the output.\\
+    \begin{center}
+        \includegraphics[height = 150px]{images/multiplexer2.png}
+    \end{center}
+    A multiplexer will have $nb$ data inputs (D0, D1, D2, D3, ..., Dn-1), and $b$ outputs(Y). It will have $s=\lceil\log_2(n)\rceil$ SEL inputs to select the input that connects to the output.\\
+    This can be simplified if there are less inputs, inputs that relate to each other, or constant inputs. That is, instead of using an nth order multiplexer, we might be able to reduce it to logic gates or to a lower order multiplexer.\\
+    Like encoders, multiplexers can be combined, as shown in the following image:
+    \begin{center}
+        \includegraphics[height = 180px]{images/bigmux.png}
+    \end{center}
+    where each of the first layer multiplexers corresponds to S1=1, and S1=0 respectively.\\
+    A demultiplexer, on the other hand, is basically a decoder, with the only difference being that, instead of making the output 1, it makes the output equivalent to the input corresponding to the SEL.\\
+    \section{Other Combinational Building Blocks}
+    \subsection{Priority Encoders}
+    Priority encoders are those which "accept requests for service" from multiple
+    devices. As these requests can be made at the same time, it will select those
+    with the highest value, and allow it to write to the bus.\\ Its equations are
+    defined as following:
+    \begin{align*}
+        H_N     & =I_N                               \\
+        H_{N-1} & =I_N' \land I_{N-1}                \\
+        H_{N-2} & =I_N' \land I_{N-1}' \land I_{N-2} \\
+                & \vdots
+    \end{align*}
+    With $I_N$ being the highest priority input.\\
 Among priority encoders, exist the cascading priority encoders.\\
 If there are groups of priority encoders that we want writing to the same bus we would input each of the devices into their own priority encoder with enables allowing us to decide which of these priority encoders are activated.
-\section{XOR gates}
-An XOR gate can compare two bits for equality. It can be used to add, to compare, to check difference, to count, and to generate random numbers.\\
-It can be implemented through a MUX.\\
-Properties:\\
+\subsection{XOR gates}
+An XOR gate can compare two bits for equality. It can be used to add, to
+compare, to check difference, to count, and to generate random numbers.\\ It
+can be implemented through a MUX.\\ Properties:\\
 \begin{itemize}
     \item $X\oplus 0 = X$
     \item $X\oplus 1 = X'$
@@ -1579,6 +1586,96 @@ Also:
 \begin{equation*}
     C=A \oplus B \implies A = B\oplus C
 \end{equation*}
+\section{State Machines}
+Unlike combinational circuits which depend only on the inputs, sequential
+circuits depend on current values as well as inputs. Past inputs determine the
+state of a circuit, which is represented by set variables which have a single
+bit of \textbf{memory} assigned to them.\\
+$k$ state variables correspond to $2^k$ possible states. However, the memory is limited, and thus, not all combinations will react uniquely.\\
+\defn{Synchoronous sequential circuit}{state changes occur at times specified by a clock signal. That is, the changes will occur when the clock goes from LOW to HIGH, of when it goes from HIGH to LOW(negative logic).}\\
+There are many types of memory to store values of state varibles. Let us consider positively triggered D flip-flops.\\
+\begin{center}
+    \includegraphics[width = 75px]{images/dflipflop.png}
+\end{center}
+Its operation works as following:
+\begin{table}
+    \centering
+    \begin{tabular}{c c| c c}
+        D&CLK&Q&QN\\
+        \hline
+        0&$L\rightarrow H$& 0 & 1\\
+        1&$L\rightarrow H$& 1 & 0\\
+        x& 0& last Q & last QN\\
+        x&1&last Q & last QN
+    \end{tabular}
+\end{table}
+A truth table for it can be easily made using current and next state, that is before and after teh rising clock edge.\\
+\begin{table}
+    \centering
+    \begin{tabular}{c c | c}
+        D&Q&Q*\\
+        \hline
+        0&0&0\\
+        0&1&0\\
+        1&0&1\\
+        1&1&1
+    \end{tabular}\\~\\
+    or\\~\\
+    \begin{tabular}{c c | c}
+    D&Q&Q*\\
+    \hline
+    0 & x& 0\\
+    1&x&1
+    \end{tabular}
+\end{table}
+Where Q* is the next state.\\
+Which leads to the following characteristic equation:
+\begin{equation*}
+    Q^*=D
+\end{equation*}
+Another kind of flip-flop is the S-R flip-flop.
+\begin{table}
+    \centering
+    \begin{tabular}{c c c | c}
+        S&R&Q&Q*\\
+        \hline~\\\hline
+        0&0&0&0\\
+        0&0&1&1\\
+        \hline
+        0&1&x&0\\
+        \hline
+        1&0&x&1\\
+        \hline
+        1&1&x&unused
+    \end{tabular}
+\end{table}
+which lead to the following characteristic equation:
+\begin{equation*}
+    Q^*=S\lor R' \land Q
+\end{equation*}
+\subsection{State-Machine Structure and Analysis}
+The general form of a synchronous finite state machine is as follows:
+\begin{center}
+    \includegraphics[height = 100px]{images/fsm_basic.png}
+\end{center}
+There are kinds of FSMs, for example the Mealy Machine which follows:\\
+$\text{next state} = F(\text{present state, input})$\\
+$\text{output} = G(\text{present state, input})$\\~\\
+or Moore Machines:\\
+$\text{next state} = F(\text{present state, input})$\\
+$\text{output} = G(\text{present state})$.\\
+\subsection{Analysis of State Machines}
+Steps to follow:
+\begin{enumerate}
+    \item Determine the next-state and output functions
+    \begin{enumerate}
+        \item Obtain the functions in terms of the flip-flop inputs
+        \item Substitute the functions into the characteristic equations
+    \end{enumerate}
+    \item Use these functions to make a transition table that specifies the next state based on the input.\\
+    \item Assign names to states and create a step table
+    \item Draw a state diagram
+\end{enumerate}
 \end{document}
 
 % \begin{circuitikz} \draw
