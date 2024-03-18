@@ -1765,6 +1765,29 @@ The same principle applies to the series configuration:
     Q&=\frac{1}{R_s}\sqrt{\frac{L_s}{C_s}} = \omega_o\frac{L_s}{R_s}\\
     B_\omega &= \frac{R_s}{L_s}
 \end{align*}
+\section{Designing Low Pass Filters}
+To know if a circuit is Low Pass, Band Pass or High Pass, consider the circuit at $\omega = 0$ and at $\omega = \infty$. Replace all components with their impedances at these frequencies, and analyze the output.\\
+A low pass filter is defined by the following:
+\begin{align*}
+    \lim_{\omega \rightarrow \infty} |H(j\omega)| &= 0\\
+    \lim_{\omega \rightarrow 0} |H(j\omega)| &\neq 0\\
+\end{align*}
+The passband of a circuit is the frequency range at which you want the transfer value to be above a predefined $H_{max}$. The stopband is the frequency range in which the transfer value is smaller than a predefined $H_{min}$.\\
+\defn{Attenuation}{$A(j\omega) = \frac{1}{H(s)}$}.\\
+\subsection{Butterworth Low-Pass Filters}
+Butterworth filters are those which have a frequency response magnitude that looks like the following:
+\begin{equation*}
+    H(\omega) = \frac{1}{\sqrt{1+\left(\frac{\omega}{\omega_c}\right)^{2n}}}
+\end{equation*}
+Determine the minimum order using the following equation:
+\begin{equation*}
+    n_{min} \geq \frac{\frac{1}{2}\log_{10}\left(\frac{10^{0.1A_{min}}-1}{10^{0.1A_{max}}-1}\right)}{\log_{10}\left(\frac{\omega_s}{\omega_p}\right)}
+\end{equation*}
+and $\omega_c$ with the following:
+\begin{equation*}
+    \frac{\omega_p}{(10^{0.1A_{max}}-1)^{\frac{1}{2n}}} \leq \omega_c \leq \frac{\omega_s}{(10^{0.1A_{min}}-1)^{\frac{1}{2n}}}
+\end{equation*}
+
 \end{document}
 
 % \begin{center}

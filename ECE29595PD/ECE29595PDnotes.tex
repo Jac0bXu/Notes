@@ -1566,115 +1566,140 @@ $2^n$ inputs, and the output is the number corresponding to the single input
                 & \vdots
     \end{align*}
     With $I_N$ being the highest priority input.\\
-Among priority encoders, exist the cascading priority encoders.\\
-If there are groups of priority encoders that we want writing to the same bus we would input each of the devices into their own priority encoder with enables allowing us to decide which of these priority encoders are activated.
-\subsection{XOR gates}
-An XOR gate can compare two bits for equality. It can be used to add, to
-compare, to check difference, to count, and to generate random numbers.\\ It
-can be implemented through a MUX.\\ Properties:\\
-\begin{itemize}
-    \item $X\oplus 0 = X$
-    \item $X\oplus 1 = X'$
-    \item $(X\oplus Y)' = X'\oplus Y = X\oplus Y'$
-    \item $X\oplus Y = X' \oplus Y'$
-    \item $X \oplus Y = Y\oplus X$
-    \item $X \oplus Y \oplus Z = (X\oplus Y) \oplus Z = X\oplus(Y\oplus Z)$
-\end{itemize}
-The output of an n-input XOR function is 1 iff the number of high inputs is odd.\\
-The k-map of an XOR gate cannot be minimized.\\
-Also:
-\begin{equation*}
-    C=A \oplus B \implies A = B\oplus C
-\end{equation*}
-\section{State Machines}
-Unlike combinational circuits which depend only on the inputs, sequential
-circuits depend on current values as well as inputs. Past inputs determine the
-state of a circuit, which is represented by set variables which have a single
-bit of \textbf{memory} assigned to them.\\
-$k$ state variables correspond to $2^k$ possible states. However, the memory is limited, and thus, not all combinations will react uniquely.\\
-\defn{Synchoronous sequential circuit}{state changes occur at times specified by a clock signal. That is, the changes will occur when the clock goes from LOW to HIGH, of when it goes from HIGH to LOW(negative logic).}\\
-There are many types of memory to store values of state varibles. Let us consider positively triggered D flip-flops.\\
-\begin{center}
-    \includegraphics[width = 75px]{images/dflipflop.png}
-\end{center}
-Its operation works as following:
-\begin{table}
-    \centering
-    \begin{tabular}{c c| c c}
-        D&CLK&Q&QN\\
-        \hline
-        0&$L\rightarrow H$& 0 & 1\\
-        1&$L\rightarrow H$& 1 & 0\\
-        x& 0& last Q & last QN\\
-        x&1&last Q & last QN
-    \end{tabular}
-\end{table}
-A truth table for it can be easily made using current and next state, that is before and after teh rising clock edge.\\
-\begin{table}
-    \centering
-    \begin{tabular}{c c | c}
-        D&Q&Q*\\
-        \hline
-        0&0&0\\
-        0&1&0\\
-        1&0&1\\
-        1&1&1
-    \end{tabular}\\~\\
-    or\\~\\
-    \begin{tabular}{c c | c}
-    D&Q&Q*\\
-    \hline
-    0 & x& 0\\
-    1&x&1
-    \end{tabular}
-\end{table}
-Where Q* is the next state.\\
-Which leads to the following characteristic equation:
-\begin{equation*}
-    Q^*=D
-\end{equation*}
-Another kind of flip-flop is the S-R flip-flop.
-\begin{table}
-    \centering
-    \begin{tabular}{c c c | c}
-        S&R&Q&Q*\\
-        \hline~\\\hline
-        0&0&0&0\\
-        0&0&1&1\\
-        \hline
-        0&1&x&0\\
-        \hline
-        1&0&x&1\\
-        \hline
-        1&1&x&unused
-    \end{tabular}
-\end{table}
-which lead to the following characteristic equation:
-\begin{equation*}
-    Q^*=S\lor R' \land Q
-\end{equation*}
-\subsection{State-Machine Structure and Analysis}
-The general form of a synchronous finite state machine is as follows:
-\begin{center}
-    \includegraphics[height = 100px]{images/fsm_basic.png}
-\end{center}
-There are kinds of FSMs, for example the Mealy Machine which follows:\\
+    Among priority encoders, exist the cascading priority encoders.\\
+    If there are groups of priority encoders that we want writing to the same bus we would input each of the devices into their own priority encoder with enables allowing us to decide which of these priority encoders are activated.
+    \subsection{XOR gates}
+    An XOR gate can compare two bits for equality. It can be used to add, to
+    compare, to check difference, to count, and to generate random numbers.\\ It
+    can be implemented through a MUX.\\ Properties:\\
+    \begin{itemize}
+        \item $X\oplus 0 = X$
+        \item $X\oplus 1 = X'$
+        \item $(X\oplus Y)' = X'\oplus Y = X\oplus Y'$
+        \item $X\oplus Y = X' \oplus Y'$
+        \item $X \oplus Y = Y\oplus X$
+        \item $X \oplus Y \oplus Z = (X\oplus Y) \oplus Z = X\oplus(Y\oplus Z)$
+    \end{itemize}
+    The output of an n-input XOR function is 1 iff the number of high inputs is odd.\\
+    The k-map of an XOR gate cannot be minimized.\\
+    Also:
+    \begin{equation*}
+        C=A \oplus B \implies A = B\oplus C
+    \end{equation*}
+    \section{State Machines}
+    Unlike combinational circuits which depend only on the inputs, sequential
+    circuits depend on current values as well as inputs. Past inputs determine the
+    state of a circuit, which is represented by set variables which have a single
+    bit of \textbf{memory} assigned to them.\\ $k$ state variables correspond to
+$2^k$ possible states. However, the memory is limited, and thus, not all
+    combinations will react uniquely.\\ \defn{Synchoronous sequential
+        circuit}{state changes occur at times specified by a clock signal. That is, the
+        changes will occur when the clock goes from LOW to HIGH, of when it goes from
+        HIGH to LOW(negative logic).}\\ There are many types of memory to store values
+    of state varibles. Let us consider positively triggered D flip-flops.\\
+    \begin{center}
+        \includegraphics[width = 75px]{images/dflipflop.png}
+    \end{center}
+    Its operation works as following:
+    \begin{table}
+        \centering
+        \begin{tabular}{c c| c c}
+            D & CLK              & Q      & QN      \\
+            \hline
+            0 & $L\rightarrow H$ & 0      & 1       \\
+            1 & $L\rightarrow H$ & 1      & 0       \\
+            x & 0                & last Q & last QN \\
+            x & 1                & last Q & last QN
+        \end{tabular}
+    \end{table}
+    A truth table for it can be easily made using current and next state, that is before and after teh rising clock edge.\\
+    \begin{table}
+        \centering
+        \begin{tabular}{c c | c}
+            D & Q & Q* \\
+            \hline
+            0 & 0 & 0  \\
+            0 & 1 & 0  \\
+            1 & 0 & 1  \\
+            1 & 1 & 1
+        \end{tabular}\\~\\
+        or\\~\\
+        \begin{tabular}{c c | c}
+            D & Q & Q* \\
+            \hline
+            0 & x & 0  \\
+            1 & x & 1
+        \end{tabular}
+    \end{table}
+    Where Q* is the next state.\\
+    Which leads to the following characteristic equation:
+    \begin{equation*}
+        Q^*=D
+    \end{equation*}
+    Another kind of flip-flop is the S-R flip-flop.
+    \begin{table}
+        \centering
+        \begin{tabular}{c c c | c}
+            S & R & Q & Q*     \\
+            \hline~            \\\hline
+            0 & 0 & 0 & 0      \\
+            0 & 0 & 1 & 1      \\
+            \hline
+            0 & 1 & x & 0      \\
+            \hline
+            1 & 0 & x & 1      \\
+            \hline
+            1 & 1 & x & unused
+        \end{tabular}
+    \end{table}
+    which lead to the following characteristic equation:
+    \begin{equation*}
+        Q^*=S\lor R' \land Q
+    \end{equation*}
+    \subsection{State-Machine Structure and Analysis}
+    The general form of a synchronous finite state machine is as follows:
+    \begin{center}
+        \includegraphics[height = 100px]{images/fsm_basic.png}
+    \end{center}
+    There are kinds of FSMs, for example the Mealy Machine which follows:\\
 $\text{next state} = F(\text{present state, input})$\\
 $\text{output} = G(\text{present state, input})$\\~\\
-or Moore Machines:\\
+    or Moore Machines:\\
 $\text{next state} = F(\text{present state, input})$\\
 $\text{output} = G(\text{present state})$.\\
 \subsection{Analysis of State Machines}
 Steps to follow:
 \begin{enumerate}
     \item Determine the next-state and output functions
+          \begin{enumerate}
+              \item Obtain the functions in terms of the flip-flop inputs
+              \item Substitute the functions into the characteristic equations
+          \end{enumerate}
+    \item Use these functions to make a transition table that specifies the next state
+          based on the input.
+    \item Assign names to states and create a step table which has the present state, the
+          next state and the output.
+    \item (Optional) Draw a state diagram.
+\end{enumerate}
+A state table allows us to discern the behavior of a circuit directly, without having to analyze the circuit for every possible state and every possible input to every state. All one needs to do is use it as a lookup table based on the input and the state at each moment.\\
+\subsection{State-Machine Design with State Tables}
+To instead create a circuit from a state table or function, the following steps
+are the following.
+\begin{enumerate}
+    \item Find a state table that represents the desired function.
+    \item Check for redundant terms, and eliminate them. That is, if there are two states that perform the exact same function, find a way to remove them. Two states $S_i$ and $S_j$ are distinguishable if there exists an input sequence such that when the machine receives the sequence at state $S_i$, it produces a different output to  a start at state $S_j$.\\ If they are not distinguishable, they are equivalent. The goal of this step is to find and remove equivalent states.\\
     \begin{enumerate}
-        \item Obtain the functions in terms of the flip-flop inputs
-        \item Substitute the functions into the characteristic equations
+        \item Check for a sequence of length 0.
+        \item Check for increasing sequence lengths with increments of 1. That is, group all the states that produce the same outputs for the same inputs. If they produce different outputs, they are to be grouped separately.
+        \item Stop when you reach $n$, that is the number of states or when adding another input does not create any new groups. We stop at $n$ because in the worst case scenario, each step will distinguish a single state.
     \end{enumerate}
-    \item Use these functions to make a transition table that specifies the next state based on the input.\\
-    \item Assign names to states and create a step table
-    \item Draw a state diagram
+    \item Select number of state variables, and assign combinations of these to the
+          states.
+    \item Derive transition and output tables.
+    \item Select the type of flip-flop that matches the requirements, and write an
+          excitation table specifying the next term in terms of the current term.\\
+    \item Derive logic equations based on excitation table.
+    \item Perform logic minimization.
 \end{enumerate}
 \end{document}
 
