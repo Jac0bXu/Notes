@@ -1734,51 +1734,55 @@ At resonance, which is where the Bode plot will peak, the plot will be at $20\lo
 Bases on which transfer function is being measured, it will act as a band pass for the resistor, as a high pass for the capacitor, and as a low pass for an inductor.\\
 \begin{itemize}
     \item \defn{$H_m$}{The maximum of the transfer function.}
-    \begin{equation*}
-        H_m = R_p
-    \end{equation*}
+          \begin{equation*}
+              H_m = R_p
+          \end{equation*}
     \item \defn{$\omega_m$}{Frequency at which the maximum is achieved.}
-    \begin{equation*}
-        \omega_m = \frac{1}{\sqrt{L_pC_p}}
-    \end{equation*}
+          \begin{equation*}
+              \omega_m = \frac{1}{\sqrt{L_pC_p}}
+          \end{equation*}
     \item \defn{$\omega_L$}{lower half-frequency of the bandpass characteristic, that is, the point at which the gain is 3dB less than the peak, and the frequency is lower than $\omega_m$.}
     \item \defn{$\omega_H$}{upper half-frequency of the bandpass characteristic, that is, the point at which the gain is 3dB less than the peak, and the frequency is higher than $\omega_m$.}
-    \begin{equation*}
-        |H(j\omega_L,j\omega_H)| = \frac{\frac{\omega}{C_p}}{\sqrt{\left(\frac{1}{L_pC_p}-\omega^2\right)^2+\left(\frac{\omega}{R_pC_p}\right)^2}} = \frac{R_p}{\sqrt{2}}
-    \end{equation*}
+          \begin{equation*}
+              |H(j\omega_L,j\omega_H)| = \frac{\frac{\omega}{C_p}}{\sqrt{\left(\frac{1}{L_pC_p}-\omega^2\right)^2+\left(\frac{\omega}{R_pC_p}\right)^2}} = \frac{R_p}{\sqrt{2}}
+          \end{equation*}
     \item \defn{$B_\omega$}{difference between half-frequencies}.
-    \begin{equation*}
-        B_\omega = \omega_H-\omega_L
-    \end{equation*}
+          \begin{equation*}
+              B_\omega = \omega_H-\omega_L
+          \end{equation*}
     \item \defn{$Q$}{proportion between maximum frequency and bandpass.}
-    \begin{equation*}
-        Q = \frac{\omega_m}{B_\omega}
-    \end{equation*}
+          \begin{equation*}
+              Q = \frac{\omega_m}{B_\omega}
+          \end{equation*}
 \end{itemize}
 So, for the previous configuration, that is, parallel RLC:
 \begin{align*}
-    Q&=R_p\sqrt{\frac{C_p}{L_p}} = \omega_oR_pC_p\\
-    B_\omega &= \frac{1}{R_pC_p}
+    Q        & =R_p\sqrt{\frac{C_p}{L_p}} = \omega_oR_pC_p \\
+    B_\omega & = \frac{1}{R_pC_p}
 \end{align*}
 The same principle applies to the series configuration:
 \begin{align*}
-    Q&=\frac{1}{R_s}\sqrt{\frac{L_s}{C_s}} = \omega_o\frac{L_s}{R_s}\\
-    B_\omega &= \frac{R_s}{L_s}
+    Q        & =\frac{1}{R_s}\sqrt{\frac{L_s}{C_s}} = \omega_o\frac{L_s}{R_s} \\
+    B_\omega & = \frac{R_s}{L_s}
 \end{align*}
 \section{Designing Low Pass Filters}
-To know if a circuit is Low Pass, Band Pass or High Pass, consider the circuit at $\omega = 0$ and at $\omega = \infty$. Replace all components with their impedances at these frequencies, and analyze the output.\\
-A low pass filter is defined by the following:
+To know if a circuit is Low Pass, Band Pass or High Pass, consider the circuit
+at $\omega = 0$ and at $\omega = \infty$. Replace all components with their
+impedances at these frequencies, and analyze the output.\\ A low pass filter is
+defined by the following:
 \begin{align*}
-    \lim_{\omega \rightarrow \infty} |H(j\omega)| &= 0\\
-    \lim_{\omega \rightarrow 0} |H(j\omega)| &\neq 0\\
+    \lim_{\omega \rightarrow \infty} |H(j\omega)| & = 0    \\
+    \lim_{\omega \rightarrow 0} |H(j\omega)|      & \neq 0 \\
 \end{align*}
 The passband of a circuit is the frequency range at which you want the transfer value to be above a predefined $H_{max}$. The stopband is the frequency range in which the transfer value is smaller than a predefined $H_{min}$.\\
 \defn{Attenuation}{$A(j\omega) = \frac{1}{H(s)}$}.\\
 \subsection{Butterworth Low-Pass Filters}
-Butterworth filters are those which have a frequency response magnitude that looks like the following:
+Butterworth filters are those which have a frequency response magnitude that
+looks like the following:
 \begin{equation*}
-    H(\omega) = \frac{1}{\sqrt{1+\left(\frac{\omega}{\omega_c}\right)^{2n}}}
+    H(j\omega) = \frac{|K|}{\sqrt{1+\left(\frac{\omega}{\omega_c}\right)^{2n}}}
 \end{equation*}
+where $\omega_c$ is the cutoff frequency, and $n$ is the order of the circuit.\\
 Determine the minimum order using the following equation:
 \begin{equation*}
     n_{min} \geq \frac{\frac{1}{2}\log_{10}\left(\frac{10^{0.1A_{min}}-1}{10^{0.1A_{max}}-1}\right)}{\log_{10}\left(\frac{\omega_s}{\omega_p}\right)}
@@ -1787,35 +1791,12 @@ and $\omega_c$ with the following:
 \begin{equation*}
     \frac{\omega_p}{(10^{0.1A_{max}}-1)^{\frac{1}{2n}}} \leq \omega_c \leq \frac{\omega_s}{(10^{0.1A_{min}}-1)^{\frac{1}{2n}}}
 \end{equation*}
-
+So, the steps are:
+\begin{enumerate}
+    \item Find filter order.
+    \item Choose the correct normalized function.
+    \item Choose the corresponding circuit based on whether the load side or source side resistance is known.
+    \item Adjust frequency scale ($\omega_c$) if $A_{max}\neq 3dB$.
+    \item Frequency and magnitude scale to the right value. 
+\end{enumerate}
 \end{document}
-
-% \begin{center}
-%     \begin{tikzpicture}[scale = 1]
-%         \begin{axis}[
-%                 axis lines = center,
-%                 xlabel = Quantity,
-%                 ylabel = Price,
-%                 ymax = 10,
-%                 xmax = 10,
-%                 ymin = -10,
-%                 xmin = -10,
-%                 legend entries = {DC, Undamped, Overdamped}
-%             ]
-%             \addplot [
-%                 domain=-4:0,
-%                 samples=100,
-%                 color=blue,
-%             ]
-%             {(16-x^2)^0.5};
-%             \addplot [black, dotted] coordinates {(0,26) (6,26)};
-%             \addplot [cyan, fill = cyan, fill opacity = 0.15] coordinates {(0,14) (2,26) (0,26)} \closedcycle;
-%             \addplot [
-%                 domain=-4:0,
-%                 samples=100,
-%                 color=blue,
-%             ]
-%             {-(16-x^2)^0.5};
-%         \end{axis}
-%     \end{tikzpicture}
-% \end{center}

@@ -1687,14 +1687,29 @@ To instead create a circuit from a state table or function, the following steps
 are the following.
 \begin{enumerate}
     \item Find a state table that represents the desired function.
-    \item Check for redundant terms, and eliminate them. That is, if there are two states that perform the exact same function, find a way to remove them. Two states $S_i$ and $S_j$ are distinguishable if there exists an input sequence such that when the machine receives the sequence at state $S_i$, it produces a different output to  a start at state $S_j$.\\ If they are not distinguishable, they are equivalent. The goal of this step is to find and remove equivalent states.\\
-    \begin{enumerate}
-        \item Check for a sequence of length 0.
-        \item Check for increasing sequence lengths with increments of 1. That is, group all the states that produce the same outputs for the same inputs. If they produce different outputs, they are to be grouped separately.
-        \item Stop when you reach $n$, that is the number of states or when adding another input does not create any new groups. We stop at $n$ because in the worst case scenario, each step will distinguish a single state.
-    \end{enumerate}
+    \item Check for redundant terms, and eliminate them. That is, if there are two states
+          that perform the exact same function, find a way to remove them. Two states
+          $S_i$ and $S_j$ are distinguishable if there exists an input sequence such that
+          when the machine receives the sequence at state $S_i$, it produces a different
+          output to a start at state $S_j$.\\ If they are not distinguishable, they are
+          equivalent. The goal of this step is to find and remove equivalent states.\\
+          \begin{enumerate}
+              \item Check for a sequence of length 0.
+              \item Check for increasing sequence lengths with increments of 1. That is, group all
+                    the states that produce the same outputs for the same inputs. If they produce
+                    different outputs, they are to be grouped separately.
+              \item Stop when you reach $n$, that is the number of states or when adding another
+                    input does not create any new groups. We stop at $n$ because in the worst case
+                    scenario, each step will distinguish a single state.
+          \end{enumerate}
     \item Select number of state variables, and assign combinations of these to the
-          states.
+          states.\\ At least $\lceil \log_2(n)\rceil$ state variables are necessary.\\
+          The steps are \begin{enumerate}
+              \item Replace each item with the binary representation of it. So, for a four state, you would assign 00, 01, 10 and 11 to each of the states.
+              \item Minimize using Karnaugh maps or the Quine-McKluskey method.
+              \item Try other arrangements of assignments of states to find which results in the least number of literals. 
+          \end{enumerate}
+          The number of state assignments for an $n$ state machine with $k$ bits, is $\frac{2^k!}{(2^k-n)!}$.
     \item Derive transition and output tables.
     \item Select the type of flip-flop that matches the requirements, and write an
           excitation table specifying the next term in terms of the current term.\\
