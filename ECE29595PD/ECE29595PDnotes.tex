@@ -1705,17 +1705,47 @@ are the following.
     \item Select number of state variables, and assign combinations of these to the
           states.\\ At least $\lceil \log_2(n)\rceil$ state variables are necessary.\\
           The steps are \begin{enumerate}
-              \item Replace each item with the binary representation of it. So, for a four state, you would assign 00, 01, 10 and 11 to each of the states.
+              \item Replace each item with the binary representation of it. So, for a four state,
+                    you would assign 00, 01, 10 and 11 to each of the states.
               \item Minimize using Karnaugh maps or the Quine-McKluskey method.
-              \item Try other arrangements of assignments of states to find which results in the least number of literals. 
+              \item Try other arrangements of assignments of states to find which results in the
+                    least number of literals.
           \end{enumerate}
-          The number of state assignments for an $n$ state machine with $k$ bits, is $\frac{2^k!}{(2^k-n)!}$.
+          The number of state assignments for an $n$ state machine with $k$ bits, is $\frac{2^k!}{(2^k-n)!}$.\\
+          \textit{Note: there are many other methods of state minimization.}
     \item Derive transition and output tables.
     \item Select the type of flip-flop that matches the requirements, and write an
           excitation table specifying the next term in terms of the current term.\\
     \item Derive logic equations based on excitation table.
     \item Perform logic minimization.
 \end{enumerate}
+\section{Sequential Logic Elements}
+\subsection{Bistable Elements}
+Memory is created by feedback. The simplest way is done by connecting two inverters in a loop.\\
+This happens because the output of each will force the other to maintain its state.\\
+An analysis of the steady state behavior of bistable elements allow for the existence of a third, intermediate state.\\
+The graphs of the two inverters will be reflections of each other across the $x=y$ line. The intersection of these to graphs is the third state, as it is also a stable state (metastable). That is, if there are small fluctuations in the input voltage, the stability will be lost.\\
+\begin{center}
+    \includegraphics[width = 150px]{images/bistable.png}
+\end{center}
+This metastable point is to be avoided, as it introduces uncertainty to the behavior of the circuit.
+\subsection{Latches and Flip-Flops}
+An example of an S-R Latch is an example of a latch:
+\begin{center}
+    \includegraphics[width= 100px]{images/srlatch.png}
+\end{center}
+The excitation table will look like the following:
+\begin{table}
+    \centering
+    \begin{tabular}{c c|c c}
+        S & R & Q &Q'\\
+        \hline
+        0 & 0 & Q & Q'\\
+        1 & 0 & 1 & 0\\
+        0 & 1 & 0 & 1\\
+        1 & 1 & 0x & 0x
+    \end{tabular}
+\end{table}
 \end{document}
 
 % \begin{circuitikz} \draw
