@@ -1814,4 +1814,44 @@ where:
 \end{align*}
 After this, follow the same steps as shown for Low-Pass filters, with $\Omega$ replacing all $\omega$'s.
 Once the first four steps are completed, convert back into a high pass filters by replacing all capacitors with inductors and all inductors with capacitors.\\
+\section{Op-Amps}
+The following is an Operational Amplifier:
+\begin{center}
+    \begin{circuitikz}
+        \draw 
+        (0,0) node[op amp] (opamp) {}
+        (opamp.-) to[short] ++(-0.5,0)
+        node[left] {inverting input, $v_-$}
+        (opamp.+) to[short] ++(-0.5,0)
+        node[left] {noninverting input, $v_+$}
+        (opamp.out) to[short] ++(0.5,0)
+        node[right] {$V_{out}$}
+        (opamp.down) to[short] ++(0,-0.5)
+        node[below] {$V-$}
+        (opamp.up) to[short] ++(0,0.5)
+        node[above] {$V+$};
+    \end{circuitikz}
+\end{center}
+and this is how it is modeled:
+\begin{center}
+    \includegraphics[width = 150px]{images/opampinside.png}
+\end{center}
+An ideal op-amp would have infinite input resistance, zero output resistance, and infinite voltage gain.\\
+\textit{Note: for intents and purposes of this course, all op-amps are ideal.}\\
+Steps to follow:
+\begin{enumerate}
+    \item Virtual Short Circuit to find $v_-$. That is, find $v_+$, and since $v_-=v_+$, you have found both.\\
+    \item Calculate the input path current:
+    \begin{equation*}
+        I_I = \frac{V_I-V_-}{Z_I}
+    \end{equation*}
+    \item Calculate the feedback path current:
+    \begin{equation*}
+        I_f = \frac{V_-V_o}{Z_f}
+    \end{equation*}
+    \item Equate to calculate gain:
+    \begin{equation*}
+        I_I = I_f \implies gain = \frac{V_o}{V_I}
+    \end{equation*}
+\end{enumerate} 
 \end{document}

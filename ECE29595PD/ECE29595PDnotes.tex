@@ -1746,6 +1746,18 @@ The excitation table will look like the following:
         1 & 1 & 0x & 0x
     \end{tabular}
 \end{table}
+As can be seen, it behaves incorrectly if both S and R are 1, so circuits are made such that it is not possible for both of them to be HIGH at the same time.\\
+\textit{Note: The midpoint of the transition, is metastable, and can cause transition errors. To solve this, we need to create parameters such that this can be avoided. Among them is the minimum-pulse-width, which allows for a clearer distinction between HIGH and LOW.\\}
+SR flip-flops may have EN inputs, which behave normally when EN is HIGH, and retain previous state when EN is LOW.\\
+To convert an SR latch into a D latch, it would change into the following:
+\begin{center}
+    \includegraphics[width = 150px]{images/dlatch.png}
+\end{center}
+There are several propagation delays in the execution of a D flip-flop. It thus also needs verification. Among these solutions are D flip-flop synchronization. This is done by connecting two flip-flops sequentially as shown below:
+\begin{center}
+    \includegraphics[width = 150px]{images/dlatchsync.png}
+\end{center}
+
 \end{document}
 
 % \begin{circuitikz} \draw
