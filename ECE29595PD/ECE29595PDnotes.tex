@@ -1667,64 +1667,68 @@ $\text{output} = G(\text{present state, input})$\\~\\
     or Moore Machines:\\
 $\text{next state} = F(\text{present state, input})$\\
 $\text{output} = G(\text{present state})$.\\
-\subsection{Analysis of State Machines}
-Steps to follow:
-\begin{enumerate}
-    \item Determine the next-state and output functions
-          \begin{enumerate}
-              \item Obtain the functions in terms of the flip-flop inputs
-              \item Substitute the functions into the characteristic equations
-          \end{enumerate}
-    \item Use these functions to make a transition table that specifies the next state
-          based on the input.
-    \item Assign names to states and create a step table which has the present state, the
-          next state and the output.
-    \item (Optional) Draw a state diagram.
-\end{enumerate}
-A state table allows us to discern the behavior of a circuit directly, without having to analyze the circuit for every possible state and every possible input to every state. All one needs to do is use it as a lookup table based on the input and the state at each moment.\\
-\subsection{State-Machine Design with State Tables}
-To instead create a circuit from a state table or function, the following steps
-are the following.
-\begin{enumerate}
-    \item Find a state table that represents the desired function.
-    \item Check for redundant terms, and eliminate them. That is, if there are two states
-          that perform the exact same function, find a way to remove them. Two states
-          $S_i$ and $S_j$ are distinguishable if there exists an input sequence such that
-          when the machine receives the sequence at state $S_i$, it produces a different
-          output to a start at state $S_j$.\\ If they are not distinguishable, they are
-          equivalent. The goal of this step is to find and remove equivalent states.\\
-          \begin{enumerate}
-              \item Check for a sequence of length 0.
-              \item Check for increasing sequence lengths with increments of 1. That is, group all
-                    the states that produce the same outputs for the same inputs. If they produce
-                    different outputs, they are to be grouped separately.
-              \item Stop when you reach $n$, that is the number of states or when adding another
-                    input does not create any new groups. We stop at $n$ because in the worst case
-                    scenario, each step will distinguish a single state.
-          \end{enumerate}
-    \item Select number of state variables, and assign combinations of these to the
-          states.\\ At least $\lceil \log_2(n)\rceil$ state variables are necessary.\\
-          The steps are \begin{enumerate}
-              \item Replace each item with the binary representation of it. So, for a four state,
-                    you would assign 00, 01, 10 and 11 to each of the states.
-              \item Minimize using Karnaugh maps or the Quine-McKluskey method.
-              \item Try other arrangements of assignments of states to find which results in the
-                    least number of literals.
-          \end{enumerate}
-          The number of state assignments for an $n$ state machine with $k$ bits, is $\frac{2^k!}{(2^k-n)!}$.\\
-          \textit{Note: there are many other methods of state minimization.}
-    \item Derive transition and output tables.
-    \item Select the type of flip-flop that matches the requirements, and write an
-          excitation table specifying the next term in terms of the current term.\\
-    \item Derive logic equations based on excitation table.
-    \item Perform logic minimization.
-\end{enumerate}
-\section{Sequential Logic Elements}
-\subsection{Bistable Elements}
-Memory is created by feedback. The simplest way is done by connecting two inverters in a loop.\\
-This happens because the output of each will force the other to maintain its state.\\
-An analysis of the steady state behavior of bistable elements allow for the existence of a third, intermediate state.\\
-The graphs of the two inverters will be reflections of each other across the $x=y$ line. The intersection of these to graphs is the third state, as it is also a stable state (metastable). That is, if there are small fluctuations in the input voltage, the stability will be lost.\\
+    \subsection{Analysis of State Machines}
+    Steps to follow:
+    \begin{enumerate}
+        \item Determine the next-state and output functions
+              \begin{enumerate}
+                  \item Obtain the functions in terms of the flip-flop inputs
+                  \item Substitute the functions into the characteristic equations
+              \end{enumerate}
+        \item Use these functions to make a transition table that specifies the next state
+              based on the input.
+        \item Assign names to states and create a step table which has the present state, the
+              next state and the output.
+        \item (Optional) Draw a state diagram.
+    \end{enumerate}
+    A state table allows us to discern the behavior of a circuit directly, without having to analyze the circuit for every possible state and every possible input to every state. All one needs to do is use it as a lookup table based on the input and the state at each moment.\\
+    \subsection{State-Machine Design with State Tables}
+    To instead create a circuit from a state table or function, the following steps
+    are the following.
+    \begin{enumerate}
+        \item Find a state table that represents the desired function.
+        \item Check for redundant terms, and eliminate them. That is, if there are two states
+              that perform the exact same function, find a way to remove them. Two states
+              $S_i$ and $S_j$ are distinguishable if there exists an input sequence such that
+              when the machine receives the sequence at state $S_i$, it produces a different
+              output to a start at state $S_j$.\\ If they are not distinguishable, they are
+              equivalent. The goal of this step is to find and remove equivalent states.\\
+              \begin{enumerate}
+                  \item Check for a sequence of length 0.
+                  \item Check for increasing sequence lengths with increments of 1. That is, group all
+                        the states that produce the same outputs for the same inputs. If they produce
+                        different outputs, they are to be grouped separately.
+                  \item Stop when you reach $n$, that is the number of states or when adding another
+                        input does not create any new groups. We stop at $n$ because in the worst case
+                        scenario, each step will distinguish a single state.
+              \end{enumerate}
+        \item Select number of state variables, and assign combinations of these to the
+              states.\\ At least $\lceil \log_2(n)\rceil$ state variables are necessary.\\
+              The steps are \begin{enumerate}
+                  \item Replace each item with the binary representation of it. So, for a four state,
+                        you would assign 00, 01, 10 and 11 to each of the states.
+                  \item Minimize using Karnaugh maps or the Quine-McKluskey method.
+                  \item Try other arrangements of assignments of states to find which results in the
+                        least number of literals.
+              \end{enumerate}
+              The number of state assignments for an $n$ state machine with $k$ bits, is $\frac{2^k!}{(2^k-n)!}$.\\
+              \textit{Note: there are many other methods of state minimization.}
+        \item Derive transition and output tables.
+        \item Select the type of flip-flop that matches the requirements, and write an
+              excitation table specifying the next term in terms of the current term.\\
+        \item Derive logic equations based on excitation table.
+        \item Perform logic minimization.
+    \end{enumerate}
+    \section{Sequential Logic Elements}
+    \subsection{Bistable Elements}
+    Memory is created by feedback. The simplest way is done by connecting two
+    inverters in a loop.\\ This happens because the output of each will force the
+    other to maintain its state.\\ An analysis of the steady state behavior of
+    bistable elements allow for the existence of a third, intermediate state.\\ The
+    graphs of the two inverters will be reflections of each other across the $x=y$
+line. The intersection of these to graphs is the third state, as it is also a
+stable state (metastable). That is, if there are small fluctuations in the
+input voltage, the stability will be lost.\\
 \begin{center}
     \includegraphics[width = 150px]{images/bistable.png}
 \end{center}
@@ -1738,11 +1742,11 @@ The excitation table will look like the following:
 \begin{table}
     \centering
     \begin{tabular}{c c|c c}
-        S & R & Q &Q'\\
+        S & R & Q  & Q' \\
         \hline
-        0 & 0 & Q & Q'\\
-        1 & 0 & 1 & 0\\
-        0 & 1 & 0 & 1\\
+        0 & 0 & Q  & Q' \\
+        1 & 0 & 1  & 0  \\
+        0 & 1 & 0  & 1  \\
         1 & 1 & 0x & 0x
     \end{tabular}
 \end{table}
@@ -1757,6 +1761,57 @@ There are several propagation delays in the execution of a D flip-flop. It thus 
 \begin{center}
     \includegraphics[width = 150px]{images/dlatchsync.png}
 \end{center}
+A D flip-flop can also have enable inputs, and the circuit is implemented as shown below:
+\begin{center}
+    \includegraphics[width = 150px]{images/denableflipflop.png}
+\end{center}
+In similar manners, it can have reset and set, at which point the truth table becomes the following.
+\begin{table}
+    \centering
+    \begin{tabular}{c c | c}
+        S & R & F \\
+        \hline
+        0 & 0 & D \\
+        0 & 1 & 0 \\
+        1 & 0 & 1 \\
+        1 & 1 & x
+    \end{tabular}
+\end{table}
+\subsection{Clocking Considerations}
+The following is a timing diagram of a flip-flop:
+\begin{center}
+    \includegraphics[width = 200px]{images/flipfloptiming.png}
+\end{center}
+These times and transitions that are necessary to avoid hazards add up to the clock period of the flip flop.
+\begin{itemize}
+    \item $t_{ffpd}$ is the time from the rising edge of clock till the stability of the output.
+    \item $t_{comb}$ is the time for the combinational logic of the circuit to stabilize.
+    \item $t_{setup}$ is the time necessary before the next clock rising edge.
+\end{itemize}
+No changes can happen wile the clock is going up, nor for a period of time before that. That is:\\
+\begin{equation*}
+    t_{clk}>t_{ffpd}+t_{setup}+t_{comb}
+\end{equation*}
+This defines the setup-time margin as the positive number given by $t_{clk}-t_{ffpd(max)}-t_{comb(max)}-t_{setup}$.\\
+This also sets up the requirement that the $t_{ffpd(min)}+t_{comb(min)}>t_{hold}$ so that the changes don't begin to happen too soon.\\
+Which then defines the hold-time margin as $t_{ffpd(min)}+t_{comb(min)}-t_{hold}$.\\
+\section{Counters and Shift Registers}
+\subsection{Counters}
+\defn{Counter}{an FSM whose state-diagram contains a single cycle.}\\
+$n$ bits allow for counting up to $2^n$.\\
+This can be easily implemented using T flip-flops which retain state when input is one, and toggle if input is zero.\\
+This leads to the following assignments:
+\begin{align*}
+    T_0&=1\\
+    T_1&=Q_0\\
+    T_2&=Q_1Q_0\\
+    &\vdots\\
+    T_i&=Q_{i-1}\cdots Q_1Q_0
+\end{align*}
+That is:
+\begin{equation*}
+    T_i = Q_{i-1}T_{i-1}
+\end{equation*}
 
 \end{document}
 
