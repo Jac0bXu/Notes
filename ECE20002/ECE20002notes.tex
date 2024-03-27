@@ -1854,4 +1854,60 @@ Steps to follow:
         I_I = I_f \implies gain = \frac{V_o}{V_I}
     \end{equation*}
 \end{enumerate} 
-\end{document}
+Op amps can thus be used to create filters, such as the following configuration, which allows one to create a low pass filter with pole at $\frac{1}{R_fC}$ and initial gain of $\frac{R_f}{R_i}$.
+\begin{center}
+    \includegraphics[height = 100px]{images/opamplowpass.png}
+    \includegraphics[height = 100px]{images/opamplowpassbode.png}
+\end{center}
+The massive advantage of op-amp filters is the lack of interaction between branches. That is, the networks will not interfere with each other.
+
+We will now list configurations and their purposes/effects:
+\begin{itemize}
+    \item Low Pass Filter:
+    \begin{center}
+        \includegraphics[width = 100px]{images/opamplow2.png}
+    \end{center}
+    \begin{equation*}
+        \frac{v_o}{v_s} = -\frac{Z_f}{Z_s} = -\frac{R_f}{R_s}\frac{1}{1+j\omega R_fC}
+    \end{equation*}
+    \item Differential Amplifier:
+    \begin{center}
+        \includegraphics[width = 100px]{images/diffamp.png}
+    \end{center}
+    \begin{equation*}
+        v_o = -v_{S1}+v_{S2}
+    \end{equation*}
+    \item Summing Amplifier:
+    \begin{center}
+        \includegraphics[width = 100px]{images/sumamp.png}
+    \end{center}
+    \begin{equation*}
+        v_o = -\left(v_1\frac{G_1}{G_f}+v_2\frac{G_2}{G_f}\right)+\frac{v_3G_3+v_4G_4+v_5G_5}{G_3+G_4+G_5}\left(\frac{G_1}{G_f}+\frac{G_2}{G_f}+1\right)
+    \end{equation*}
+    \item Differentiator:
+    \begin{center}
+        \includegraphics[width = 100px]{images/differentiator.png}
+    \end{center}
+    \begin{align*}
+        v_o &= -R_1C\frac{dv_{in}}{dt}\\
+        \text{for SSS}\\
+        v_o &= -R_1CsV_{in} 
+    \end{align*}
+    \item Integrator:
+    \begin{center}
+        \includegraphics[width = 100px]{images/integrator.png}
+    \end{center}
+    \begin{align*}
+        v_o &= v_o(0^+)-\frac{1}{RC}\int_{0}^{t}v_{in}(\tau) d\tau\\
+        \text{for SSS}\\
+        v_o &= -\frac{1}{RC}\frac{V_{in}}{s} 
+    \end{align*}
+    \item Voltage Buffer:
+    \begin{center}
+        \includegraphics[width = 100px]{images/v_buffer_opamp.png}
+    \end{center}
+    \begin{equation*}
+        v_o = v_- = v_s
+    \end{equation*}
+\end{itemize}
+\end{document}  
