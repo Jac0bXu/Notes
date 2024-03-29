@@ -1812,7 +1812,21 @@ That is:
 \begin{equation*}
     T_i = Q_{i-1}T_{i-1}
 \end{equation*}
-
+\subsection{Shift Registers}
+A shift register is an $n$-bit register with a provision for shifting its data by one position at every clock cycle.\\
+The following is a \textit{serial-in serial-out} register:
+\begin{center}
+    \includegraphics[width = 200px]{images/serialinoutreg.png}
+\end{center}
+What this register does is shift all the inputs by one bit each clock cycle.\\
+One can also make \textit{serial-in parallel-out} shift registers which allow for the whole state to be read at once.\\
+Finally, one can have a \textit{parallel-in serial-out} register, which will have certain operations, such as shifting right, shifting left, loading, holding, etc. 
+For example:
+\begin{center}
+    \includegraphics[width = 200px]{images/parinseroutreg.png}
+\end{center}
+\section{Counter}
+A comparator compares two binary numbers and indicates whether or not they are equal.
 \end{document}
 
 % \begin{circuitikz} \draw
