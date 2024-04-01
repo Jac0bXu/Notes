@@ -1786,31 +1786,36 @@ where $\omega_c$ is the cutoff frequency, and $n$ is the order of the circuit.\\
 So, the steps are:
 \begin{enumerate}
     \item Find filter order.
-    \begin{equation*}
-        n_{min} \geq \frac{\frac{1}{2}\log_{10}\left(\frac{10^{0.1A_{min}}-1}{10^{0.1A_{max}}-1}\right)}{\log_{10}\left(\frac{\omega_s}{\omega_p}\right)}
-    \end{equation*}
+          \begin{equation*}
+              n_{min} \geq \frac{\frac{1}{2}\log_{10}\left(\frac{10^{0.1A_{min}}-1}{10^{0.1A_{max}}-1}\right)}{\log_{10}\left(\frac{\omega_s}{\omega_p}\right)}
+          \end{equation*}
     \item Choose the correct normalized function.
-    \item Choose the corresponding circuit based on whether the load side or source side resistance is known.
-    \begin{center}
-        \includegraphics[width = \textwidth]{images/standard_butterworth.png}
-    \end{center}
-    \item Adjust frequency scale ($\omega_c$) if $A_{max}\neq 3dB$. That is, scale so that $\omega_p = 1$ fits the specs using the following equation:\\ 
-    \begin{equation*}
-        \frac{\omega_p}{(10^{0.1A_{max}}-1)^{\frac{1}{2n}}} \leq \omega_c \leq \frac{\omega_s}{(10^{0.1A_{min}}-1)^{\frac{1}{2n}}}
-    \end{equation*}
-    \item Frequency and magnitude scale to the right value of the existing components and specs.
+    \item Choose the corresponding circuit based on whether the load side or source side
+          resistance is known.
+          \begin{center}
+              \includegraphics[width = \textwidth]{images/standard_butterworth.png}
+          \end{center}
+    \item Adjust frequency scale ($\omega_c$) if $A_{max}\neq 3dB$. That is, scale so
+          that $\omega_p = 1$ fits the specs using the following equation:\\
+          \begin{equation*}
+              \frac{\omega_p}{(10^{0.1A_{max}}-1)^{\frac{1}{2n}}} \leq \omega_c \leq \frac{\omega_s}{(10^{0.1A_{min}}-1)^{\frac{1}{2n}}}
+          \end{equation*}
+    \item Frequency and magnitude scale to the right value of the existing components and
+          specs.
 \end{enumerate}
 \subsection{Butterworth High-Pass Filters}
-Create a High-Pass filter by inverting a Low-Pass filter.\\
-That is, instead of the specs causing $\omega_s<\omega<\omega_p$, they should cause $\omega_p<\omega<\omega_s$.\\
-To do so, invert the high-pass filters attenuation graph, making a graph of $\Omega$, which is the equivalent of a low-pass filter graph.\\
+Create a High-Pass filter by inverting a Low-Pass filter.\\ That is, instead of
+the specs causing $\omega_s<\omega<\omega_p$, they should cause
+$\omega_p<\omega<\omega_s$.\\ To do so, invert the high-pass filters
+attenuation graph, making a graph of $\Omega$, which is the equivalent of a
+low-pass filter graph.\\
 \begin{center}
     \includegraphics[width = 100px]{images/hpf_bode_design.png}
 \end{center}
 where:
 \begin{align*}
-    \Omega_p &= \frac{\omega_p}{\omega_p}=1\\
-    \Omega_s &= \frac{\omega_p}{\omega_s}>1
+    \Omega_p & = \frac{\omega_p}{\omega_p}=1 \\
+    \Omega_s & = \frac{\omega_p}{\omega_s}>1
 \end{align*}
 After this, follow the same steps as shown for Low-Pass filters, with $\Omega$ replacing all $\omega$'s.
 Once the first four steps are completed, convert back into a high pass filters by replacing all capacitors with inductors and all inductors with capacitors.\\
@@ -1818,7 +1823,7 @@ Once the first four steps are completed, convert back into a high pass filters b
 The following is an Operational Amplifier:
 \begin{center}
     \begin{circuitikz}
-        \draw 
+        \draw
         (0,0) node[op amp] (opamp) {}
         (opamp.-) to[short] ++(-0.5,0)
         node[left] {inverting input, $v_-$}
@@ -1840,20 +1845,21 @@ An ideal op-amp would have infinite input resistance, zero output resistance, an
 \textit{Note: for intents and purposes of this course, all op-amps are ideal.}\\
 Steps to follow:
 \begin{enumerate}
-    \item Virtual Short Circuit to find $v_-$. That is, find $v_+$, and since $v_-=v_+$, you have found both.\\
+    \item Virtual Short Circuit to find $v_-$. That is, find $v_+$, and since $v_-=v_+$,
+          you have found both.\\
     \item Calculate the input path current:
-    \begin{equation*}
-        I_I = \frac{V_I-V_-}{Z_I}
-    \end{equation*}
+          \begin{equation*}
+              I_I = \frac{V_I-V_-}{Z_I}
+          \end{equation*}
     \item Calculate the feedback path current:
-    \begin{equation*}
-        I_f = \frac{V_-V_o}{Z_f}
-    \end{equation*}
+          \begin{equation*}
+              I_f = \frac{V_-V_o}{Z_f}
+          \end{equation*}
     \item Equate to calculate gain:
-    \begin{equation*}
-        I_I = I_f \implies gain = \frac{V_o}{V_I}
-    \end{equation*}
-\end{enumerate} 
+          \begin{equation*}
+              I_I = I_f \implies gain = \frac{V_o}{V_I}
+          \end{equation*}
+\end{enumerate}
 Op amps can thus be used to create filters, such as the following configuration, which allows one to create a low pass filter with pole at $\frac{1}{R_fC}$ and initial gain of $\frac{R_f}{R_i}$.
 \begin{center}
     \includegraphics[height = 100px]{images/opamplowpass.png}
@@ -1864,51 +1870,88 @@ The massive advantage of op-amp filters is the lack of interaction between branc
 We will now list configurations and their purposes/effects:
 \begin{itemize}
     \item Low Pass Filter:
-    \begin{center}
-        \includegraphics[width = 100px]{images/opamplow2.png}
-    \end{center}
-    \begin{equation*}
-        \frac{v_o}{v_s} = -\frac{Z_f}{Z_s} = -\frac{R_f}{R_s}\frac{1}{1+j\omega R_fC}
-    \end{equation*}
+          \begin{center}
+              \includegraphics[width = 100px]{images/opamplow2.png}
+          \end{center}
+          \begin{equation*}
+              \frac{v_o}{v_s} = -\frac{Z_f}{Z_s} = -\frac{R_f}{R_s}\frac{1}{1+j\omega R_fC}
+          \end{equation*}
     \item Differential Amplifier:
-    \begin{center}
-        \includegraphics[width = 100px]{images/diffamp.png}
-    \end{center}
-    \begin{equation*}
-        v_o = -v_{S1}+v_{S2}
-    \end{equation*}
+          \begin{center}
+              \includegraphics[width = 100px]{images/diffamp.png}
+          \end{center}
+          \begin{equation*}
+              v_o = -v_{S1}+v_{S2}
+          \end{equation*}
     \item Summing Amplifier:
-    \begin{center}
-        \includegraphics[width = 100px]{images/sumamp.png}
-    \end{center}
-    \begin{equation*}
-        v_o = -\left(v_1\frac{G_1}{G_f}+v_2\frac{G_2}{G_f}\right)+\frac{v_3G_3+v_4G_4+v_5G_5}{G_3+G_4+G_5}\left(\frac{G_1}{G_f}+\frac{G_2}{G_f}+1\right)
-    \end{equation*}
+          \begin{center}
+              \includegraphics[width = 100px]{images/sumamp.png}
+          \end{center}
+          \begin{equation*}
+              v_o = -\left(v_1\frac{G_1}{G_f}+v_2\frac{G_2}{G_f}\right)+\frac{v_3G_3+v_4G_4+v_5G_5}{G_3+G_4+G_5}\left(\frac{G_1}{G_f}+\frac{G_2}{G_f}+1\right)
+          \end{equation*}
     \item Differentiator:
-    \begin{center}
-        \includegraphics[width = 100px]{images/differentiator.png}
-    \end{center}
-    \begin{align*}
-        v_o &= -R_1C\frac{dv_{in}}{dt}\\
-        \text{for SSS}\\
-        v_o &= -R_1CsV_{in} 
-    \end{align*}
+          \begin{center}
+              \includegraphics[width = 100px]{images/differentiator.png}
+          \end{center}
+          \begin{align*}
+              v_o & = -R_1C\frac{dv_{in}}{dt} \\
+              \text{for SSS}                  \\
+              v_o & = -R_1CsV_{in}
+          \end{align*}
     \item Integrator:
-    \begin{center}
-        \includegraphics[width = 100px]{images/integrator.png}
-    \end{center}
-    \begin{align*}
-        v_o &= v_o(0^+)-\frac{1}{RC}\int_{0}^{t}v_{in}(\tau) d\tau\\
-        \text{for SSS}\\
-        v_o &= -\frac{1}{RC}\frac{V_{in}}{s} 
-    \end{align*}
+          \begin{center}
+              \includegraphics[width = 100px]{images/integrator.png}
+          \end{center}
+          \begin{align*}
+              v_o & = v_o(0^+)-\frac{1}{RC}\int_{0}^{t}v_{in}(\tau) d\tau \\
+              \text{for SSS}                                              \\
+              v_o & = -\frac{1}{RC}\frac{V_{in}}{s}
+          \end{align*}
     \item Voltage Buffer:
-    \begin{center}
-        \includegraphics[width = 100px]{images/v_buffer_opamp.png}
-    \end{center}
-    \begin{equation*}
-        v_o = v_- = v_s
-    \end{equation*}
+          \begin{center}
+              \includegraphics[width = 100px]{images/v_buffer_opamp.png}
+          \end{center}
+          \begin{equation*}
+              v_o = v_- = v_s
+          \end{equation*}
 \end{itemize}
-\end{document}  
+\section{Active Low-Pass Filters}
+The following is a circuit for an Op-Amp Based Low Pass Filter:
+\begin{center}
+    \includegraphics[width = 150px]{images/opamplpfcircuit.png}
+\end{center}
+where
+\begin{equation*}
+    H(s) = \frac{V_{out}(s)}{V_{in}(s)} = -\frac{Z_F(s)}{Z_{in}(s)} = -\frac{Y_F(s)}{Y_{in}(s)}
+\end{equation*}
+These can be chained to create higher-order filters, but since this cannot have complex poles, it will not be able to create higher order Butterworth filters. Thus, different configurations, such as the following will allow us to create these kinds of filters.\\
+\begin{center}
+    \includegraphics[width = 150px]{images/complexopamplpf.png}
+\end{center}
+\section{Introduction to MOSFETs}
+A MOSFET has four terminals:
+\begin{itemize}
+    \item Gate
+    \item Source
+    \item Drain
+    \item Body (\textit{negligible to this course})
+\end{itemize}
+The following is the structure of a MOSFET:
+\begin{center}
+    \includegraphics[width = 150px]{images/MOSFET_struct.png}
+\end{center}
+A MOSFET essentially acts as a voltage-controlled resistor.\\
+For intents and purposes of this course, there exists a constant intrinsic property of a transistor known as threshold voltage. If the gate voltage is greater than this voltage, there will be a flow of current. The larger the gate voltage is, relative to the threshold voltage, the lower the resistance (and thus, higher current).\\
+The reaction of the MOSFET to the voltage difference between drain and source is divided into two regions (once there is current flow).\\
+The first is the triode region:
+\begin{equation*}
+    I_D(triode) = \mu C_{OX}\frac{W}{L}\left((V_{GS}-V_T)V_{DS}-\frac{V_{DS}^2}{2}\right)
+\end{equation*}
+By defining $k_n = \mu C_{OX}\frac{W}{L}$, the equation is reduced to:
+\begin{equation*}
+    k_n\left((V_{GS}-V_T)V_{DS}-\frac{V_{DS}^2}{2}\right)
+\end{equation*}
+If $V_{DS}\approx 0$, it will react linearly, however, as it increases, the slope begins to decrease..
+\end{document}
 
