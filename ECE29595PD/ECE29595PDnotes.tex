@@ -1814,73 +1814,111 @@ $n$ bits allow for counting up to $2^n$.\\
     \end{equation*}
     \subsection{Shift Registers}
     A shift register is an $n$-bit register with a provision for shifting its data
-by one position at every clock cycle.\\ The following is a \textit{serial-in
-    serial-out} register:
+    by one position at every clock cycle.\\ The following is a \textit{serial-in
+        serial-out} register:
+    \begin{center}
+        \includegraphics[width = 200px]{images/serialinoutreg.png}
+    \end{center}
+    What this register does is shift all the inputs by one bit each clock cycle.\\
+    One can also make \textit{serial-in parallel-out} shift registers which allow for the whole state to be read at once.\\
+    Finally, one can have a \textit{parallel-in serial-out} register, which will have certain operations, such as shifting right, shifting left, loading, holding, etc.
+    For example:
+    \begin{center}
+        \includegraphics[width = 200px]{images/parinseroutreg.png}
+    \end{center}
+    \subsection{Comparators}
+    A comparator compares two binary numbers and indicates whether or not they are
+    equal.\\ XOR gates are one bit comparators. A two bit comparator can be created
+    by ORing two XOR gates. This could be extended to more, but this would require
+    far too many XOR gates for large values.\\ Instead, it can be constructed
+    iteratively, which does not have O(n) XOR gates, replacing uit instead with
+    O(n) propagation delay.\\ The following is the basic building block:
+    \begin{center}
+        \includegraphics[width = 100px]{images/iterative_bb.png}
+    \end{center}
+    Where PI and PO are primary inputs and outputs, CI and CO are cascading inputs and outputs.\\
+    These are connected to each other, and follow these steps:
+    \begin{enumerate}
+        \item Assign $C_0$ to its initial value and $i$ to $0$
+        \item Use the inputs to calculate the outputs
+        \item Update $i$ to $i+1$
+        \item If $i<n$ return to step 2.
+    \end{enumerate}
+    However, this can also be done by connecting it to an FF, as shown below:
+    \begin{center}
+        \includegraphics[width = 100px]{images/comparatorFF.png}
+    \end{center}
+    This method no longer requires PI.\\
+    \begin{center}
+        \includegraphics[width = 150px]{images/comparatorbasic.png}
+    \end{center}
+    It is also possible to create magnitude comparators using this process.\\
+    It would take the bits to be compared as PI, and it CI and CO would determine which of teh two numbers is larger.\\
+    \section{Combinational Arithmetic Elements}
+    \subsection{Adding and Subtracting}
+    To add two numbers, one can use a full adder, which has the following truth
+    table:\\
+    \begin{table}
+        \centering
+        \begin{tabular}{c c c | c c}
+            X & Y & CI & S & CO \\
+            \hline
+            0 & 0 & 0  & 0 & 0  \\
+            0 & 0 & 1  & 1 & 0  \\
+            0 & 1 & 0  & 1 & 0  \\
+            0 & 1 & 1  & 0 & 1  \\
+            1 & 0 & 0  & 1 & 0  \\
+            1 & 0 & 1  & 0 & 1  \\
+            1 & 1 & 0  & 0 & 1  \\
+            1 & 1 & 1  & 1 & 1  \\
+        \end{tabular}
+    \end{table}
+    These can be cascaded to create a multi-bit adder, called a ripple adder.\\
+    The disadvantage of this is that it has a tendency of being slow.\\
+    This ripple adder can also be used to subtract. We can use the following properties:
+    \begin{align*}
+        X-Y          & =X+(-Y)              \\
+        -Y           & = 2_{comp}(Y) = Y'+1 \\
+        \implies X-Y & = X+(2_{comp}(Y))
+    \end{align*}
+    So, what needs to be done is to calculate the complement, and then send it into the adder itself.\\
+
+    An ALU is a machine that takes in a combination and outputs a selected function
+    of its inputs by using a multiplexer.\\
+    \subsection{Multipliers}
+    Binary multiplication is done in a similar manner to decimal multiplication.\\
+    \begin{table}
+        \centering
+        \begin{tabular}{c c c c c c}
+                     &   &   & 1 & 0 & 1 \\
+            $\times$ &   &   & 1 & 1 & 0 \\
+            \hline
+                     &   &   & 0 & 0 & 0 \\
+                     &   & 1 & 0 & 1 &   \\
+                     & 1 & 0 & 1 &   &   \\
+            \hline
+                     & 1 & 1 & 1 & 1 & 0 \\
+        \end{tabular}
+    \end{table}
+    So, in general, it takes the following form:\\
+    \begin{center}
+        \includegraphics[width = 150px]{images/multiplier.png}
+    \end{center}
+    With a total of $(m-1)n$ full adders to account for all the additions. However, there are more efficient methods, such as those that use carry look ahead to reduce it to $m-2+n$ full adders.\\
+\subsection{BCD Adder}
+BCD stands for Binary Coded Decimal. It is a code where each digit between 0
+and 9 is represented using four bits. In essence, it stores two digits ber
+byte.\\ When adding two digits in BCD, we use the following rules:
+\begin{itemize}
+    \item If the result is smaller than 9, do nothing.
+    \item Otherwise, replace the result with the result-10, and send a carry of 1.
+    \item If there is a carry of 1, it represents a carry of 10, but these operations are
+          using hexadecimal, so, we need to add 6 to correctly use the carry.
+\end{itemize}
+So, the full BCD adder is:\\
 \begin{center}
-    \includegraphics[width = 200px]{images/serialinoutreg.png}
+    \includegraphics[width = 150px]{images/bcd_adder.png}
 \end{center}
-What this register does is shift all the inputs by one bit each clock cycle.\\
-One can also make \textit{serial-in parallel-out} shift registers which allow for the whole state to be read at once.\\
-Finally, one can have a \textit{parallel-in serial-out} register, which will have certain operations, such as shifting right, shifting left, loading, holding, etc.
-For example:
-\begin{center}
-    \includegraphics[width = 200px]{images/parinseroutreg.png}
-\end{center}
-\subsection{Comparators}
-A comparator compares two binary numbers and indicates whether or not they are
-equal.\\ XOR gates are one bit comparators. A two bit comparator can be created
-by ORing two XOR gates. This could be extended to more, but this would require
-far too many XOR gates for large values.\\ Instead, it can be constructed
-iteratively, which does not have O(n) XOR gates, replacing uit instead with
-O(n) propagation delay.\\ The following is the basic building block:
-\begin{center}
-    \includegraphics[width = 100px]{images/iterative_bb.png}
-\end{center}
-Where PI and PO are primary inputs and outputs, CI and CO are cascading inputs and outputs.\\
-These are connected to each other, and follow these steps:
-\begin{enumerate}
-    \item Assign $C_0$ to its initial value and $i$ to $0$
-    \item Use the inputs to calculate the outputs
-    \item Update $i$ to $i+1$
-    \item If $i<n$ return to step 2.
-\end{enumerate}
-However, this can also be done by connecting it to an FF, as shown below:
-\begin{center}
-    \includegraphics[width = 100px]{images/comparatorFF.png}
-\end{center}
-This method no longer requires PI.\\
-\begin{center}
-    \includegraphics[width = 150px]{images/comparatorbasic.png}
-\end{center}
-It is also possible to create magnitude comparators using this process.\\
-It would take the bits to be compared as PI, and it CI and CO would determine which of teh two numbers is larger.\\
-\section{Combinational Arithmetic Elements}
-\subsection{Adding and Subtracting}
-To add two numbers, one can use a full adder, which has the following truth
-table:\\
-\begin{table}
-    \centering
-    \begin{tabular}{c c c | c c}
-        X & Y & CI & S & CO \\
-        \hline
-        0 & 0 & 0  & 0 & 0  \\
-        0 & 0 & 1  & 1 & 0  \\
-        0 & 1 & 0  & 1 & 0  \\
-        0 & 1 & 1  & 0 & 1  \\
-        1 & 0 & 0  & 1 & 0  \\
-        1 & 0 & 1  & 0 & 1  \\
-        1 & 1 & 0  & 0 & 1  \\
-        1 & 1 & 1  & 1 & 1  \\
-    \end{tabular}
-\end{table}
-These can be cascaded to create a multi-bit adder, called a ripple adder.\\
-The disadvantage of this is that it has a tendency of being slow.\\
-This ripple adder can also be used to subtract. We can use the following properties:
-\begin{align*}
-    X-Y&=X+(-Y)\\
-    -Y &= 2_{complement}(Y) = Y'+1 
-\end{align*}
-So, what needs to be done is to calculate the complement, and then send it into the adder itself.\\
 \end{document}
 
 % \begin{circuitikz} \draw
