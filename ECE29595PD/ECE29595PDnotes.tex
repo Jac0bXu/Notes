@@ -1904,7 +1904,7 @@ $n$ bits allow for counting up to $2^n$.\\
     \begin{center}
         \includegraphics[width = 150px]{images/multiplier.png}
     \end{center}
-    With a total of $(m-1)n$ full adders to account for all the additions. However, there are more efficient methods, such as those that use carry look ahead to reduce it to $m-2+n$ full adders.\\
+    With a total of $2(m-2)+n$ full adder delays to account for all the additions. However, there are more efficient methods, such as those that use carry-save to reduce it to $m-2+n$ full adder delays.\\
 \subsection{BCD Adder}
 BCD stands for Binary Coded Decimal. It is a code where each digit between 0
 and 9 is represented using four bits. In essence, it stores two digits ber
@@ -1919,6 +1919,8 @@ So, the full BCD adder is:\\
 \begin{center}
     \includegraphics[width = 150px]{images/bcd_adder.png}
 \end{center}
+\section{Advanced Topics}
+
 \end{document}
 
 % \begin{circuitikz} \draw

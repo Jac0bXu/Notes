@@ -1341,6 +1341,69 @@ Prefix, postfix, and infix notations are those which come from preorder, postord
     \end{tabular}
 \end{table}
 These expressions allow a computer to easily evaluate mathematical inputs it receives.
+\section{BSTs and AVLs}
+\subsection{Binary Search Trees}
+Now that we know what trees are, we will define Binary Search Trees, or BSTs.\\
+A BST is a tree such that all descendants of a node to the left of the node are less than the node, while all nodes to the right are larger than the node.\\
+This leads to inorder traversal of the tree being sorted.\\
+To search for a number within a BST, one can simply use the following code snippet:
+\begin{lstlisting}
+Tnode *binary_search(Tnode *root, int key)
+{
+    Tnode *curr = root;
+    while (curr != NULL) {
+        if (key == curr->data)
+            break;
+        else if (key < curr->data)
+            curr = curr->left;
+        else
+            curr = curr->right;
+    }
+    return curr;
+}
+\end{lstlisting}
+This code snippet basically goes right if the number being searched is larger, and left otherwise.\\
+The problem with binary search is that, in the worst case scenario, which is when the tree is completely skewed, the time complexity is O(n), as opposed to what a binary tree should be able to provide, which is O(log(n)).\\
+The direct method of inserting a node into a binary search tree entails the following.
+\begin{itemize}
+    \item Traverse the tree as if searching for the number to be inserted.
+    \item When you reach an "empty space", or a NULL node, create a node and place the number at the spot.
+\end{itemize}
+The worst case time complexity of this is once again O(n).\\
+Node deletion is slightly more tricky. It can be divided into three cases.
+\begin{enumerate}
+    \item No children: Search for the node, if it exists, free memory and all links to the node.
+    \begin{center}
+        \begin{forest}
+            [5 [3 [2 [1] []] [4]] [7 [\textbf{6}] [8]]]
+        \end{forest}
+        $\rightarrow$
+        \begin{forest}
+            [5 [3 [2 [1] []] [4]] [7 [] [8]]]
+        \end{forest}
+    \end{center}
+    \item One child: Search for the node. Make parent of node to be deleted, parent of child of node to be deleted. Free memory.
+    \begin{center}
+        \begin{forest}
+            [5 [3 [\textbf{2} [1] []] [4]] [7 [6] [8]]]
+        \end{forest}
+        $\rightarrow$
+        \begin{forest}
+            [5 [3 [1] [4]] [7 [6] [8]]]
+        \end{forest}
+    \end{center}
+    \item Two children: if a node has two children, we replace the key of the node to be deleted with that of its immediate inorder predecessor (That is, go left once, and then right all the way.). Then delete the inorder predecessor.
+    \begin{center}
+        \begin{forest}
+            [5 [\textbf{3} [2 [1] []] [4]] [7 [6] [8]]]
+        \end{forest}
+        $\rightarrow$
+        \begin{forest}
+            [5 [3 [1] [4]] [7 [6] [8]]]
+        \end{forest}
+    \end{center}
+    
+\end{enumerate}
 \end{document}
 % \begin{center}
 %    \begin{forest}
