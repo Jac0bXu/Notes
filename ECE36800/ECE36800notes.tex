@@ -476,13 +476,13 @@ Which leads to the little-omega notation:
 \textit{For most cases, if f is $O(g)$, but not $\Theta(g)$, it is $o(g)$. Exceptional cases would be like $f(n) = n^{|\sin(n)|}$, which seldom exist.}\\
 There are some implications that come from these relationships:
 \begin{align*}
-    f(n) = \Theta(g(n)) &\\
-    &\implies f(n) = \Omega(g(n)), f(n)= O(g(n)),\\
-    &\implies g(n) =\Omega(f(n)), g(n) = O(f(n))\\
-    f(n) = o(g(n)) &\\
-    &\implies f(n) = O(g(n))\\
-    f(n) = \omega(g(n)) &\\
-    &\implies f(n) = \Omega(g(n))
+    f(n) = \Theta(g(n)) &                                              \\
+                        & \implies f(n) = \Omega(g(n)), f(n)= O(g(n)), \\
+                        & \implies g(n) =\Omega(f(n)), g(n) = O(f(n))  \\
+    f(n) = o(g(n))      &                                              \\
+                        & \implies f(n) = O(g(n))                      \\
+    f(n) = \omega(g(n)) &                                              \\
+                        & \implies f(n) = \Omega(g(n))
 \end{align*}
 \section{Linked Lists}
 \textit{NOTE: my notes on this section are not great, as much of the explanation was done through images and drawings upon them. If you have better notes for this section, please feel free to improve them.}\\
@@ -1043,8 +1043,9 @@ On the other hand, one should shrink only when it has gone an exponent below the
     \end{tabular}
 \end{table}
 \section{Queues}
-Queues, unlike stacks, which work on the LIFO rule, work on the FIFO rule. That is, you can add only at the end, but pop or remove and access at the beginning.\\ 
-The primitive operators are:
+Queues, unlike stacks, which work on the LIFO rule, work on the FIFO rule. That
+is, you can add only at the end, but pop or remove and access at the
+beginning.\\ The primitive operators are:
 \begin{itemize}
     \item enqueue(Q,i): add item at end of queues
     \item dequeue(Q): remove and return item from front of queue
@@ -1058,17 +1059,17 @@ Once again, these can be represented through linked lists. The primitive operati
     \centering
     \begin{tabular}{|c|}
         \hline
-        f \\
+        f            \\
         \hline
-        $\downarrow$\\
+        $\downarrow$ \\
         \hline
     \end{tabular}
     \hspace{6.3em}
     \begin{tabular}{|c|}
         \hline
-        r \\
+        r            \\
         \hline
-        $\downarrow$\\
+        $\downarrow$ \\
         \hline
     \end{tabular}
     \hspace{3.5em} \quad \hspace{1em}
@@ -1099,17 +1100,17 @@ If we were to dequeue:\\
     \centering
     \begin{tabular}{|c|}
         \hline
-        f \\
+        f            \\
         \hline
-        $\downarrow$\\
+        $\downarrow$ \\
         \hline
     \end{tabular}
     \hspace{2em}
     \begin{tabular}{|c|}
         \hline
-        r \\
+        r            \\
         \hline
-        $\downarrow$\\
+        $\downarrow$ \\
         \hline
     \end{tabular}
     \hspace{3em} \quad \hspace{1em}
@@ -1135,17 +1136,17 @@ If were to enqueue(1) from there:\\
     \centering
     \begin{tabular}{|c|}
         \hline
-        f \\
+        f            \\
         \hline
-        $\downarrow$\\
+        $\downarrow$ \\
         \hline
     \end{tabular}
     \hspace{6.3em}
     \begin{tabular}{|c|}
         \hline
-        r \\
+        r            \\
         \hline
-        $\downarrow$\\
+        $\downarrow$ \\
         \hline
     \end{tabular}
     \hspace{3.5em} \quad \hspace{1em}
@@ -1178,37 +1179,37 @@ We will store the address of the array, the size of the array, the front and the
     \centering
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \cellcolor{cyan}\textbf{1}&\cellcolor{cyan}\textbf{2}&\cellcolor{cyan}\textbf{3}&\textit{?}\\
+        \cellcolor{cyan}\textbf{1} & \cellcolor{cyan}\textbf{2} & \cellcolor{cyan}\textbf{3} & \textit{?} \\
         \hline
     \end{tabular}\\
     f=0, r=3\\
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \cellcolor{cyan}\textbf{1}&\cellcolor{cyan}\textbf{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \cellcolor{cyan}\textbf{1} & \cellcolor{cyan}\textbf{2} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} \\
         \hline
     \end{tabular}\\
     f=0, r=4\\
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \textit{1}&\cellcolor{cyan}\textbf{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \textit{1} & \cellcolor{cyan}\textbf{2} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} \\
         \hline
     \end{tabular}\\
     f=1, r=4\\
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \textit{1}&\textit{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \textit{1} & \textit{2} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} \\
         \hline
     \end{tabular}\\
     f=2, r=4\\
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \cellcolor{cyan}\textbf{5}&\textit{2}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \cellcolor{cyan}\textbf{5} & \textit{2} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} \\
         \hline
     \end{tabular}\\
     f=2, r=1\\
     \begin{tabular}{|c|c|c|c|}
         \hline
-        \cellcolor{cyan}\textbf{5}&\cellcolor{cyan}\textbf{6}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \cellcolor{cyan}\textbf{5} & \cellcolor{cyan}\textbf{6} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} \\
         \hline
     \end{tabular}\\
     f=2, r=2\\
@@ -1216,14 +1217,14 @@ We will store the address of the array, the size of the array, the front and the
     Option 1:\\
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        \cellcolor{cyan}\textbf{5}&\cellcolor{cyan}\textbf{6}&\textit{3}&\textit{4}&\textit{?}&\textit{?}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}\\
+        \cellcolor{cyan}\textbf{5} & \cellcolor{cyan}\textbf{6} & \textit{3} & \textit{4} & \textit{?} & \textit{?} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} \\
         \hline
     \end{tabular}\\
     f=6, r=2\\
     Option 2:\\
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
         \hline
-        \textit{5}&\textit{6}&\cellcolor{cyan}\textbf{3}&\cellcolor{cyan}\textbf{4}&\cellcolor{cyan}\textbf{5}&\cellcolor{cyan}\textbf{6}&\textit{?}&\textit{?}\\
+        \textit{5} & \textit{6} & \cellcolor{cyan}\textbf{3} & \cellcolor{cyan}\textbf{4} & \cellcolor{cyan}\textbf{5} & \cellcolor{cyan}\textbf{6} & \textit{?} & \textit{?} \\
         \hline
     \end{tabular}\\
     f=2, r=6\\
@@ -1232,11 +1233,12 @@ We will store the address of the array, the size of the array, the front and the
 Queues can also be double ended. These are known as dequeues. They are implemented similarly, however, the linked list is changed for a doubly linked list. \\
 There also exist priority queues, in which items are added or removed in order of priority. For these, the time complexities to enqueue and dequeue are O(1) and O(n) respectively. However, if it were ordered, it would be O(n) and O(1).\\
 \section{Trees}
-A tree is a graph such that there exist no cycles between its nodes. Have an algorithmic reduction in time complexity of searching and sorting elements.\\
+A tree is a graph such that there exist no cycles between its nodes. Have an
+algorithmic reduction in time complexity of searching and sorting elements.\\
 \begin{center}
-   \begin{forest}
-       [A [B [D][]][C [E [] [H]] [F] [G]]]
-   \end{forest}    
+    \begin{forest}
+        [A [B [D][]][C [E [] [H]] [F] [G]]]
+    \end{forest}
 \end{center}
 In which A is a root node.\\
 B and C are sibling nodes, as they are on the same level.\\
@@ -1249,22 +1251,22 @@ A complete binary tree is that which has all levels completely filled:
 \begin{center}
     \begin{forest}
         [A [B [D [H] [I]][E [J] [K]]][C [F [L] [M]] [G [N] [O]]]]
-    \end{forest}    
- \end{center}
- At level L, there will be $2^L$ nodes, the total number of nodes, in terms of the height h will be $2^{h+1}-1$. This means the height will be O(log(n)).\\
- An almost complete binary tree is one that is full on all levels except the last:\\
- \begin{center}
-     \begin{forest}
-         [A [B [D [H] []][E [J] [K]]][C [F [L] []] [G [N] [O]]]]
-     \end{forest}    
-  \end{center}
+    \end{forest}
+\end{center}
+At level L, there will be $2^L$ nodes, the total number of nodes, in terms of the height h will be $2^{h+1}-1$. This means the height will be O(log(n)).\\
+An almost complete binary tree is one that is full on all levels except the last:\\
+\begin{center}
+    \begin{forest}
+        [A [B [D [H] []][E [J] [K]]][C [F [L] []] [G [N] [O]]]]
+    \end{forest}
+\end{center}
 Will have at least $2^h$ nodes, and at most $2^{h+1}-2$.
 A strictly binary tree is one in which each node has either 0 or 2 nodes.\\
 \begin{center}
     \begin{forest}
         [A [B [D][E [J] [K]]][C [F] [G]]]
-    \end{forest}    
- \end{center}
+    \end{forest}
+\end{center}
 If there are n leaf nodes, there will be 2n-1 non-leaf nodes.\\
 It is defined as following:\\
 \begin{lstlisting}
@@ -1275,8 +1277,8 @@ It is defined as following:\\
         struct _Tnode *right;
     } Tnode;
 \end{lstlisting}
-This can in fact also be implemented with arrays.\\
-There are four kinds of list tree traversal:
+This can in fact also be implemented with arrays.\\ There are four kinds of
+list tree traversal:
 \begin{enumerate}
     \item Preorder: root, left, right
     \item Inorder: left, root, right
@@ -1288,11 +1290,11 @@ A tree can also be traversed through by creating a stack:\\
     \centering
     \begin{tabular}[b]{|c|}
         \hline
-        \textbf{} \\
+        \textbf{}  \\
         \hline
-        \textbf{} \\
+        \textbf{}  \\
         \hline
-        \textbf{} \\
+        \textbf{}  \\
         \hline
         \textbf{A} \\
         \hline
@@ -1300,9 +1302,9 @@ A tree can also be traversed through by creating a stack:\\
     $\rightarrow$
     \begin{tabular}[b]{|c|}
         \hline
-        \textbf{} \\
+        \textbf{}  \\
         \hline
-        \textbf{} \\
+        \textbf{}  \\
         \hline
         \textbf{B} \\
         \hline
@@ -1312,7 +1314,7 @@ A tree can also be traversed through by creating a stack:\\
     $\rightarrow$
     \begin{tabular}[b]{|c|}
         \hline
-        \textbf{} \\
+        \textbf{}  \\
         \hline
         \textbf{D} \\
         \hline
@@ -1326,7 +1328,8 @@ A tree can also be traversed through by creating a stack:\\
 With each pop from a stack printing and adding the two children into the stack.\\
 Alongside that, a queue can be used to conduct breadth traversal.\\
 \subsection{"Fixes"}
-Prefix, postfix, and infix notations are those which come from preorder, postorder, and inorder traversals of the following tree:
+Prefix, postfix, and infix notations are those which come from preorder,
+postorder, and inorder traversals of the following tree:
 \begin{center}
     \begin{forest}
         [-[/[+[a][b]][c]][*[d][e]]]
@@ -1335,18 +1338,19 @@ Prefix, postfix, and infix notations are those which come from preorder, postord
 \begin{table}
     \centering
     \begin{tabular}{c|c|c}
-        preorder & inorder & postorder \\
+        preorder          & inorder         & postorder \\
         \hline
-        -(/(+(ab)c)*(de))& ((a+b)/c)-(d*e) & ab+c/de*-
+        -(/(+(ab)c)*(de)) & ((a+b)/c)-(d*e) & ab+c/de*-
     \end{tabular}
 \end{table}
 These expressions allow a computer to easily evaluate mathematical inputs it receives.
 \section{BSTs and AVLs}
 \subsection{Binary Search Trees}
 Now that we know what trees are, we will define Binary Search Trees, or BSTs.\\
-A BST is a tree such that all descendants of a node to the left of the node are less than the node, while all nodes to the right are larger than the node.\\
-This leads to inorder traversal of the tree being sorted.\\
-To search for a number within a BST, one can simply use the following code snippet:
+A BST is a tree such that all descendants of a node to the left of the node are
+less than the node, while all nodes to the right are larger than the node.\\
+This leads to inorder traversal of the tree being sorted.\\ To search for a
+number within a BST, one can simply use the following code snippet:
 \begin{lstlisting}
 Tnode *binary_search(Tnode *root, int key)
 {
@@ -1362,52 +1366,471 @@ Tnode *binary_search(Tnode *root, int key)
     return curr;
 }
 \end{lstlisting}
-This code snippet basically goes right if the number being searched is larger, and left otherwise.\\
-The problem with binary search is that, in the worst case scenario, which is when the tree is completely skewed, the time complexity is O(n), as opposed to what a binary tree should be able to provide, which is O(log(n)).\\
-The direct method of inserting a node into a binary search tree entails the following.
+This code snippet basically goes right if the number being searched is larger,
+and left otherwise.\\ The problem with binary search is that, in the worst case
+scenario, which is when the tree is completely skewed, the time complexity is
+O(n), as opposed to what a binary tree should be able to provide, which is
+O(log(n)).\\ The direct method of inserting a node into a binary search tree
+entails the following.
 \begin{itemize}
     \item Traverse the tree as if searching for the number to be inserted.
-    \item When you reach an "empty space", or a NULL node, create a node and place the number at the spot.
+    \item When you reach an "empty space", or a NULL node, create a node and place the
+          number at the spot.
 \end{itemize}
 The worst case time complexity of this is once again O(n).\\
 Node deletion is slightly more tricky. It can be divided into three cases.
 \begin{enumerate}
-    \item No children: Search for the node, if it exists, free memory and all links to the node.
-    \begin{center}
-        \begin{forest}
-            [5 [3 [2 [1] []] [4]] [7 [\textbf{6}] [8]]]
-        \end{forest}
-        $\rightarrow$
-        \begin{forest}
-            [5 [3 [2 [1] []] [4]] [7 [] [8]]]
-        \end{forest}
-    \end{center}
-    \item One child: Search for the node. Make parent of node to be deleted, parent of child of node to be deleted. Free memory.
-    \begin{center}
-        \begin{forest}
-            [5 [3 [\textbf{2} [1] []] [4]] [7 [6] [8]]]
-        \end{forest}
-        $\rightarrow$
-        \begin{forest}
-            [5 [3 [1] [4]] [7 [6] [8]]]
-        \end{forest}
-    \end{center}
-    \item Two children: if a node has two children, we replace the key of the node to be deleted with that of its immediate inorder predecessor (That is, go left once, and then right all the way.). Then delete the inorder predecessor.
-    \begin{center}
-        \begin{forest}
-            [5 [\textbf{3} [2 [1] []] [4]] [7 [6] [8]]]
-        \end{forest}
-        $\rightarrow$
-        \begin{forest}
-            [5 [3 [1] [4]] [7 [6] [8]]]
-        \end{forest}
-    \end{center}
-    
+    \item No children: Search for the node, if it exists, free memory and all links to
+          the node.
+          \begin{center}
+              \begin{forest}
+                  [5 [3 [2 [1] []] [4]] [7 [\textbf{6}] [8]]]
+              \end{forest}
+              ~~~~~
+              \begin{forest}
+                  [5 [3 [2 [1] []] [4]] [7 [] [8]]]
+              \end{forest}
+          \end{center}
+    \item One child: Search for the node. Make parent of node to be deleted, parent of
+          child of node to be deleted. Free memory.
+          \begin{center}
+              \begin{forest}
+                  [5 [3 [\textbf{2} [1] []] [4]] [7 [6] [8]]]
+              \end{forest}
+              ~~~~~
+              \begin{forest}
+                  [5 [3 [1] [4]] [7 [6] [8]]]
+              \end{forest}
+          \end{center}
+    \item Two children: if a node has two children, we replace the key of the node to be
+          deleted with that of its immediate inorder predecessor (That is, go left once,
+          and then right all the way.). Then delete the inorder predecessor.
+          \begin{center}
+              \begin{forest}
+                  [5 [\textbf{3} [2 [1] []] [4]] [7 [6] [8]]]
+              \end{forest}
+              ~~~~~
+              \begin{forest}
+                  [5 [2 [\textbf{2} [1] []] [4]] [7 [6] [8]]]
+              \end{forest}
+              ~~~~~
+              \begin{forest}
+                  [5 [2 [1] [4]] [7 [6] [8]]]
+              \end{forest}
+          \end{center}
 \end{enumerate}
+\subsection{Height Balanced BSTs (AVLs)}
+As mentioned in the previous section, the time complexity for BST traversal, insertion, and deletion can reach up to O(n). This is highly inefficient. To remove these inefficiencies, the AVL was created.\\
+An AVL is a BST such that the difference in height between the right branch and left branch of any node, is at most one.\\
+To maintain the balance of a tree, we undergo steps known as rotations.\\
+Moving forward, in each node, we will store the key, the children and the balance, where the balance is defined as the height of the left branch minus the height of the right branch.\\
+\begin{center}
+    \begin{forest}
+        [5(1) [3(1) [2(1) [1(0)] []] [4(0)]] [7(0) [6(0)] [8(0)]]]
+    \end{forest}
+\end{center}
+We want the balance of all nodes to be 1,0 or -1 at the end of any insertion or deletion operation.\\
+We will begin by understanding how to insert a node.\\
+Node insertion requires a few steps after the steps mentioned before. So, let us assume that a node has been successfully inserted into the tree. By moving up the tree recursively, we can update balances based on which of the two children the recursive call addressed. That is, if the child that had its balance updated was the right child, if the parent were to require a balance update, it would change from 1 to 0, 0 to -1, or -1 to -2.\\
+Let us look at how balances are updated:
+\begin{itemize}
+    \item If the initial balance was 0, and a node was inserted, it would become 1 or -1, and the parent would need to have its balance updates as well.
+    \item If the initial balance was -1 or 1, and after the node was inserted, it became 0, the height of the tree remains the same, and thus, the balance of the parent does not need to be updated.
+    \item If the initial balance was -1 or 1, and after the node was inserted, it became 2 or -2, rotations are necessary, but parent will no longer require balance updates.
+\end{itemize}
+We will now define rotations. There are two kinds of rotations, clockwise rotations (CR), and counter-clockwise rotations (CCR).
+The following is the code definition of CCR:
+\begin{lstlisting}
+CCR(old_root) {
+    new_root = old_root->right;
+    old_root->right = new_root->left;
+    new_root->left = old_root;
+    return new_root;
+}
+\end{lstlisting}
+What this code does is transform a tree as follows:
+\begin{center}
+    \begin{forest}
+        [A [T1 [] []][B [T2 [] []] [T3 [] []]]]
+    \end{forest}
+    ~~~~~
+    \begin{forest}
+        [B [A [T1 [] []] [T2 [] []]][T3 [] []]]
+    \end{forest}
+\end{center}
+On the other hand, the following is a definition of CR:
+\begin{lstlisting}
+CR(old_root) {
+    new_root = old_root->left;
+    old_root->left = new_root->right;
+    new_root->right = old_root;
+    return new_root;
+}
+\end{lstlisting}
+Which does:
+\begin{center}
+    \begin{forest}
+        [B [A [T1 [] []] [T2 [] []]][T3 [] []]]
+    \end{forest}
+    ~~~~~
+    \begin{forest}
+        [A [T1 [] []][B [T2 [] []] [T3 [] []]]]
+    \end{forest}
+\end{center}
+So, how are these relevant to balancing a tree?\\
+\begin{itemize}
+    \item Case 1:
+    \begin{center}
+        \begin{forest}
+            [A(1) [B(0) [T1 [] []] [T2 [] []]][T3 [] []]]
+        \end{forest}
+        ~~~~~
+        \begin{forest}
+            [A(2) [B(1) [T1 [ [New]] []] [T2 [] []]][T3 [] []]]
+        \end{forest}
+    \end{center}
+    By applying CR(A):\\
+    \begin{center}
+        \begin{forest}
+            [B(0) [T1 [ [New]] []][A(0) [T2 [] []] [T3 [] []]]]
+        \end{forest}
+    \end{center}
+    \item Case 2:
+    \begin{center}
+        \begin{forest}
+            [A(1) [B(0) [T1 [] []] [T2 [] []]][T3 [] []]]
+        \end{forest}
+        ~~~~~
+        \begin{forest}
+            [A(2) [B(1) [T1 [] []] [T2 [ [New]] []]][T3 [] []]]
+        \end{forest}
+    \end{center}
+    This needs two rotations to balance, first, CCR(B), then CR(A).
+    The end result of this can be subdivided into further cases:
+    \begin{itemize}
+        \item Case 2a:
+        \begin{center}
+            \begin{forest}
+                [A(2) [B(-1) [T1 [] []] [C(1) [T2a [ [New]] []] [T2b [] []]]] [T3 [] []]]
+            \end{forest}    
+        \end{center}
+        Which, after the two operations ends up as follows:
+        \begin{center}
+            \begin{forest}
+                [C(0) [B(0) [T1 [] []] [T2a [ [New]] []]] [A(-1) [T2b [] []] [T3 [] []]]]
+            \end{forest}
+        \end{center}
+        \item Case 2b:
+        \begin{center}
+            \begin{forest}
+                [A(2) [B(-1) [T1 [] []] [C(-1) [T2a [] []] [T2b [ [New]] []]]] [T3 [] []]]
+            \end{forest}    
+        \end{center}
+        Which, after the two aforementioned operations, ends up as:
+        \begin{center}
+            \begin{forest}
+                [C(0) [B(0) [T1 [] []] [T2a [] []]] [A(-1) [T2b [] [ [New]]] [T3 [] []]]]
+            \end{forest}
+        \end{center}
+        \item Case 2c:
+        \begin{center}
+            \begin{forest}
+                [A(2) [B(-1) [] [New]] []]
+            \end{forest}
+            which will end up as:
+            \begin{forest}
+                [New(0) [B(0)] [A(0)]]
+            \end{forest}
+        \end{center}
+    \end{itemize}
+    \item Case 3: Mirror of Case 1
+    \item Case 4: Mirror of Case 2
+\end{itemize}
+Now we will learn how to delete.\\
+The deletion process is like the mirror of the insertion process.\\
+The differences are reflected in things like, if there was a node deleted in the right root, the balance changes from 0 to 1.\\
+If the balance changes from 0 to anything, there is no change in height.\\
+However, if the balance changes from -1 to 0, or 1 to 0, there is a change in height that will be reflected in the parent.\\
+Finally, if the balance changes from -1 to 1 or vice versa, there was no change in height.\\
+The time complexity of both the deletion and insertion is O(log(n)).\\
+\section{Heapsort and Priority Queues}
+\subsection{Heapsort}
+A heapsort is a tree represented by an array. It is also called a max-heap. It is an almost complete binary tree such that the value of all children is less than or equal to the value of the node itself.\\
+It has O(log(n)) insertion and deletion operations.\\
+Its representation as an array is the following:\\
+Root has index 0.\\
+Parent of (i>0) has index value in array $\frac{i-1}{2}$.\\
+Left of (i) has index of $2i+1$ as long as the index is within array bounds.\\
+Right of (i) has index $2i+2$.\\
+Steps to add node:\\
+\begin{enumerate}
+    \item Insert node at end of heap.\\
+    \item If element is greater than parent, exchange position with parent.
+\end{enumerate}
+\begin{center}
+    \begin{forest}
+        [10 [7 [2 [0] [1]] [3 [1] []]] [9 [8] [5]]]
+    \end{forest}
+    ~\\
+    Insert 8\\
+    \begin{forest}
+        [10 [7 [2 [0] [1]] [3 [1] [8]]] [9 [8] [5]]]
+    \end{forest}
+    ~~
+    \begin{forest}
+        [10 [7 [2 [0] [1]] [8 [1] [3]]] [9 [8] [5]]]
+    \end{forest}
+    ~~
+    \begin{forest}
+        [10 [8 [2 [0] [1]] [7 [1] [3]]] [9 [8] [5]]]
+    \end{forest}
+\end{center}
+The following is the code for this process:
+\begin{lstlisting}
+Upward_heapify(array[], n):
+    new = array[n]
+    child = n
+    parent = (child-1)/2
+    while child > 0 and array[parent] < new
+        array[child] = array[parent]
+        child = parent
+        parent = (child-1)/2
+    array[child] = new
+\end{lstlisting}
+The dequeue operation entails the following steps:
+\begin{enumerate}
+    \item Exchange root and last node
+    \item Exchange new root with larger of two children while any of the two children is larger.
+\end{enumerate}
+The code for this is:
+\begin{lstlisting}
+Downward_heapify(array[], i, n):
+    temp = array[i];
+    while ((j = 2*i+1) <= n)
+        if (j < n and array[j] < array[j+1])
+            j = j+1
+        if (temp >= array[j])
+            break
+        else
+            array[i] = array[j]
+            i = j
+    array[i] = temp
+\end{lstlisting}
+One can sort by enqueueing all elements and then repeatedly dequeue the root.\\
+One can more efficiently build the tree using downward heapify using the following code:
+\begin{lstlisting}
+for i = n/2 - 1 downto 0
+    Downward_heapify(r[], i, n-1)
+for i = n-1 downto 1
+    swap(r[i], r[0])
+    Downward_heapify(r[], 0, i-1)
+\end{lstlisting}
+\section{Graphs}
+A graph consists of a set of vertices and edges. Each edge connects two nodes.\\
+\begin{center}
+    \begin{tikzpicture}
+        \tikzstyle{node_style} = [circle,draw=black]
+        \tikzstyle{edge_style} = [draw=black]
+        \node[node_style] (v1) at (-2,2) {2};
+        \node[node_style] (v2) at (2,2) {3};
+        \node[node_style] (v3) at (4,0) {6};
+        \node[node_style] (v4) at (2,-2) {4};
+        \node[node_style] (v5) at (-2,-2) {5};
+        \node[node_style] (v6) at (-4,0) {1};
+        \draw[edge_style]  (v1) -- (v2);
+        \draw[edge_style]  (v2) -- (v3);
+        \draw[edge_style]  (v3) -- (v4);
+        \draw[edge_style]  (v4) -- (v5);
+        \draw[edge_style]  (v5) -- (v6);
+        \draw[edge_style]  (v6) -- (v1);
+        \draw[edge_style]  (v5) -- (v1);
+        \draw[edge_style]  (v5) -- (v2);
+        \draw[edge_style]  (v4) -- (v2);
+        \draw[edge_style] (v4) to [out=20,in=340,looseness=5] (v4);
+    \end{tikzpicture}
+\end{center}
+On the other hand, a directed graph is that in which each edge has a direction.\\
+\begin{center}
+    \begin{tikzpicture}
+        \tikzstyle{node_style} = [circle,draw=black]
+        \tikzstyle{edge_style} = [draw=black]
+        \node[node_style] (v1) at (-2,2) {2};
+        \node[node_style] (v2) at (2,2) {3};
+        \node[node_style] (v3) at (4,0) {6};
+        \node[node_style] (v4) at (2,-2) {4};
+        \node[node_style] (v5) at (-2,-2) {5};
+        \node[node_style] (v6) at (-4,0) {1};
+        \draw[edge_style]  (v1) edge (v2);
+        \draw[edge_style]  (v2) edge (v3);
+        \draw[edge_style]  (v3) edge (v4);
+        \draw[edge_style]  (v4) edge (v5);
+        \draw[edge_style]  (v5) edge (v6);
+        \draw[edge_style]  (v6) edge (v1);
+        \draw[edge_style]  (v5) edge (v1);
+        \draw[edge_style]  (v5) edge (v2);
+        \draw[edge_style]  (v4) edge (v2);
+        \draw[edge_style] (v4) edge [loop right] ();
+    \end{tikzpicture}
+\end{center}
+This leads to a few definitions:
+\begin{itemize}
+    \item For a directed edge <u,v>:\\
+    \begin{itemize}
+        \item The edge is incident from u and incident to v
+        \item v is adjacent to u
+        \item u is the predecessor of v
+        \item v is the successor of u
+        \item u is the source node
+        \item v is the destination node
+    \end{itemize}
+    \item For an undirected egde (u,v):
+    \begin{itemize}
+        \item the edge is incident on both nodes
+        \item both nodes are adjacent to the other
+    \end{itemize}
+    \item Degree: number if incident edges for a node in an undirected graph
+    \item Indegree: number of incoming edges for a node in directed graph
+    \item Outdegree: number of outgoing edges for a node in directed graph
+\end{itemize}
+A weighted graph is that which associates a number with each edge, known as the weight.\\
+A path of length $k$ is a sequence of $k+1$ adjacent nodes.\\
+A path from a node to itself is a cycle.\\
+If a graph has no cycles, it is acyclic, otherwise, it is cyclic.\\
+A graph is connected if every node is reachable from every other.\\
+A directed graph is strongly connected if every node is reachable from every other.\\
+\textit{Note: a tree is an acyclic graph.}\\
+A graph can be represented in two main ways:
+\begin{itemize}
+    \item Adjacency-matrix representation: it is a $V\times V$ matrix such that it has True in every node that is adjacent to it.\\
+    \begin{center}
+        \includegraphics[width = 100px]{images/adj_matrix.png}
+    \end{center}
+    If it were weighted, it stores the weight instead. For the empty spots, they can be filled with $0$ or $\infty$ as required by the problem to be solved.\\
+    Has high memory requirements.
+    \item Adjacency-list representation: It is a list that stores each node. Each node has a list which stores all the adjacent nodes.\\
+    \begin{center}
+        \includegraphics[width = 100px]{images/adj_ist.png}
+    \end{center}
+\end{itemize}
+Each of these representations has their own advantages and disadvantages depending on what needs to be done:
+\begin{table}
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        Comparison & Winner\\
+        \hline
+        (x,y) exists? & matrix\\
+        find vertex degree & list\\
+        less memory for small & m+n vs $n^2$\\
+        less memory for big  & matrices\\
+        edge insertion & matrices\\
+        traversal & m+n vs $n^2$\\
+        most problems & lists\\
+        \hline
+    \end{tabular}
+\end{table}
+There are several ways to traverse graphs. We will now cover two of them, which are Breadth-First Search (BFS), and Depth-First Search (DFS).\\
+\begin{itemize}
+    \item BFS: Explore all nodes at a distance k before exploring any at distance k+1.\\
+    The unexplored nodes are stored via queues.\\
+    We will use three colors to represent the status of a node:\\
+    \begin{itemize}
+        \item White: Never been visited.
+        \item Gray: Has been visited, but still in queue.
+        \item Black: Fully analyzed, no longer in queue.
+    \end{itemize}
+    The code that conducts BFS is the following:
+    \begin{lstlisting}
+    BFS(G)
+    // G: adj-list representation
+    for each node u in V[G]
+        color[u] = WHITE
+        d[u] = infinity
+        parent[u] = NULL
+    for each node u in V[G]
+        if (color[u] == WHITE)
+            bfs(G, u)
+    \end{lstlisting}
+    and the function bfs is:
+    \begin{lstlisting}
+    bfs(G, s)
+        Q =init_queue()
+        color[s] = GRAY;
+        d[s] = 0; parent[s] = NULL
+        Enqueue(Q, s) // insert into Queue
+        while (!Empty(Q))
+            u = Front(Q)
+            for each v in adj[u]
+                if (color[v] == WHITE)
+                    color[v] = GRAY;
+                    d[v] = d[u] + 1; parent[v] = u
+                    Enqueue(Q, v) // insert into Queue
+        Dequeue(Q)
+        color[u] = BLACK
+    \end{lstlisting}
+    In essence, what BFS does is the following:
+    \begin{enumerate}
+        \item Visit first node
+        \item Visit all adjacent nodes of node as long as they are white (unvisited)
+        \item Remove first node from queue
+        \item Go to next node in queue
+        \item Repeat from step 2 until graph completely traversed
+    \end{enumerate}
+    This leads to a few definitions:
+    \begin{itemize}
+        \item Tree edges: any edge of the BFS tree(s)
+        \item Back edges: edges connecting a vertex to an ancestor, such as self loops
+        \item Cross edges: all other edges
+    \end{itemize}
+    BFS has a time compexity of O(V+E)
+    \item DFS: explore all reachable nodes, before changing origin.\\
+    Once again, we will use the same colors with the same representations.\\
+    The code is the following:
+    \begin{lstlisting}
+    DFS(G)
+        // G: adj-list representation
+        for each node u in V[G]
+            color[u] = WHITE
+            parent[u] = NULL
+        time = 0
+        for each node u in V[G]
+            if (color[u] == WHITE)
+                dfs(G, u)
+    \end{lstlisting}
+    where dfs is:
+    \begin{lstlisting}
+        dfs(G, u)
+        color[u] = GRAY // visit begins
+        d[u] = time = time + 1
+        for each v in adj[u]
+            if (color[v] == WHITE))
+                parent[v] = u
+                dfs(G, v)
+        color[u]= BLACK // visit ends
+        f[u] = time = time + 1
+    \end{lstlisting}
+    In essence, what DFS does is the following:
+    \begin{enumerate}
+        \item Visit first node
+        \item Go to top priority node from there (recursively)
+        \item Repeat this process until no visitable nodes that are unmarked exist
+        \item Go back to step 1 but choose new, unvisited node
+        \item Repeat until graph has been completely visited
+    \end{enumerate}
+    Within the DFS trees and forests, there exist the following definitions:
+    \begin{itemize}
+        \item Tree edge: any edge from the tree(s)
+        \item Back edge: edges connecting to an ancestor in a DFT
+        \item Forward edges: nontree edges connecting a vertex to a descendant
+        \item Cross edges: all other edges
+    \end{itemize}
+\end{itemize}
+\section{Shortest Path Algorithms}
+A shortest path has the following properties: 
+\begin{itemize}
+    \item Any subpath of a shortest path is a shortest path
+    \item A path $\delta$ fulfills: $\delta(s,v) = \delta(s,u) + w<u,v>$
+\end{itemize}
 \end{document}
-% \begin{center}
-%    \begin{forest}
-%        [2 [1 [0 [0 [0] []] [0 [] [1]]] [2 [2] [2]]] [8 [7 [5 [5] [7 [7] [7]]] [8 [8] [8]]] [8 [] [9]]]]
-%    \end{forest}    
-% \end{center}
+
 
