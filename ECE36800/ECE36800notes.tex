@@ -1420,10 +1420,14 @@ Node deletion is slightly more tricky. It can be divided into three cases.
           \end{center}
 \end{enumerate}
 \subsection{Height Balanced BSTs (AVLs)}
-As mentioned in the previous section, the time complexity for BST traversal, insertion, and deletion can reach up to O(n). This is highly inefficient. To remove these inefficiencies, the AVL was created.\\
-An AVL is a BST such that the difference in height between the right branch and left branch of any node, is at most one.\\
-To maintain the balance of a tree, we undergo steps known as rotations.\\
-Moving forward, in each node, we will store the key, the children and the balance, where the balance is defined as the height of the left branch minus the height of the right branch.\\
+As mentioned in the previous section, the time complexity for BST traversal,
+insertion, and deletion can reach up to O(n). This is highly inefficient. To
+remove these inefficiencies, the AVL was created.\\ An AVL is a BST such that
+the difference in height between the right branch and left branch of any node,
+is at most one.\\ To maintain the balance of a tree, we undergo steps known as
+rotations.\\ Moving forward, in each node, we will store the key, the children
+and the balance, where the balance is defined as the height of the left branch
+minus the height of the right branch.\\
 \begin{center}
     \begin{forest}
         [5(1) [3(1) [2(1) [1(0)] []] [4(0)]] [7(0) [6(0)] [8(0)]]]
@@ -1434,9 +1438,14 @@ We will begin by understanding how to insert a node.\\
 Node insertion requires a few steps after the steps mentioned before. So, let us assume that a node has been successfully inserted into the tree. By moving up the tree recursively, we can update balances based on which of the two children the recursive call addressed. That is, if the child that had its balance updated was the right child, if the parent were to require a balance update, it would change from 1 to 0, 0 to -1, or -1 to -2.\\
 Let us look at how balances are updated:
 \begin{itemize}
-    \item If the initial balance was 0, and a node was inserted, it would become 1 or -1, and the parent would need to have its balance updates as well.
-    \item If the initial balance was -1 or 1, and after the node was inserted, it became 0, the height of the tree remains the same, and thus, the balance of the parent does not need to be updated.
-    \item If the initial balance was -1 or 1, and after the node was inserted, it became 2 or -2, rotations are necessary, but parent will no longer require balance updates.
+    \item If the initial balance was 0, and a node was inserted, it would become 1 or -1,
+          and the parent would need to have its balance updates as well.
+    \item If the initial balance was -1 or 1, and after the node was inserted, it became
+          0, the height of the tree remains the same, and thus, the balance of the parent
+          does not need to be updated.
+    \item If the initial balance was -1 or 1, and after the node was inserted, it became
+          2 or -2, rotations are necessary, but parent will no longer require balance
+          updates.
 \end{itemize}
 We will now define rotations. There are two kinds of rotations, clockwise rotations (CR), and counter-clockwise rotations (CCR).
 The following is the code definition of CCR:
@@ -1480,69 +1489,69 @@ Which does:
 So, how are these relevant to balancing a tree?\\
 \begin{itemize}
     \item Case 1:
-    \begin{center}
-        \begin{forest}
-            [A(1) [B(0) [T1 [] []] [T2 [] []]][T3 [] []]]
-        \end{forest}
-        ~~~~~
-        \begin{forest}
-            [A(2) [B(1) [T1 [ [New]] []] [T2 [] []]][T3 [] []]]
-        \end{forest}
-    \end{center}
-    By applying CR(A):\\
-    \begin{center}
-        \begin{forest}
-            [B(0) [T1 [ [New]] []][A(0) [T2 [] []] [T3 [] []]]]
-        \end{forest}
-    \end{center}
+          \begin{center}
+              \begin{forest}
+                  [A(1) [B(0) [T1 [] []] [T2 [] []]][T3 [] []]]
+              \end{forest}
+              ~~~~~
+              \begin{forest}
+                  [A(2) [B(1) [T1 [ [New]] []] [T2 [] []]][T3 [] []]]
+              \end{forest}
+          \end{center}
+          By applying CR(A):\\
+          \begin{center}
+              \begin{forest}
+                  [B(0) [T1 [ [New]] []][A(0) [T2 [] []] [T3 [] []]]]
+              \end{forest}
+          \end{center}
     \item Case 2:
-    \begin{center}
-        \begin{forest}
-            [A(1) [B(0) [T1 [] []] [T2 [] []]][T3 [] []]]
-        \end{forest}
-        ~~~~~
-        \begin{forest}
-            [A(2) [B(1) [T1 [] []] [T2 [ [New]] []]][T3 [] []]]
-        \end{forest}
-    \end{center}
-    This needs two rotations to balance, first, CCR(B), then CR(A).
-    The end result of this can be subdivided into further cases:
-    \begin{itemize}
-        \item Case 2a:
-        \begin{center}
-            \begin{forest}
-                [A(2) [B(-1) [T1 [] []] [C(1) [T2a [ [New]] []] [T2b [] []]]] [T3 [] []]]
-            \end{forest}    
-        \end{center}
-        Which, after the two operations ends up as follows:
-        \begin{center}
-            \begin{forest}
-                [C(0) [B(0) [T1 [] []] [T2a [ [New]] []]] [A(-1) [T2b [] []] [T3 [] []]]]
-            \end{forest}
-        \end{center}
-        \item Case 2b:
-        \begin{center}
-            \begin{forest}
-                [A(2) [B(-1) [T1 [] []] [C(-1) [T2a [] []] [T2b [ [New]] []]]] [T3 [] []]]
-            \end{forest}    
-        \end{center}
-        Which, after the two aforementioned operations, ends up as:
-        \begin{center}
-            \begin{forest}
-                [C(0) [B(0) [T1 [] []] [T2a [] []]] [A(-1) [T2b [] [ [New]]] [T3 [] []]]]
-            \end{forest}
-        \end{center}
-        \item Case 2c:
-        \begin{center}
-            \begin{forest}
-                [A(2) [B(-1) [] [New]] []]
-            \end{forest}
-            which will end up as:
-            \begin{forest}
-                [New(0) [B(0)] [A(0)]]
-            \end{forest}
-        \end{center}
-    \end{itemize}
+          \begin{center}
+              \begin{forest}
+                  [A(1) [B(0) [T1 [] []] [T2 [] []]][T3 [] []]]
+              \end{forest}
+              ~~~~~
+              \begin{forest}
+                  [A(2) [B(1) [T1 [] []] [T2 [ [New]] []]][T3 [] []]]
+              \end{forest}
+          \end{center}
+          This needs two rotations to balance, first, CCR(B), then CR(A).
+          The end result of this can be subdivided into further cases:
+          \begin{itemize}
+              \item Case 2a:
+                    \begin{center}
+                        \begin{forest}
+                            [A(2) [B(-1) [T1 [] []] [C(1) [T2a [ [New]] []] [T2b [] []]]] [T3 [] []]]
+                        \end{forest}
+                    \end{center}
+                    Which, after the two operations ends up as follows:
+                    \begin{center}
+                        \begin{forest}
+                            [C(0) [B(0) [T1 [] []] [T2a [ [New]] []]] [A(-1) [T2b [] []] [T3 [] []]]]
+                        \end{forest}
+                    \end{center}
+              \item Case 2b:
+                    \begin{center}
+                        \begin{forest}
+                            [A(2) [B(-1) [T1 [] []] [C(-1) [T2a [] []] [T2b [ [New]] []]]] [T3 [] []]]
+                        \end{forest}
+                    \end{center}
+                    Which, after the two aforementioned operations, ends up as:
+                    \begin{center}
+                        \begin{forest}
+                            [C(0) [B(0) [T1 [] []] [T2a [] []]] [A(-1) [T2b [] [ [New]]] [T3 [] []]]]
+                        \end{forest}
+                    \end{center}
+              \item Case 2c:
+                    \begin{center}
+                        \begin{forest}
+                            [A(2) [B(-1) [] [New]] []]
+                        \end{forest}
+                        which will end up as:
+                        \begin{forest}
+                            [New(0) [B(0)] [A(0)]]
+                        \end{forest}
+                    \end{center}
+          \end{itemize}
     \item Case 3: Mirror of Case 1
     \item Case 4: Mirror of Case 2
 \end{itemize}
@@ -1555,14 +1564,13 @@ Finally, if the balance changes from -1 to 1 or vice versa, there was no change 
 The time complexity of both the deletion and insertion is O(log(n)).\\
 \section{Heapsort and Priority Queues}
 \subsection{Heapsort}
-A heapsort is a tree represented by an array. It is also called a max-heap. It is an almost complete binary tree such that the value of all children is less than or equal to the value of the node itself.\\
-It has O(log(n)) insertion and deletion operations.\\
-Its representation as an array is the following:\\
-Root has index 0.\\
-Parent of (i>0) has index value in array $\frac{i-1}{2}$.\\
-Left of (i) has index of $2i+1$ as long as the index is within array bounds.\\
-Right of (i) has index $2i+2$.\\
-Steps to add node:\\
+A heapsort is a tree represented by an array. It is also called a max-heap. It
+is an almost complete binary tree such that the value of all children is less
+than or equal to the value of the node itself.\\ It has O(log(n)) insertion and
+deletion operations.\\ Its representation as an array is the following:\\ Root
+has index 0.\\ Parent of (i>0) has index value in array $\frac{i-1}{2}$.\\ Left
+of (i) has index of $2i+1$ as long as the index is within array bounds.\\ Right
+of (i) has index $2i+2$.\\ Steps to add node:\\
 \begin{enumerate}
     \item Insert node at end of heap.\\
     \item If element is greater than parent, exchange position with parent.
@@ -1600,7 +1608,8 @@ Upward_heapify(array[], n):
 The dequeue operation entails the following steps:
 \begin{enumerate}
     \item Exchange root and last node
-    \item Exchange new root with larger of two children while any of the two children is larger.
+    \item Exchange new root with larger of two children while any of the two children is
+          larger.
 \end{enumerate}
 The code for this is:
 \begin{lstlisting}
@@ -1617,7 +1626,8 @@ Downward_heapify(array[], i, n):
     array[i] = temp
 \end{lstlisting}
 One can sort by enqueueing all elements and then repeatedly dequeue the root.\\
-One can more efficiently build the tree using downward heapify using the following code:
+One can more efficiently build the tree using downward heapify using the
+following code:
 \begin{lstlisting}
 for i = n/2 - 1 downto 0
     Downward_heapify(r[], i, n-1)
@@ -1626,7 +1636,8 @@ for i = n-1 downto 1
     Downward_heapify(r[], 0, i-1)
 \end{lstlisting}
 \section{Graphs}
-A graph consists of a set of vertices and edges. Each edge connects two nodes.\\
+A graph consists of a set of vertices and edges. Each edge connects two
+nodes.\\
 \begin{center}
     \begin{tikzpicture}
         \tikzstyle{node_style} = [circle,draw=black]
@@ -1675,19 +1686,19 @@ On the other hand, a directed graph is that in which each edge has a direction.\
 This leads to a few definitions:
 \begin{itemize}
     \item For a directed edge <u,v>:\\
-    \begin{itemize}
-        \item The edge is incident from u and incident to v
-        \item v is adjacent to u
-        \item u is the predecessor of v
-        \item v is the successor of u
-        \item u is the source node
-        \item v is the destination node
-    \end{itemize}
+          \begin{itemize}
+              \item The edge is incident from u and incident to v
+              \item v is adjacent to u
+              \item u is the predecessor of v
+              \item v is the successor of u
+              \item u is the source node
+              \item v is the destination node
+          \end{itemize}
     \item For an undirected egde (u,v):
-    \begin{itemize}
-        \item the edge is incident on both nodes
-        \item both nodes are adjacent to the other
-    \end{itemize}
+          \begin{itemize}
+              \item the edge is incident on both nodes
+              \item both nodes are adjacent to the other
+          \end{itemize}
     \item Degree: number if incident edges for a node in an undirected graph
     \item Indegree: number of incoming edges for a node in directed graph
     \item Outdegree: number of outgoing edges for a node in directed graph
@@ -1701,46 +1712,48 @@ A directed graph is strongly connected if every node is reachable from every oth
 \textit{Note: a tree is an acyclic graph.}\\
 A graph can be represented in two main ways:
 \begin{itemize}
-    \item Adjacency-matrix representation: it is a $V\times V$ matrix such that it has True in every node that is adjacent to it.\\
-    \begin{center}
-        \includegraphics[width = 100px]{images/adj_matrix.png}
-    \end{center}
-    If it were weighted, it stores the weight instead. For the empty spots, they can be filled with $0$ or $\infty$ as required by the problem to be solved.\\
-    Has high memory requirements.
-    \item Adjacency-list representation: It is a list that stores each node. Each node has a list which stores all the adjacent nodes.\\
-    \begin{center}
-        \includegraphics[width = 100px]{images/adj_ist.png}
-    \end{center}
+    \item Adjacency-matrix representation: it is a $V\times V$ matrix such that it has
+          True in every node that is adjacent to it.\\
+          \begin{center}
+              \includegraphics[width = 100px]{images/adj_matrix.png}
+          \end{center}
+          If it were weighted, it stores the weight instead. For the empty spots, they can be filled with $0$ or $\infty$ as required by the problem to be solved.\\
+          Has high memory requirements.
+    \item Adjacency-list representation: It is a list that stores each node. Each node
+          has a list which stores all the adjacent nodes.\\
+          \begin{center}
+              \includegraphics[width = 100px]{images/adj_ist.png}
+          \end{center}
 \end{itemize}
 Each of these representations has their own advantages and disadvantages depending on what needs to be done:
 \begin{table}
     \centering
     \begin{tabular}{|c|c|}
         \hline
-        Comparison & Winner\\
+        Comparison            & Winner       \\
         \hline
-        (x,y) exists? & matrix\\
-        find vertex degree & list\\
-        less memory for small & m+n vs $n^2$\\
-        less memory for big  & matrices\\
-        edge insertion & matrices\\
-        traversal & m+n vs $n^2$\\
-        most problems & lists\\
+        (x,y) exists?         & matrix       \\
+        find vertex degree    & list         \\
+        less memory for small & m+n vs $n^2$ \\
+        less memory for big   & matrices     \\
+        edge insertion        & matrices     \\
+        traversal             & m+n vs $n^2$ \\
+        most problems         & lists        \\
         \hline
     \end{tabular}
 \end{table}
 There are several ways to traverse graphs. We will now cover two of them, which are Breadth-First Search (BFS), and Depth-First Search (DFS).\\
 \begin{itemize}
     \item BFS: Explore all nodes at a distance k before exploring any at distance k+1.\\
-    The unexplored nodes are stored via queues.\\
-    We will use three colors to represent the status of a node:\\
-    \begin{itemize}
-        \item White: Never been visited.
-        \item Gray: Has been visited, but still in queue.
-        \item Black: Fully analyzed, no longer in queue.
-    \end{itemize}
-    The code that conducts BFS is the following:
-    \begin{lstlisting}
+          The unexplored nodes are stored via queues.\\ We will use three colors to
+          represent the status of a node:\\
+          \begin{itemize}
+              \item White: Never been visited.
+              \item Gray: Has been visited, but still in queue.
+              \item Black: Fully analyzed, no longer in queue.
+          \end{itemize}
+          The code that conducts BFS is the following:
+          \begin{lstlisting}
     BFS(G)
     // G: adj-list representation
     for each node u in V[G]
@@ -1751,8 +1764,8 @@ There are several ways to traverse graphs. We will now cover two of them, which 
         if (color[u] == WHITE)
             bfs(G, u)
     \end{lstlisting}
-    and the function bfs is:
-    \begin{lstlisting}
+          and the function bfs is:
+          \begin{lstlisting}
     bfs(G, s)
         Q =init_queue()
         color[s] = GRAY;
@@ -1768,25 +1781,24 @@ There are several ways to traverse graphs. We will now cover two of them, which 
         Dequeue(Q)
         color[u] = BLACK
     \end{lstlisting}
-    In essence, what BFS does is the following:
-    \begin{enumerate}
-        \item Visit first node
-        \item Visit all adjacent nodes of node as long as they are white (unvisited)
-        \item Remove first node from queue
-        \item Go to next node in queue
-        \item Repeat from step 2 until graph completely traversed
-    \end{enumerate}
-    This leads to a few definitions:
-    \begin{itemize}
-        \item Tree edges: any edge of the BFS tree(s)
-        \item Back edges: edges connecting a vertex to an ancestor, such as self loops
-        \item Cross edges: all other edges
-    \end{itemize}
-    BFS has a time compexity of O(V+E)
-    \item DFS: explore all reachable nodes, before changing origin.\\
-    Once again, we will use the same colors with the same representations.\\
-    The code is the following:
-    \begin{lstlisting}
+          In essence, what BFS does is the following:
+          \begin{enumerate}
+              \item Visit first node
+              \item Visit all adjacent nodes of node as long as they are white (unvisited)
+              \item Remove first node from queue
+              \item Go to next node in queue
+              \item Repeat from step 2 until graph completely traversed
+          \end{enumerate}
+          This leads to a few definitions:
+          \begin{itemize}
+              \item Tree edges: any edge of the BFS tree(s)
+              \item Back edges: edges connecting a vertex to an ancestor, such as self loops
+              \item Cross edges: all other edges
+          \end{itemize}
+          BFS has a time compexity of O(V+E)
+    \item DFS: explore all reachable nodes, before changing origin.\\ Once again, we will
+          use the same colors with the same representations.\\ The code is the following:
+          \begin{lstlisting}
     DFS(G)
         // G: adj-list representation
         for each node u in V[G]
@@ -1797,8 +1809,8 @@ There are several ways to traverse graphs. We will now cover two of them, which 
             if (color[u] == WHITE)
                 dfs(G, u)
     \end{lstlisting}
-    where dfs is:
-    \begin{lstlisting}
+          where dfs is:
+          \begin{lstlisting}
         dfs(G, u)
         color[u] = GRAY // visit begins
         d[u] = time = time + 1
@@ -1809,31 +1821,31 @@ There are several ways to traverse graphs. We will now cover two of them, which 
         color[u]= BLACK // visit ends
         f[u] = time = time + 1
     \end{lstlisting}
-    In essence, what DFS does is the following:
-    \begin{enumerate}
-        \item Visit first node
-        \item Go to top priority node from there (recursively)
-        \item Repeat this process until no visitable nodes that are unmarked exist
-        \item Go back to step 1 but choose new, unvisited node
-        \item Repeat until graph has been completely visited
-    \end{enumerate}
-    Within the DFS trees and forests, there exist the following definitions:
-    \begin{itemize}
-        \item Tree edge: any edge from the tree(s)
-        \item Back edge: edges connecting to an ancestor in a DFT
-        \item Forward edges: nontree edges connecting a vertex to a descendant
-        \item Cross edges: all other edges
-    \end{itemize}
+          In essence, what DFS does is the following:
+          \begin{enumerate}
+              \item Visit first node
+              \item Go to top priority node from there (recursively)
+              \item Repeat this process until no visitable nodes that are unmarked exist
+              \item Go back to step 1 but choose new, unvisited node
+              \item Repeat until graph has been completely visited
+          \end{enumerate}
+          Within the DFS trees and forests, there exist the following definitions:
+          \begin{itemize}
+              \item Tree edge: any edge from the tree(s)
+              \item Back edge: edges connecting to an ancestor in a DFT
+              \item Forward edges: nontree edges connecting a vertex to a descendant
+              \item Cross edges: all other edges
+          \end{itemize}
 \end{itemize}
 \section{Shortest Path Algorithms}
-A shortest path has the following properties: 
+A shortest path has the following properties:
 \begin{itemize}
     \item Any subpath of a shortest path is a shortest path
     \item A path $\delta$ fulfills: $\delta(s,v) = \delta(s,u) + w<u,v>$
 \end{itemize}
 \subsection{Dijkstra's Algorithm}
-Traverse a step, and tighten all distances.\\
-The code for this algorithm is the following:
+Traverse a step, and tighten all distances.\\ The code for this algorithm is
+the following:
 \begin{lstlisting}
 Dijkstra(G, w, s) // s: starting node
     PQ = V[G]
@@ -1854,7 +1866,8 @@ So, what is happening her is the following:
     \item Visit all nodes that can be visited from there
     \item Remove node from visitable
     \item Select the smallest of the visitable nodes and use as source node
-    \item Visit all nodes once again, if the weight to current source node plus the weight of source node to current node is less than current path, update value
+    \item Visit all nodes once again, if the weight to current source node plus the
+          weight of source node to current node is less than current path, update value
     \item Go back to step 4 until all nodes visited
 \end{enumerate}
 Time complexity of all uses of extract min is $O(V\log(V))$\\
@@ -1885,14 +1898,73 @@ Find shortest path of length k.\\
 The way this algorithm works is the following:
 \begin{enumerate}
     \item Starting from first node, visit all adjacent nodes
-    \item From each of the nodes, if their value was updates, visit their respective adjacent nodes
+    \item From each of the nodes, if their value was updates, visit their respective
+          adjacent nodes
     \item Repeat until no node has been updates in a round
 \end{enumerate}
-Worst case time complexity is O(VE).
+Worst case time complexity is O(VE).\\~\\
 A problem that can be solved using this algorithm is the difference constraints problem:
 Let us say we have a set of numbers that are constrained by the form $x_i-x_j \leq b_{ij}$, where $b_{ij}$ is a constant.\\
 We can order all the values and their differences if we were to find the shortest path between any two nodes. If two nodes are not connected in any way, they do not constrain each other.\\
+\section{Directed Acyclic Graphs and Topological Sorting}
+A DAG is a graph that has no cycles. It is often used to represent things with
+a temporal basis. For example, the existence of prerequisites.\\ Topological
+sorting is an array arrangement of a graph such that each node is before its
+descendants.\\ There are a few ways to topologically sort a DAG.
+\begin{itemize}
+    \item Queue-Based: Initialize a queue and a list. Calculate the indegree of each
+          node. Enqueue all nodes with indegree 0. While queue is not empty, remove a
+          node from queue, and update all indegrees. If any indegree becomes 0, add it to
+          queue.\\
+    \item DFS-Based: DFS, with slight modifications:
+        \begin{itemize}
+            \item Whenever a node is colored black, insert it to front of linked list.
+            \item Return list in reverse order of timestamp f[]
+        \end{itemize}
+        So, what this does is the following: 
+        \begin{enumerate}
+            \item Takes a node
+            \item Goes to its adjacent
+            \item Continues till no path forward
+            \item Adds newest black item to list.
+            \item List is now topologically sorted.
+        \end{enumerate}
+\end{itemize}
+The shortest path in a DAG can be calculated using the following algorithm:
+\begin{lstlisting}
+DAG-Shortest-Paths(G, w, s) // s: source
+Topologically sort V[G]
+for each node u in V[G]
+    d[u] = infinity; 
+    pred[u] = NULL
+d[s] = 0
+for each node u in topological order
+    for each v in adj[u]
+        if (d[v] > d[u] + w<u,v>)
+            d[v] = d[u] + w<u,v>
+            pred[v] = u
+\end{lstlisting}
+The way this algorithm works is the following:
+\begin{enumerate}
+    \item Once a DAG has been topologically sorted, it is linearly traversed, with the source having its initial path of 0, and all others infinity.
+    \item For each node that is being visited, all its connected nodes are updated to the smallest value they have received.
+    \item Once this is done, the next node is visited, and the process is repeated.
+\end{enumerate}
+Total time complexity : O(V+E)
+The same algorithm can be used for longest path. With the only difference being the initial values having values of $-\infty$, adn checking for longer instead of shorter paths.\\
+\subsection{PERT Diagrams}
+Used to find an order in which tasks should be done, considering prerequisites.\\
+Steps for ASAP method:
+\begin{enumerate}
+    \item Select a start and end node
+    \item Connect the start node to all nodes with a weight of 0 using red edges
+    \item Connect all nodes to the end node with a weight of their duration using blue edges
+    \item Find longest path using prior algorithms
+    \item Final path weight of end node is the desired value
+\end{enumerate}
+The ALAP method does the same thing as the ASAP method, but it reverses the edges.\\
+Once the values from teh ASAp method and the ALAP method have been found, the difference, at each node between the ALAP value and the ASAP value is the slack that can be afforded for the task.\\
+
 
 \end{document}
-
 
