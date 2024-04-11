@@ -1963,8 +1963,22 @@ Steps for ASAP method:
     \item Final path weight of end node is the desired value
 \end{enumerate}
 The ALAP method does the same thing as the ASAP method, but it reverses the edges.\\
-Once the values from teh ASAp method and the ALAP method have been found, the difference, at each node between the ALAP value and the ASAP value is the slack that can be afforded for the task.\\
-
+Once the values from the ASAP method and the ALAP method have been found, the difference, at each node between the ALAP value and the ASAP value is the slack that can be afforded for the task.\\
+\section{Minimum Spanning Trees}
+Let us consider a connected graph.\\ 
+A spanning tree is a tree such that all nodes are within the tree.\\
+A minimum spanning tree is a spanning tree with the smallest total weight across all edges of the tree.\\
+This is the code for a minimum spanning tree:
+\begin{lstlisting}
+Generic-MST(G, w)
+// Weight function w: E = R
+A = NULL
+while A does not form a spanning tree
+    find (u,v) that is safe for A
+    A.append{(u,v)}
+\end{lstlisting}
+A is always a subset of some MST.\\
+The idea behind this is to partition the graph. If no edge intersects the partition, A is respected. On the other hand, if an edge is crossing the partition, it is safe if it is the one with the smallest weight possible.\\
 
 \end{document}
 
