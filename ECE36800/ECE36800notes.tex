@@ -1978,7 +1978,46 @@ while A does not form a spanning tree
     A.append{(u,v)}
 \end{lstlisting}
 A is always a subset of some MST.\\
-The idea behind this is to partition the graph. If no edge intersects the partition, A is respected. On the other hand, if an edge is crossing the partition, it is safe if it is the one with the smallest weight possible.\\
+The idea behind this is to partition the graph. If no edge intersects the partition, A is respected. On the other hand, if an edge is crossing the partition, the edge is safe if it is the one with the smallest weight possible.\\
+\subsection{Kruskal's Algorithm}
+This algorithm maintains a tree, and selects the smallest weight during each iteration. If it creates a cycle, it will be discarded.\\
+\begin{lstlisting}
+// A is an acyclic subgraph of G
+PQ = build a min-heap of edges
+A = NULL
+do until A is a spanning tree of G
+    e = Extract-Min(PQ)
+    if A.append{e} is acyclic
+        A = A.append{e}
+return A
+\end{lstlisting}
+In essence:
+\begin{itemize}
+    \item Find smallest
+    \item Check if it makes a cycle
+    \item If there is no cycle, keep, otherwise, discard
+\end{itemize}
+\subsection{Disjoint-set}
+For disjoint set manipulations, there are a few basic operations:
+\begin{itemize}
+    \item makeSet(x): creates a new set whose only member is x - O(1)
+    \item Union(x,y): unites x and y, if they are from different states - O(log(n))
+    \item Link(x,y): selects one of the inputs as root, where the inputs are representatives of two different sets
+    \item findSet(x): finds the representative of a node x - O(log(n))
+\end{itemize}
+\begin{lstlisting}
+MST-Kruskal(G, w)
+A = NULL
+for each vertex v in V[G]
+    Make-Set(v)
+PQ = build a min-heap of edges
+while A is not a spanning tree
+    (u,v) = Extract-Min(PQ)
+    if ((x = Find-Set(u)) != (y = Find-Set(v)))
+        A = A.append{(u,v)}
+        Link(x,y)
+return A
+\end{lstlisting}
 
 \end{document}
 
