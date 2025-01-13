@@ -1,0 +1,274 @@
+\documentclass[nobib,fleqn,8pt]{article}
+
+%\\geometry{showframe}% for debugging purposes -- displays the margins
+\usepackage{geometry}
+\geometry{margin=0.5in} % Example of setting 1-inch margins
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{color}
+\usepackage{steinmetz}
+% Fixes captions and images being cut off
+\usepackage{marginfix}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath,amsthm}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{circuitikz}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+\usepackage{pgfplots}
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\small}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+% Define a custom command for definitions and biconditional
+\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+\let\biconditional\leftrightarrow
+\linespread{0.9}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+$MR=MC$\\
+$P=f(Q)$\\~\\
+Current Price of Investments:
+\begin{equation*}
+    PV_1 = \frac{FV}{(1+i)^n}
+\end{equation*}
+If it generates a value at the end of each year:
+\begin{equation*}
+    PV_{stream} = \sum_{t=1}^n\frac{FV_t}{(1+i)^t}
+\end{equation*}
+\begin{equation*}
+    PV_{net} = \sum_{t=1}^n\frac{FV_t}{(1+i)^t}-C_0 \text{ -where $C_0$ is the current investment}
+\end{equation*}
+Current value of a firm before paying
+\begin{equation*}
+    PV_{firm} = \pi_0\frac{i+1}{i-g}
+\end{equation*}
+Current value of a firm after paying
+\begin{equation*}
+    PV_{firm} = \pi_0\frac{i+1}{i-g} - \pi_0 = \frac{\pi_0(1+g)}{i-g}
+\end{equation*}
+\begin{equation*}
+    PV_{perpetuity} = \frac{CF}{i}
+\end{equation*}
+Full Economic Price: Amount consumers would be willing to pay if the supply was the amount being sold under a price ceiling.\\
+Deadweight loss when surplus is triangle on the right of intersection.\\
+Deadweight loss when shortage is triangle on the left of intersection.\\
+Deadweight loss when govt. pays is \textbf{M} shaped.\\~\\
+Least squares regression: $y=\hat{a}+\hat{b}x$\\
+CI: $\hat{a}\pm 2\sigma_{\hat{a}}$,$\hat{b}\pm 2\sigma_{\hat{b}}$ where $\sigma$ are standard errors.\\
+The t-stat is: $t_{\hat{x}}=\frac{\hat{x}}{\sigma_{\hat{x}}}$ where $x=a,b$\\
+\begin{equation*}
+    Marginal_{revenue} = Price\left(\frac{1+Elasticity}{Elasticity}\right)
+\end{equation*}
+\begin{equation*}
+    Elasticity = \frac{\delta Q_x^d}{\delta P} \frac{P}{Q_x} \textit{ (or M if income)} = \left\vert \frac{\frac{Q_2-Q_1}{(Q_2+Q_1)}}{\frac{P_2-P_1}{(P_2+P_1)}}\right\vert
+\end{equation*}
+Demand is elastic if the revenue increases by decreasing the price, that is $|E>1|$.\\
+Own demand elasticity is affected by substitute availability, time of purchase horizon, expenditure of consumer budgets.\\
+In cross-product, if $E<0$, products are complements. In income, if $E<0$, product is inferior.\\
+If Q function is logarithmic, coefficients are elasticities.\\
+Marginal rate of substitution = $|\frac{d}{dQ_x}Q_y|$\\
+If a firms revenues are derived from the sales of two products, y and x:
+\begin{equation*}
+    \Delta Revenue = [Rev_x(1+E_{xx})+Rev_y E_{yx}]\times \%\Delta P_x
+\end{equation*}
+For producer:
+\begin{equation*}
+    Market_{subs_{rate}}(x,y) = -\frac{P_x}{P_y} \text{ otherwise, equilibrium is not achieved}
+\end{equation*}
+For consumer:
+\begin{equation*}
+    Marginal_{rate_{subs}}(x,y) =MRS_{x,y} =  \frac{P_x}{P_y} \text{ otherwise,equilibrium consumption bundle is not achieved}
+\end{equation*}
+\begin{eqnarray*}
+    MRTS_{KL} = \frac{MP_L}{MP_K} ( = \frac{\mathbf{w}age}{\mathbf{r}ent} \text{ for cost minimization} = tangent(isoquant=isocost))\\
+    \text{remember that } K\uparrow \implies MP_K \downarrow\\
+    Value_{Marginal_{Product}}= VMP_x = P_{rice}\times MP_x (= w \text{ if $x=L_{abor}$, fixed }K_{apital})
+\end{eqnarray*}
+\begin{eqnarray*}
+    C(Q_1,0)+C(0,Q_2)>C(Q_1,Q_2) \implies \text{Economy of Scope}\\
+    \frac{\Delta MC_1(Q_1,Q_2)}{\Delta Q_2} = \frac{\delta}{\delta Q_2}(\frac{\delta}{\delta Q_1} C(Q_1,Q_2))< 0 \implies \text{Cost Complementarity}
+\end{eqnarray*}
+\begin{eqnarray*}
+    \frac{d}{dQ}AVG_{TOT_{cost}}<0 \implies \text{economy of scale}
+\end{eqnarray*}
+\begin{itemize}
+    \item Contract - well defined and measurable and highly specialized with optimal
+          length $L^* = L(MB=MC)$
+    \item Specialized Investment - exchange that cannot be recovered, relationship
+          specific (site, physical asset, dedicated assets, human capital). Leads to
+          costly bargaining, underinvestment, opportunism and hold up.
+    \item Spot exchange - modest number,standardized,many sellers,opportunism not
+          problem,underinvestment$\implies$bad quality
+    \item Vertical integration - buying internally, or from subsidiaries, less costs and
+          opportunism, more work.
+    \item hold-up problem - losses from contract breach
+    \item principal-agent problem - agent/principal goals don't align (conflict of
+          interest), solved using \%profits or spot checks
+\end{itemize}
+\begin{equation*}
+    NewContractValue = (\sum SunkCosts) (-1?)
+\end{equation*}
+\begin{equation*}
+    4FirmConcentrationRatio = \frac{F1+F2+F3+F4}{TotalMarket}
+\end{equation*}
+\begin{eqnarray*}
+    HHI = 10000\times\sum_i\left(\frac{F_i}{TotalMarket}\right)^2 \\
+    \text{block if merger makes $HHI_n>2500$ or $\Delta HHI > 200$}
+\end{eqnarray*}
+\begin{equation*}
+    RothschildIndex = \frac{OwnElaticity}{DemandElasticity}
+\end{equation*}
+\begin{eqnarray*}
+    P = \frac{1}{1-LernerIndex}\times MC\\
+    MarkUpFactor = \frac{P}{MC}
+\end{eqnarray*}
+Perfect Competition:
+\begin{itemize}
+    \item Many buyers and sellers
+    \item homogenous products
+    \item perfect information in buyers and sellers
+    \item free entry and exit
+\end{itemize}
+Market Parameters
+\begin{itemize}
+    \item Monopoly: Rothschild = 1, HHI=10000, C4=1
+    \item Oligopoly: Rothschild = large, HHI = large, C4 =1
+    \item Monopolistic Competition: Rothschild = small $>>0$, HHI = small, C4 = small
+    \item Perfect Competition: Rothschild = very small, HHI = very small, C4 = very small
+\end{itemize}
+
+A firm should shut down if $profit<fixed_{cost}$ or $P<AVC$.\\ Entry to a market occurs
+until economic profits shrink to 0.\\ Profit Maximizing Price is: $P_{demand}$
+at $Q_{MR=MC}$\\ Revenue Maximizing Price is: $P_{demand}$ at $Q_{MR=0}$\\~\\
+Let $P = b-mQ$:\\ $MR = \frac{d}{dQ}PQ = b-2mQ = b-2m(Q_1+Q_2) =
+    P\left(\frac{1+E}{E}\right)$\\ For a multiple source monopoly: $MR(Q_1,Q_2) =
+    MC_1(Q_1)$ and $MR(Q_1,Q_2) = MC_2(Q_2)$\\~\\ Slope in oligopoly where opposing
+firm does not match changes is more horizontal.\\ Range of marginal cost to
+keep price: $[MR(D_1(P)),MR(D_2(P))]$\\~\\ 
+In a Sweezy oligopoly:
+Few firms, many customers, differentiated products, rivals will cut in response to cut, but not increase in response to increase.\\
+In a Cournot duopoly:
+Few firms, many customers, any kind of product, rival holds constant output in response to changes.
+\begin{eqnarray*}
+    P=a-b(Q_1+Q_2)\\
+    \implies MR_1(Q_1,Q2) = a-bQ_2-2bQ_1, MR_2(Q_1,Q2) = a-bQ_1-2bQ_2\\
+    \implies Q_1 = r_1(Q_2)= \frac{a-c_1}{2b}-\frac{1}{2}Q_2,Q_2 = r_2(Q_1)= \frac{a-c_2}{2b}-\frac{1}{2}Q_1
+\end{eqnarray*}
+In a Stackelberg duopoly: few firms, many customers, any kind of product, one leader defines price before, all others follow 
+\begin{eqnarray*}
+    P = a-b(Q_L+Q_F)\\
+    \implies Q_L = \frac{a+c_F-2c_L}{2b}, Q_F= \frac{a-c_F}{2b}-\frac{1}{2}Q_L
+\end{eqnarray*}
+In a Bertrand oligopoly: few firms, many customers, identical products, constant MC, price comepetition, perfect info, no transaction cost
+\begin{eqnarray*}
+    P = a-bQ, P_{eq} = MC\\
+    Q = \frac{a-MC}{b}\\
+    \pi = 0
+\end{eqnarray*}
+In Collusive Environments, which behave like monopolies:
+\begin{equation*}
+    MR = MC \implies Q = \frac{a-MC}{2b}
+\end{equation*}
+Contestable market if: same tech, consumer quick price change response, firms slow price change response, no sunk cost.\\~\\
+In a one-shot game: the strategy is the one with the best payout for each of the other player's choices.\\
+In a game where the one-shot Nash equilibrium points at nonideal payout, \textbf{near-infinite} plays are necessary to earn more. If it is an infinite game with interest, higher payoff is possible if:
+\begin{equation*}
+    \frac{\pi_{cheat}-\pi_{cooperation}}{\pi_{cooperation}-\pi_{Nash}}\leq \frac{1}{i}
+\end{equation*}
+If there is a probability $\theta$ for the game to end, no reason to cheat if: $\Pi_A^{Cheat}\leq \frac{\pi_A^{coop}}{\theta} = \Pi_A^{coop}$\\
+if it is a multistage game, make a choice tree.\\
+In a Monopoly/Mon Comp: $P = \left(\frac{E_F}{1+E_F}\right)MC = K\times MC$ where K is the profit-maximizing markup factor\\
+In a Cournot Oligopoly: $P = \left(\frac{NE_M}{1+NE_M}\right)MC = \left(\frac{E_F}{1+E_F}\right)MC$\\~\\
+In Price Discrimination:
+\begin{itemize}
+    \item First Degree: Price sticks to demand curve. $P=D$, $\pi = \int D-MC$
+    \item Second Degree: Change price after certain amount is consumed.
+    \item Third Degree: $P_1\left(\frac{1+E_1}{E_1}\right)=MC,
+              P_2\left(\frac{1+E_2}{E_2}\right)=MC$, $Markup = \frac{E}{E+1}$, needs no
+          resale, different E
+    \item Two-Part Pricing: $Fixed_{Fee}+PerUnit_{Fee}$ where $Fixed_{Fee} =\pi = \int
+              D-MC$ and $PerUnit_{Fee} = MC$
+    \item Block Pricing: Sell total quantity as one. $P = \int_{0}^{Q}D$, $\pi = \int
+              D-MC$, $Q= Q_{uantity}(D=MC)$
+    \item Commodity Bundling: Sell multiple different products as a single bundle.
+          Customer will buy if price of bundle is less than sum of individual MB.
+    \item Peak-load pricing: higher prices during peak hours
+    \item Cross-subsidy: if two products are related through cost, sell one cheaper, the other more expensive
+    \item Transfer pricing: internal pricing - upstream set price for lowstream avoiding double marginalization. \\$NRM_D = MR_D-MC_D = MC_U$
+    \item Double marginalization: when both upstream and attempt to maximize division profits, instead of overall profits.
+    \item Price matching, brand loyalty, randomized pricing are other strategies
+\end{itemize}
+Random Outcome Probability: $Variance = (Stdev)^2 = \sum P(x)(x-\mu)^2 $, $\mu = Expected_{Value} = \sum x*P(x)$, big stdev is risky\\
+\begin{itemize}
+    \item Risk Neutral: indifferent to probability vs for sure
+    \item Risk Averse: prefers for sure, \textit{this type of customers leads to chain
+              stores, online reviews, insurance}
+    \item Risk loving: prefers a probability of higher
+\end{itemize}
+Reservation Price is the price at which $Expected_{benefit} = Search_{Cost}$\\
+Diversification: reduce risks by investing in multiple projects\\
+Auction:
+\begin{itemize}
+    \item Independent Private Values:
+          \begin{itemize}
+              \item First Price, seal: \begin{equation*}
+                        b = value-\frac{value-lowest_{valuation}}{num_{bidders}}
+                    \end{equation*}
+              \item Dutch: let lower until \begin{equation*}
+                        b = value-\frac{value-lowest_{valuation}}{num_{bidders}}
+                    \end{equation*}
+              \item Second Price, seal: $b = v$
+              \item English: active until $b=v$
+          \end{itemize}
+          Expected Revenues for auctioneer: $English = Second-price = first-price = Dutch$
+    \item Correlated Values Auctions: avoid winner's curse, which is the fact that the
+          winner values it more than all others.\\ Expected revenue for auctioneer:
+          $English>Second-price>first-price=Dutch$
+\end{itemize}
+Assymetric information leads to:
+\begin{itemize}
+    \item Hidden Actions are morally hazardous, and can be avoided by incentive
+          contracts, signaling or screening.
+    \item Hidden Characteristics lead to adverse selection, and can be avoided through
+          screening and sorting.
+\end{itemize}
+
+\end{document}
+

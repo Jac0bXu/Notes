@@ -1,0 +1,336 @@
+\documentclass[nobib]{article}
+
+%\\geometry{showframe}% for debugging purposes -- displays the margins
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{color}
+\usepackage{steinmetz}
+% Fixes captions and images being cut off
+\usepackage{marginfix}
+\usepackage{array}
+\usepackage{tikz}
+\usepackage{amsmath,amsthm}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{circuitikz}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+
+\title{Notes for ECON 30100 - Managerial Economics}
+\date{\today}  % if the \date{} command is left out, the current date will be used
+
+\usepackage{pgfplots}
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% For finite state machines 
+\usetikzlibrary{automata} % Import library for drawing automata
+\usetikzlibrary{positioning} % ...positioning nodes
+\usetikzlibrary{arrows} % ...customizing arrows
+\tikzset{node distance=2.5cm, % Minimum distance between two nodes. Change if necessary.
+    every state/.style={ % Sets the properties for each state
+    semithick,
+    fill=gray!10},
+    initial text={}, % No label on start arrow
+    double distance=2pt, % Adjust appearance of accept states
+    every edge/.style={ % Sets the properties for each transition
+    draw,
+    ->,>=stealth', % Makes edges directed with bold arrowheads
+    auto,
+    semithick}}
+\let\epsilon\varepsilon
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+% Define a custom command for definitions and biconditional
+\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+\let\biconditional\leftrightarrow
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    These are lecture notes for fall 2024 ECON 30100 at Purdue as taught by Professor Younghyun Kim. Modify, use, and distribute as you please.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Fundamentals of Managerial Economics}
+Managerial Economics is the study of how to direct scarce resources to achieve
+the managerial goal most efficiently.
+\begin{itemize}
+    \item Manager - a person who directs resources to achieve a stated goal
+    \item Economics - science of making decisions in the presence of scarce resources
+\end{itemize}
+Different kinds of profits:
+\begin{itemize}
+    \item Accounting profits - total amount of money earned minus cost of producing goods
+          and services.
+    \item Economic Profits - difference between total revenue and the total opportunity
+          cost of producing the firms goods and services. \\~\\ The opportunity cost is
+          often greater than the accounting cost because it is the sum of the accounting
+          cost and the next best option.
+\end{itemize}
+
+Present Value of an amount received in the future is the amount that would have
+to be invested today to obtain that value at that given moment.\\ That is:
+\begin{equation*}
+    PV = \frac{FV}{(1+i)^n}
+\end{equation*}
+Where $n$ is years, and $i$ is rate of interest.\\
+
+The extension of this, to account for more time periods uses the following
+method:
+\begin{equation*}
+    PV = \frac{FV_1}{(1+i)^{n_1}}+\frac{FV_2}{(1+i)^{n_2}}+\frac{FV_3}{(1+i)^{n_3}}+\cdots+\frac{FV_N}{(1+i)^{n_N}}
+\end{equation*}
+
+However, to have this money, one must invest first, so, the net present value
+can be calculated like this:
+\begin{equation*}
+    NPV = \frac{FV_1}{(1+i)^{n_1}}+\frac{FV_2}{(1+i)^{n_2}}+\frac{FV_3}{(1+i)^{n_3}}+\cdots+\frac{FV_N}{(1+i)^{n_N}}-C_0
+\end{equation*}
+
+The following is a formula that is important, and will be used a lot in the
+future:
+\begin{equation*}
+    A+AR+AR^2+AR^3+\cdots=\frac{A}{1-R}
+\end{equation*}
+where $R=\frac{1}{1+i}$.
+
+\subsection{Infinitely Lived Assets}
+Some decisions generate cash flow indefinitely, and are thus defined by thus
+formula:
+\begin{equation*}
+    PV = \frac{CF_1}{(1+i)^{1}}+\frac{CF_2}{(1+i)^{2}}+\frac{CF_3}{(1+i)^{3}}+\cdots
+\end{equation*}
+And, because of the above formula on geometric series, if they are all equal,
+\begin{equation*}
+    PV=\frac{CF}{i}
+\end{equation*}
+These investments, can be extended to firm acquisitions:
+\begin{equation*}
+    PV = \frac{\pi_1}{(1+i)^{1}}+\frac{\pi_2}{(1+i)^{2}}+\frac{\pi_3}{(1+i)^{3}}+\cdots
+\end{equation*}
+And, assuming the profits of the firm will grow over time at a rate $g$:
+\begin{equation*}
+    PV = \frac{(\pi_1)(1+g)}{(1+i)^{1}}+\frac{(\pi_2)(1+g)^2}{(1+i)^{2}}+\frac{(\pi_3)(1+g)^3}{(1+i)^{3}}+\cdots = \frac{\pi_0(1+i)}{(i-g)}
+\end{equation*}
+If the profits are paid out as dividends:
+\begin{equation*}
+    PVD = PV-\pi_0=\frac{\pi_0(1+g)}{(i-g)}-\pi_0
+\end{equation*}
+
+\subsection{Marginal Analysis}
+It is the process of comparing marginal benefits to marginal costs.\\ We will
+define B(Q) as the total benefit from Q units of a variable.\\ Thus, C(Q) is
+the cost of these Q units.\\ This brings the net benefits, N(Q) to $N(Q) =
+    B(Q)-C(Q)$\\~\\
+
+Marginal Benefit - Additional benefits from an additional unit of the relevant
+variable, and will be denoted as MB(Q).\\ Marginal Cost - Same as MB, but for
+costs, and represented by MC(Q).\\ Thus, the marginal net benefits are $MNB(Q)
+    = MB(Q)-MC(Q)$.\\ Thus, the total net benefits are maximized when
+$MB(Q)=MC(Q)$.\\
+\subsection{Data Decisions}
+Econometrics is the statistical analysis of economic data, and can be used to
+obtain the quantitative estimates of important effects.\\ To make the decisions
+based on this, regression is used:\\ It looks at the relationship between the
+dependent variable X, and the dependent variable Y.\\ This attempts to find the
+line that best describes this relationship.\\ It is usually of the form:
+\begin{equation*}
+    Y = a + bX + e
+\end{equation*}
+Where $a$ and $b$ are the variables we want to find, and $e$ is the error.
+This is essentially the $y=mx+b$ equation, but taking into consideration the nonlinearity and error of measurements.\\
+Thus, the equation is reduced to
+\begin{equation*}
+    Y = \hat{a} + \hat{b}X
+\end{equation*}
+Where the new coefficients allow for the smallest sum of squared errors.\\
+The 95\% confidence intervals of these two variables are $\hat{a}\pm 2\sigma_{\hat{a}}$ and $\hat{b}\pm 2\sigma_{\hat{b}}$ with $\sigma$ being their respective standard errors.\\
+Another relevant parameter for these calculations is the t-parameter, which is defined by:
+\begin{equation*}
+    t_{\hat{x}} = \frac{x}{\sigma_{\hat{x}}}
+\end{equation*}
+the larger the t-parameter is, the more likely it is for the relevant variable has a non-zero coefficient. As long as it is greater than 2, there is a 95\% chance of the relation not being 0.\\
+There are other kinds of relations, such as:
+\begin{equation*}
+    \ln(Y) = a+b\ln(X)+e
+\end{equation*}
+which can be solved in the same manner after substituting and reaching an equation of form:
+\begin{equation*}
+    Y' = a +bX'+e
+\end{equation*}
+or equations with multiple variables and multiple regressions, to the extent of polynomial functions.\\~\\
+
+\subsection*{R-squared}
+R-squared is a measure of how well the derived equation describes the
+reality.\\
+\begin{equation*}
+    R^2 = \frac{SS_{regression}}{SS_{total}}
+\end{equation*}
+Where SS is the sum of squared errors.\\
+Note: $0 \leq R^2 \leq 1$, and the greater it is, the closer the equation is to the reality.\\
+There is an alternate measure known as the f-statistic.
+
+\section{Market Forces: Demand and Supply}
+
+\subsection{Demand}
+
+The law of demand states that price and quantity are inversely related. That
+is, as the price rises, the quantity demanded falls. Thus, the demand is
+plotted as a downward sloping line.\\ Movements in these graphs represent
+movements in the situation. A move of a point along the line represents a
+change in the quantity demanded, which is caused by a change in price. A shift
+of the demand is caused by any other factors and is represented by a shift of
+the whole curve.\\ There are many factors that affect demand, such as
+\subsubsection{Income}
+Changes in income will change how much consumers buy at any price. Goods can be
+categorized, as normal goods, which face an increase in demand as income rises,
+and a loss in demand when it falls.\\ Inferior goods on the other hand, see a
+surge in demand as income falls, and a drop when it rises.\\
+\subsubsection{Related Goods}
+There are two kinds of related goods:
+\begin{enumerate}
+    \item Complementary Goods: Those which are used alongside the good. That is if their
+          price rises, causing their demand to fall, the demand for the original good
+          will fall as well.
+    \item Supplementary Goods: Those which are used instead of the good. If their prices
+          rise, their demand will fall, and thus users will prefer to buy the original
+          good instead, causing an increase in the demand of the original good.
+\end{enumerate}
+\subsubsection{Other factors}
+\subsubsection*{Advertising and Consumer Tastes}
+Increase in advertising increases demand for the product. That is, the users become more willing to pay for the item. Thus, the demand curve shifts to the right, representing an increase in demand.
+\subsubsection*{Population}
+The higher the population, the higher the demand will be, as there will be more people who want to buy the good.
+\subsubsection*{Consumer Expectations}
+If the consumers are expecting a rise in prices of a good, they will buy more at the moment.
+\subsubsection{Demand Function}
+Let $P_x$ be the price of good $x$, $P_y$ the price of the related good $y$, M
+be the income, and H the numerical value of other factors.\\
+\begin{equation*}
+    Q_x^d = f(P_x,P_y,M,H) = \alpha_0 + \alpha_x P_x + \alpha_y P_y +\alpha_M M+ \alpha_H H
+\end{equation*}
+Usually, when solving problems related to this, we  hold all but one of the variables fixed, and analyze the system, based on the remaining variable.\\
+\subsubsection{Consumer Surplus}
+Consumer Surplus is the area of the triangle above the price and below the
+demand curve. Thus, it is defined by:
+\begin{equation*}
+    C_{surplus} = \frac{(\alpha_0 - P_x^0)(Q_x^0)}{2}
+\end{equation*}
+\subsection{Supply}
+The law of supply states that the higher the price, the higher the supply. This
+leads to an upward sloping supply curve. Similar to the demand curve, the
+supply curve has parameters that will affect and shift it.\\
+
+\subsubsection{Input Prices}
+The price of the materials necessary to make a good, will change the production
+cost. This will in turn change how much producers are willing to supply.
+\subsubsection{Substitutes in Production}
+The ability to change products being produced, in case of profit margin
+variations is another possible cause for these shifts.
+\subsubsection{Other factors}
+\subsubsection*{Technology or Government Regulations}
+Advances in technology, or governmental regulations, such as environmental control, can change the production cost in both directions, shifting the supply curve as well.
+\subsubsection*{Number of Firms}
+The amount of competition a producer has will force them to adjust prices accordingly, reducing profits the more competition there is.
+\subsubsection*{Taxes}
+Taxes can make large changes, both in the effective price of production and in the willingness to produce. Note that there are two kinds of taxes, excise taxes, which are a fixed quantity sum, and ad valorem taxes, which are a percentage tax.
+\subsubsection{Supply Function}
+Through these factors, the supply function ends up being of the form:
+\begin{equation*}
+    Q_x^s = f(P_x, P_y, W, H) = \beta_0 + \beta_1 P_x+ \beta_2 P_y + \beta_3 W + \beta_4 H
+\end{equation*}
+Where $P_x$ is the price of the good, $P_y$ is the price of related goods, $W$ is the price of inputs, and $H$ is the price or effect of other factors.
+\subsubsection{Producer Surplus}
+It is the area beneath the price and above the supply curve, making the
+formula:
+\begin{equation*}
+    P_{surplus} = \frac{(P_x^0 - \beta_0)(Q_x^0)}{2}
+\end{equation*}
+\subsection{Market Equilibrium}
+The equilibrium price of the market is the intersection point of the supply and
+demand curves.\\ Thus, equating the supply equation with the demand equation
+will reveal the Equilibrium Quantity and Price of the market.\\ If the price of
+the good were higher than the quilibrium price, there would be a surplus,
+defined by the horizontal gap between both curves at the high price.\\ The same
+thing occurs for lower prices, with the only difference being that there is a
+shortage instead of a surplus.\\
+\subsection{Price Restrictions}
+The government, if searching for a way to change the quantity sold, can apply
+price restrictions to force the market to change.\\
+\subsubsection{Price Ceilings}
+A price ceiling is a maximum price a good can have. For it to have any effect,
+it must be lower than $P_e$. An effective price ceiling will create a
+shortage.\\ The lost social welfare is defined by the triangle between the
+quantity sold and the equilibrium quantity between the two curves. That is:
+\begin{equation*}
+    L_{welfare} =\frac{(P_f-P_c)(Q_e-Q_s)}{2}
+\end{equation*}
+The full economic price is the amount people would be willing to pay for each unit of the good if the quantity supplies was the one under the price ceiling.\\
+\subsubsection{Price Floors}
+A price floor is a minimum price at which a price can be sold. This reduced
+quantity demanded when effective, that is, when it is greater than equilibrium
+price. Price floors create surpluses.\\ The formula for lost welfare is the
+same for this is essentially the same as the one for shortage, however, the
+triangle is on the other side of the equilibrium quantities.\\
+\begin{equation*}
+    L_{welfare} =\frac{(P_c-P_f)(Q_d-Q_f)}{2}
+\end{equation*}
+If the government were to buy the surplus, the government losses would be the area under the supply curve, between $Q_s$ and $Q_d$
+\section{Quantitative Demand Analysis}
+We will now perform a more in depth analysis of the aforementioned demand function:
+\begin{equation*}
+    Q_x^d = f(P_x,P_y,M,H) = \alpha_0 + \alpha_x P_x + \alpha_y P_y +\alpha_M M+ \alpha_H H
+\end{equation*}
+That is, we will be looking into the quantitative effect of each these variables, and how they can be modified to achieve the desired goals.\\
+\subsection{Elasticity}
+Elasticity is the measure of the response of one variable to changes in another variable. That is,
+\begin{equation*}
+    E_{G,S} = \frac{dG}{dS} \frac{S}{G}
+\end{equation*}
+There are two factors about elasticity that are important:
+\begin{enumerate}
+    \item $E < 0$: Positive elasticity indicates that the growth of one implies the growth of the other. 
+    \item $|E|>1$: If it is greater than one, we know that a small change in S will lead to a large change in G.
+\end{enumerate}
+\subsection{Own Price Elasticity of Demand}
+
+\end{document}
+
