@@ -1,0 +1,93 @@
+\documentclass[nobib]{tufte-handout}
+
+%\\geometry{showframe}% for debugging purposes -- displays the margins
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage{hyperref}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{color}
+
+% Fixes captions and images being cut off
+\usepackage{marginfix}
+
+\usepackage{pgfplots}
+\usepackage[americancurrents, americaninductors, americanvoltages, americanresistors]{circuitikz}
+\usepackage{siunitx}
+\usepackage{amsmath,amsthm}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+
+\title{Notes for ECE 30100 - Signals and Systems}
+\author[Shubham Saluja Kumar Agarwal]{Shubham Saluja Kumar Agarwal}
+\date{\today}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+% Define a custom command for definitions
+\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    These are lecture notes for fall 2023 ECE 30100 at Purdue. Modify, use, and distribute as you please.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+A signal can be continuous time (CT) signal, which has an independent
+continuous variable indexed $t\in \mathbb{R}$, or discrete time (DT) which has
+a discrete independent variable indexed $n\in \mathbb{N}(\mathbb{Z})$.\\
+
+$(.) \rightarrow CT$ \\
+$[.] \rightarrow DT$\\~\\
+
+A system, on the other hand, is something that transforms inputs into outputs.
+\begin{equation*}
+    input \rightarrow [\mathbf{SYSTEM}] \rightarrow output
+\end{equation*}
+Another way this could be represented is:
+\begin{equation*}
+    system(input,t) = output
+\end{equation*}
+
+These can also be divided into CT and DT.\\ A CT system is of the form:
+\begin{equation*}
+    x(t) \rightarrow [CT] \rightarrow y(t)
+\end{equation*}
+On the other hand, a DT is of the form:
+\begin{equation*}
+    x[n] \rightarrow [DT] \rightarrow y[n]
+\end{equation*}
+\textit{Note : For most of the course, continuous and discrete will be analyzed separately. That is, only a couple topics will have CT inputs with DT outputs, or DT inputs with CT outputs.}\\
+\textit{Note : Most of the analyzed systems we will be linear and time invariant.}\\
+\end{document}
