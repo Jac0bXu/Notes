@@ -23,7 +23,7 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{.}}
 
-\title{Notes for ECE 30100 - Signals and Systems}
+\title{Notes for ECE 30500 - Semiconductor Devices}
 \author[Shubham Saluja Kumar Agarwal]{Shubham Saluja Kumar Agarwal}
 \date{\today}  % if the \date{} command is left out, the current date will be used
 
@@ -56,7 +56,7 @@
 \maketitle
 
 \begin{abstract}
-    These are lecture notes for Fall 2025 ECE 30100 at Purdue. Modify, use, and distribute as you please.
+    These are lecture notes for Fall 2025 ECE 30500 by professor Haitong Li at Purdue. Modify, use, and distribute as you please.
 \end{abstract}
 
 \tableofcontents
@@ -64,30 +64,20 @@
 \newpage
 
 \section{Introduction}
-A signal can be continuous time (CT) signal, which has an independent
-continuous variable indexed $t\in \mathbb{R}$, or discrete time (DT) which has
-a discrete independent variable indexed $n\in \mathbb{N}(\mathbb{Z})$.\\
+The core of semiconductors lies in the silicon transistor. But, why silicon (\textbf{Si})?\\
+\begin{itemize}
+    \item Si is the second most common element on Earth.
+    \item It is easily purified, and grown defect free.
+    \item Reasonably good electronic properties
+    \item Resilient to harsh environments
+    \item Excellent mechanical properties
+\end{itemize}
+$\text{SiO}_2$ is a remarkable material because:
+\begin{itemize}
+    \item It interfaces very well with Si
+    \item Excellent insulator
+    \item Excellent barrier against impurity diffusion
+    \item High etch selectivity to Si
+\end{itemize}
 
-$(.) \rightarrow CT$ \\
-$[.] \rightarrow DT$\\~\\
-
-A system, on the other hand, is something that transforms inputs into outputs.
-\begin{equation*}
-    input \rightarrow [\mathbf{SYSTEM}] \rightarrow output
-\end{equation*}
-Another way this could be represented is:
-\begin{equation*}
-    system(input,t) = output
-\end{equation*}
-
-These can also be divided into CT and DT.\\ A CT system is of the form:
-\begin{equation*}
-    x(t) \rightarrow [CT] \rightarrow y(t)
-\end{equation*}
-On the other hand, a DT is of the form:
-\begin{equation*}
-    x[n] \rightarrow [DT] \rightarrow y[n]
-\end{equation*}
-\textit{Note : For most of the course, continuous and discrete will be analyzed separately. That is, only a couple topics will have CT inputs with DT outputs, or DT inputs with CT outputs.}\\
-\textit{Note : Most of the analyzed systems we will be linear and time invariant.}\\
 \end{document}
