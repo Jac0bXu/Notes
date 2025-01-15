@@ -23,7 +23,7 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{.}}
 
-\title{Notes for ECE 30100 - Signals and Systems}
+\title{Notes for ECE 30200 - Probabilistic Methods in Electrical and Computer Engineering}
 \author[Shubham Saluja Kumar Agarwal]{Shubham Saluja Kumar Agarwal}
 \date{\today}  % if the \date{} command is left out, the current date will be used
 
@@ -56,48 +56,41 @@
 \maketitle
 
 \begin{abstract}
-    These are lecture notes for Fall 2025 ECE 30100 at Purdue. Modify, use, and distribute as you please.
+    These are lecture notes for Fall 2025 ECE 30200 by professor Mary Comer at Purdue. Modify, use, and distribute as you please.
 \end{abstract}
 
 \tableofcontents
 
 \newpage
 
-\section{Introduction}
-A signal can be continuous time (CT) signal, which has an independent
-continuous variable indexed $t\in \mathbb{R}$, or discrete time (DT) which has
-a discrete independent variable indexed $n\in \mathbb{N}(\mathbb{Z})$.\\
-
-$(.) \rightarrow CT$ \\
-$[.] \rightarrow DT$\\~\\
-
-A system, on the other hand, is something that transforms inputs into outputs.
-\begin{equation*}
-    input \rightarrow [\mathbf{SYSTEM}] \rightarrow output
-\end{equation*}
-Another way this could be represented is:
-\begin{equation*}
-    system(input,t) = output
-\end{equation*}
-
-These can also be divided into CT and DT.\\ A CT system is of the form:
-\begin{equation*}
-    x(t) \rightarrow [CT] \rightarrow y(t)
-\end{equation*}
-On the other hand, a DT is of the form:
-\begin{equation*}
-    x[n] \rightarrow [DT] \rightarrow y[n]
-\end{equation*}
-\textit{Note : For most of the course, continuous and discrete will be analyzed separately. That is, only a couple topics will have CT inputs with DT outputs, or DT inputs with CT outputs.}\\
-\textit{Note : Most of the analyzed systems we will be linear and time invariant.}\\
-
-\section{Linearity}
-A system is linear if superposition holds. That is, if it can be analyzed by analyzing the individual components of the system and combining it.\\
-A more formal definition would be "given an input, which can be represented as the weighted sum of several inputs, the output can be represented as the sum of several weighted outputs".\\
-The necessary and sufficient conditions for linearity are:
+\section{Modelling Random Experiments}
+Examples:
 \begin{itemize}
-    \item CT: $\alpha_1 x_1(t)+\alpha_2 x_2(t)$
+    \item Flip a coin 
+    \item Rolling dice
+    \item Generate a bit from a random binary source
+    \item Generate a sequence of $n$ bits from a random binary source
+    \item Count packets arriving at a router
+    \item Measure the voltage at a point in a circuit
 \end{itemize}
-
-
+All of these examples could be at a fixed time, or over an interval of time.\\~\\
+There is a very precise framework that can be used to model any random experiment.\\
+Overview:
+\begin{itemize}
+    \item The outcome that occurs each time a random experiment is run is not known in advance, but \textbf{the set of all possible outcomes is assumed to be known}.
+    \item Subsets of the set of all possible outcomes are called events.
+    \item Probabilities are assigned to events, not outcomes, using a probability measure.
+\end{itemize}
+We need to use set theory to work with these sets.
+\section{Set Theory}
+A set is an \textbf{unordered} collection of elements denoted by \{ \}.\\
+Example:
+\begin{equation*}
+    \{1,2,3\} = \{3,2,1\} = \{2,1,3,1\}
+\end{equation*}
+Notation:
+\begin{itemize}
+    \item $w \in A$ means $w$ is in set $A$
+    \item $w \not\in A$ means $w$ is not in set $A$
+\end{itemize}
 \end{document}
