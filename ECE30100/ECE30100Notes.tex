@@ -96,8 +96,11 @@ A system is linear if superposition holds. That is, if it can be analyzed by ana
 A more formal definition would be "given an input, which can be represented as the weighted sum of several inputs, the output can be represented as the sum of several weighted outputs".\\
 The necessary and sufficient conditions for linearity are:
 \begin{itemize}
-    \item CT: $\alpha_1 x_1(t)+\alpha_2 x_2(t)$
+    \item CT: $\alpha_1 x_1(t)+\alpha_2 x_2(t)\cdots\xrightarrow[]{S} \alpha_1 y_1(t)+\alpha_2 y_2(t)\cdots$
+    \item DT: $\alpha_1 x_1[n]+\alpha_2 x_2[n]\cdots\xrightarrow[]{S} \alpha_1 y_1[n]+\alpha_2 y_2[n]\cdots$
 \end{itemize}
+for all values of $\alpha$.\\
 
+Linearity gives us an alternative way to represent and analyze a system. That is, if we know the responses of all the subcomponents of the input, we can calculate the response of the input without having to calculate it for the input directly.
 
 \end{document}
