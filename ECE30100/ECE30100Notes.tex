@@ -92,15 +92,69 @@ On the other hand, a DT is of the form:
 \textit{Note : Most of the analyzed systems we will be linear and time invariant.}\\
 
 \section{Linearity}
-A system is linear if superposition holds. That is, if it can be analyzed by analyzing the individual components of the system and combining it.\\
-A more formal definition would be "given an input, which can be represented as the weighted sum of several inputs, the output can be represented as the sum of several weighted outputs".\\
-The necessary and sufficient conditions for linearity are:
+A system is linear if superposition holds. That is, if it can be analyzed by
+analyzing the individual components of the system and combining it.\\ A more
+formal definition would be "given an input, which can be represented as the
+weighted sum of several inputs, the output can be represented as the sum of
+several weighted outputs".\\ The necessary and sufficient conditions for
+linearity are:
 \begin{itemize}
-    \item CT: $\alpha_1 x_1(t)+\alpha_2 x_2(t)\cdots\xrightarrow[]{S} \alpha_1 y_1(t)+\alpha_2 y_2(t)\cdots$
-    \item DT: $\alpha_1 x_1[n]+\alpha_2 x_2[n]\cdots\xrightarrow[]{S} \alpha_1 y_1[n]+\alpha_2 y_2[n]\cdots$
+    \item CT: $\alpha_1 x_1(t)+\alpha_2 x_2(t)\cdots\xrightarrow[]{S} \alpha_1
+              y_1(t)+\alpha_2 y_2(t)\cdots$
+    \item DT: $\alpha_1 x_1[n]+\alpha_2 x_2[n]\cdots\xrightarrow[]{S} \alpha_1
+              y_1[n]+\alpha_2 y_2[n]\cdots$
 \end{itemize}
 for all values of $\alpha$.\\
 
-Linearity gives us an alternative way to represent and analyze a system. That is, if we know the responses of all the subcomponents of the input, we can calculate the response of the input without having to calculate it for the input directly.
+Linearity gives us an alternative way to represent and analyze a system. That
+is, if we know the responses of all the subcomponents of the input, we can
+calculate the response of the input without having to calculate it for the
+input directly.
+\section{Signal Classification}
+\begin{enumerate}
+    \item DT vs. CT:\begin{itemize}
+              \item DT: $x[n]$ is a sequence of either real or complex valued numbers. $x[n]$ can
+                    be written as $x_{Re}[n]+jx_{Im}[n]$ or as $A[n]e^{j\phi[n]}$.\\ We can
+                    transform between the two notations using Euler's formula:
+                    \begin{equation*}
+                        x[n] = A[n]e^{j\phi[n]} = A[n]\cos(\phi[n])+jA[n]\sin(\phi[n])
+                    \end{equation*}
+              \item CT: $x(t)$ behaves similarly, with the only difference being that it is in
+                    terms of $t$. Euler's formula still applies.
+          \end{itemize}
+    \item Energy and Power: \begin{itemize}
+              \item Energy is the area under the squared magnitude of the signal, and it represents
+                    how costly it is to store and/or transmit the signal. \\For CT signals, energy
+                    over times $t \in (t_1,t_2)$ is \begin{equation*}
+                        E = \int_{t_1}^{t_2} |x(t)|^2 dt = \int_{t_1}^{t_2}(x_{Re}^2(t)+jx_{Im}^2(t)) dt
+                    \end{equation*}
+                    For DT signals, energy over $n \in [n_1,n_2]$ is:
+                    \begin{equation*}
+                        E = \sum_{n=n_1}^{n_2}|x[n]|^2 = \sum_{n=n_1}^{n_2}(x_{Re}^2[n]+jx_{Im}^2[n])
+                    \end{equation*}
+                    The total energy can be written as: \begin{equation*}
+                        E_\infty = \int_{-\infty}^{\infty} |x(t)|^2 dt = \sum_{n = -\infty}^{\infty} |x[n]|^2
+                    \end{equation*}
+              \item Power: \\
+                    For CT signals, average power over $(t_1,t_2)$ is \begin{equation*}
+                        P = \frac{1}{t_2-t_1}E(t_1,t_2)
+                    \end{equation*}
+                    For DT signals:
+                    \begin{equation*}
+                        P = \frac{1}{n_2-n_1+1}E[n_1,n_2]
+                    \end{equation*}
+                    And the overall average power will be:\begin{equation*}
+                        P_\infty = \lim_{T\rightarrow\infty}\frac{1}{2T}\int_{-T}^{T}|x(t)|^2 dt = \lim_{N\rightarrow\infty}\frac{1}{2N+1}\sum_{n=-N}^{N}|x[n]|^2
+                    \end{equation*}
+                    And finally, instantaneous power is $|x(t)|^2$ or $|x[n]|^2$
+          \end{itemize}
+          There are three realistic types of signals:\begin{enumerate}
+            \item $E_\infty$ finite: Must have $P_\infty =0$
+            \item $P_\infty$ finite: Must have $e_\infty = \infty$, since we are integrating over time.
+            \item Neither $E_\infty$ nor $P_\infty$ are finite: not practical, but mathematically possible.
+          \end{enumerate}
+          \textit{Note: We cannot have finite energy, $\infty$ power signals.}
+          
+\end{enumerate}
 
 \end{document}

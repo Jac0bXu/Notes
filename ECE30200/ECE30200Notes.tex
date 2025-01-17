@@ -83,7 +83,7 @@ Overview:
 \end{itemize}
 We need to use set theory to work with these sets.
 \section{Set Theory}
-A set is an \textbf{unordered} collection of elements denoted by \{ \}.\\
+A set is an \textbf{unordered} collection of elements denoted by $\{ \}$.\\
 Example:
 \begin{equation*}
     \{1,2,3\} = \{3,2,1\} = \{2,1,3,1\}
@@ -92,5 +92,57 @@ Notation:
 \begin{itemize}
     \item $w \in A$ means $w$ is in set $A$
     \item $w \not\in A$ means $w$ is not in set $A$
+\end{itemize}
+There are two ways to specify a set:
+\begin{enumerate}
+    \item Comma-separated list:
+    \begin{itemize}
+        \item $A = \{1,3,A,C\}$
+        \item $A = \{ x_1, x_2, \ldots, x_n\}$ (that is, $n$ elements for some finite $n \geq 1$ and the $i$th element is $x_i$)
+        \item $A = \{x_1,x_2, \ldots\}$ (an infinite number of elements)
+    \end{itemize}
+    \item  Rule for membership or set builder notation:
+    \begin{itemize}
+        \item $A = \{w \in \mathbb{Z} : 1\leq w \leq 6\}$
+        \item Special notation for intervals $\in \mathbb{R}$:
+        \begin{itemize}
+            \item $(a,b)$ represents $\{x \in \mathbb{R}: a < x < b\}$
+            \item $[a,b]$ represents $\{x \in \mathbb{R}: a \leq x \leq b\}$
+        \end{itemize}
+        \textit{Note}: $(a,b) \subset \mathbb{R}$ is a set, but $(a,b) \in \mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is also a point on the Cartesian plane or an ordered pair.
+    \end{itemize}
+\end{enumerate}
+\textbf{Definition}: sets $A$ and $B$ are equal if they contain exactly the same elements, and is denoted by $A=B$.\\
+\textbf{Definition}: $(w\in A \implies w\in B)\implies (A \subset B)$ for sets $A$ and $B$ where $A \subset B$ means $A$ is a subset of $B$.\\
+\textit{Note}: we will not distinguish between proper subsets (($A\subset B) \&( A \neq B)$) and subsets.
+\begin{equation*}
+    A = B \iff (A \subset B) \& (B \subset A)
+\end{equation*}
+\subsection{Special Sets}
+The set with no elements is called the empty set or the null set.\\
+Denoted by $\emptyset \text{ or } \{\}$ which is not the same as $\{\emptyset\}$.\\~\\
+The set containing all possible elements of interest is called the universal set $S$. It is known as the sample space within probability, and will contain all possible outcomes of a random experiment.\\
+\subsection{Set Operations}
+\begin{itemize}
+    \item Intersect ($\cap$): $A\cap B = \{w \in S: (w \in A) \& (w \in B) \}$
+    \item Union ($\cup$): $A\cap B = \{w \in S: (w \in A) | (w\in B)\}$
+    \item Complement ($\fbox{\phantom{}}^c$, $\fbox{\phantom{}}'$, $\bar{\fbox{\phantom{}}}$): $A^c = \{w \in S: w \not \in A\}$
+    \item Disjoint: $A\cap B = \emptyset$
+    \item \textit{Difference}: $A-B = A\cap B^c$
+\end{itemize}
+\subsection{Set Algebra}
+Set algebra provides us with a second method to prove that two sets $A,B$ are equal.\\
+It uses the fact that both union and intersection are commutative and associative to prove the statement.\\
+The following are a few properties that come from commutativity and associativity:
+\begin{itemize}
+    \item $A\cup B = B\cup A$
+    \item $A\cap B = B\cap A$
+    \item $(A\cap B)\cap C = A \cap(B\cap C)$
+    \item $(A\cup B)\cup C = A \cup(B\cup C)$
+\end{itemize}
+$\cup$ is distributive over $\cap$ and vice versa:
+\begin{itemize}
+    \item $A \cap (B\cup C) = (A\cap B) \cup (A\cap C)$
+    \item $A \cup (B\cap C) = (A\cup B) \cap (A\cup C)$
 \end{itemize}
 \end{document}

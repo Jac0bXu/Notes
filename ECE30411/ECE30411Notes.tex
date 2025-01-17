@@ -1,0 +1,103 @@
+\documentclass[nobib]{tufte-handout}
+
+%\\geometry{showframe}% for debugging purposes -- displays the margins
+
+\newcommand{\bra}[1]{\left(#1\right)}
+\usepackage{hyperref}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\usepackage{color}
+
+% Fixes captions and images being cut off
+\usepackage{marginfix}
+
+\usepackage{pgfplots}
+\usepackage[americancurrents, americaninductors, americanvoltages, americanresistors]{circuitikz}
+\usepackage{siunitx}
+\usepackage{amsmath,amsthm}
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{.}}
+
+\title{Notes for ECE 30500 - Semiconductor Devices}
+\author[Shubham Saluja Kumar Agarwal]{Shubham Saluja Kumar Agarwal}
+\date{\today}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+% Define a custom command for definitions
+\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    These are lecture notes for Fall 2025 ECE 30500 by professor Elliott at Purdue. Modify, use, and distribute as you please.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+\section{Gradient, Divergence, and Curl}
+\subsection{Gradient}
+The gradient describes the spatial slope of a 3-dimensional function. It can only be applied to a scalar field.\\~\\
+Rectangular:
+\begin{equation*}
+    \nabla f = a_x \frac{\delta d}{\delta x}+a_y \frac{\delta d}{\delta y}+a_z \frac{\delta d}{\delta z}
+\end{equation*}
+Cylindrical:
+\begin{equation*}
+    \nabla f = a_\rho \frac{\delta d}{\delta \rho}+a_\phi \frac{1}{\rho}\frac{\delta d}{\delta \phi}+a_z \frac{\delta d}{\delta z}
+\end{equation*}
+Spherical:
+\begin{equation*}
+    \nabla f = a_R \frac{\delta d}{\delta R}+a_\theta \frac{1}{R}\frac{\delta d}{\delta \theta}+a_z \frac{1}{R\sin(\theta)}\frac{\delta d}{\delta z}
+\end{equation*}
+\subsection{Divergence}
+Describes the rate of change of a vector function.\\~\\
+Rectangular:
+\begin{equation*}
+    \nabla \cdot D = \left(a_x \frac{\delta}{\delta x}+a_y \frac{\delta}{\delta y}+a_z \frac{\delta}{\delta z}\right)\cdot \left(a_x D_x +a_y D_y + a_z D_z\right) = \frac{\delta D_x}{\delta x}+\frac{\delta D_y}{\delta y}+\frac{\delta D_z}{\delta z}
+\end{equation*}
+\subsection{Curl}
+Describes the rotation of a vector function.\\
+Rectangular:
+\begin{equation*}
+    \nabla \times D = a_x\left(\frac{\delta D_z}{\delta y} - \frac{\delta D_y}{\delta z}\right)+ a_y\left(\frac{\delta D_x}{\delta z} - \frac{\delta D_z}{\delta x}\right)+ a_z\left(\frac{\delta D_y}{\delta x} - \frac{\delta D_x}{\delta y}\right)
+\end{equation*}
+Cylindrical:
+\begin{equation*}
+    \nabla \times D = a_\rho\left(\frac{\delta D_z}{\delta \phi} - \frac{\delta \rho D_\phi}{\delta z}\right)+ \rho a_\phi\left(\frac{\delta D_\rho}{\delta z} - \frac{\delta D_z}{\delta \rho}\right)+ a_z \left(\frac{\delta \rho D_\phi}{\delta \rho} - \frac{\delta D_\rho}{\delta \phi}\right)
+\end{equation*}
+\subsection{Identities}
+\begin{enumerate}
+    \item $\nabla \times \nabla V = 0$: the gradient does not rotate.
+    \item $\nabla \cdot (\nabla \times A) = 0$: the curl of a vector function does not diverge (grow).
+    \item A vector field whose divergence and curl are known is completely determined.
+\end{enumerate}
+\end{document}
