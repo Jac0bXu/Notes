@@ -101,4 +101,64 @@ The equation of the plane is:
 \end{equation*}
 The vector that is perpendicular to this plane will have the same components as the Miller indices.\\
 The Miller indices are defined as $LCM*(\frac{1}{x_{int}},\frac{1}{y_{int}},\frac{1}{z_{int}})$.
+\section{Energy Bands}
+\subsection{Quantization of Energy Levels}
+Bohr hypothesized, in his atomic model, that there was a quantization of electron angular momentum and energy levels.\\
+In the context of this class, these levels will be described by $n \in \mathbb{N}$.\\
+Additionally, the energy of these levels is $E_H = -\frac{13.6}{n^2}eV$.\\
+The energy levels of silicon are as shown below:\\
+\begin{center}
+    \includegraphics*[height = 100px]{images/si_energy_levels.png}
+\end{center}
+The further from the core, the more energy is within, so, in the image above, $4S^0$ is the layer with the most energy.\\
+The four electrons in the valence region ($3P^2,3S^2$) are the easiest to break away from the atom.
+\subsection{Bonding Model}
+Only the four valence electrons are of interest. Each of these, is shared with one of the four nearest neighbors, forming a structure like this:
+\begin{center}
+    \includegraphics*[width = 100px]{images/silicon_neighbor_bond.png}
+\end{center}
+This is the base of the silicon lattice, from which more complex lattices can be formed. The full model can be abstracted as follows:
+\begin{center}
+    \includegraphics*[width = 100px]{images/bonding_model.png}
+\end{center}
+where a line is a shared valence electron and a circle is the core of the semiconductor.\\
+\subsection{Energy Levels}
+When going from a single Si atom to a Si crystal with many atoms, the atoms are closely packed enough that we cannot treat them as individual atoms. The structure that is formed is very stable as all the atoms and their energy levels are completely filled.\\
+\textbf{Note}: Current cannot flow from full energy levels.\\
+The energy levels of these atoms are in the following order:
+\begin{eqnarray*}
+    &\text{conduction band}\\
+    &\cdots \cdots \cdots \\
+    &\uparrow \\
+    &\text{band gap}\\
+    &\uparrow \\
+    &\cdots \cdots \cdots \\
+    &\text{valence band}
+\end{eqnarray*}
+The conduction band and the valence band are energy levels where electrons can reside.\\
+Electrons can be freed from their bonds by heating the lattice to temperatures close to $300K$. The thermal energy provided by this is defined by:
+\begin{equation*}
+    E = \frac{3}{2}kT
+\end{equation*}
+The freed electrons are analyzed in terms of their energy states. When freed, they are moving from the valence band (leaving behind a "hole" in the valence band), jumping over the band gap and arriving at the conduction band.\\
+The band representation can be further abstracted to look like this:
+\begin{center}
+    \includegraphics*[width = 100px]{images/band_diagram_abstraction.png}
+\end{center}
+Where the red dots are conduction band electrons (n) and the blue dots are valence band holes (p).
+\textbf{Note}: an intrinsic semiconductor is that in which $n = p = n_i$.
+\subsection*{Constants to Remember}
+\begin{align*}
+    E_G(Si) &= 1.12eV \\
+    E_G(GaAs) &= 1.4eV \\
+    k_B T &= 0.026eV \text{ at }(T = 300K)\\
+    P &\approx e^{-E_G / k_B T}\\
+    n_i(Si) &= 1\times 10^{10} cm^{-3} \text{ at }(T = 300K)\\
+    n_i(GaAs) &= 2\times 10^{6} cm^{-3} \text{ at }(T = 300K)\\
+\end{align*}
+\subsection*{Material Representations}
+\begin{center}
+    \includegraphics*[width = 250px]{images/material_representations.png}
+\end{center}
+Note that the main difference between an insulator and a semiconductor is the size of the band gap. On the other hand, metals have no band gap at all, and all the electrons are free by default.
 \end{document}
