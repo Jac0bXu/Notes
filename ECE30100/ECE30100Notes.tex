@@ -29,7 +29,7 @@
 
 % The following package makes prettier tables.  We're all about the bling!
 \usepackage{booktabs}
-
+\usepackage{mdframed}
 % The fancyvrb package lets us customize the formatting of verbatim
 % environments.  We use a slightly smaller font.
 \usepackage{fancyvrb}
@@ -49,7 +49,42 @@
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
 % Define a custom command for definitions
-\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+\newmdenv[
+    backgroundcolor=black!10, % Light blue shading inside the box
+    linecolor=black,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+    ]{defbox}
+
+\newmdenv[
+    backgroundcolor=cyan!10, % Light blue shading inside the box
+    linecolor=cyan,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+    ]{notebox}
+    
+\newcommand{\defn}[2]{
+        \begin{defbox}
+        \noindent\textbf{#1}:\ #2
+        \end{defbox}
+}
+\newcommand{\note}[1]{
+        \begin{notebox}
+        \noindent\textit{Note}:\ #1
+        \end{notebox}
+}
 
 \begin{document}
 
@@ -156,5 +191,31 @@ input directly.
           \textit{Note: We cannot have finite energy, $\infty$ power signals.}
           
 \end{enumerate}
-
+\section{Transformations in Time}
+\begin{enumerate}
+    \item Time Shift:
+    \begin{align*}
+        x(t) \rightarrow &[TS] \rightarrow x(t-t_0)\\
+        x[n] \rightarrow &[TS] \rightarrow x[n-n_0]
+    \end{align*}
+    \begin{itemize}
+        \item $t_0,n_0>0$: signal is shifted to the right, or delayed by $t_0$
+        \item $t_0, n_0<0$: signal is shifted to the left, or advanced by $t_0$
+    \end{itemize}
+    \item Time Reversal:
+    \begin{align*}
+        x(t)\rightarrow &[TR]\rightarrow x(-t)\\
+        x[n]\rightarrow &[TR]\rightarrow x[-n]\\
+    \end{align*}
+    \item Time Scaling:
+    \begin{align*}
+        x(t)\rightarrow &[TSc]\rightarrow x(\alpha t)\\
+        x[n]\rightarrow &[TSc]\rightarrow x[c n]
+    \end{align*}
+    Assume $\alpha, c >0$
+    \begin{itemize}
+        \item $\alpha, c >1$: shorter timescale, or faster
+        \item $\alpha, c <1$: longer timescale, or slower
+    \end{itemize}
+\end{enumerate}
 \end{document}

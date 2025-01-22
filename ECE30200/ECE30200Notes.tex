@@ -37,7 +37,7 @@
 
 % Small sections of multiple columns
 \usepackage{multicol}
-
+\usepackage{mdframed}
 % These commands are used to pretty-print LaTeX commands
 \newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
 \newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
@@ -49,7 +49,43 @@
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
 % Define a custom command for definitions
-\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+
+\newmdenv[
+    backgroundcolor=black!10, % Light blue shading inside the box
+    linecolor=black,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+    ]{defbox}
+
+\newmdenv[
+    backgroundcolor=cyan!10, % Light blue shading inside the box
+    linecolor=cyan,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+    ]{notebox}
+    
+\newcommand{\defn}[2]{
+        \begin{defbox}
+        \noindent\textbf{#1}:\ #2
+        \end{defbox}
+}
+\newcommand{\note}[1]{
+        \begin{notebox}
+        \noindent\textit{Note}:\ #1
+        \end{notebox}
+}
 
 \begin{document}
 
@@ -112,9 +148,13 @@ There are two ways to specify a set:
         \textit{Note}: $(a,b) \subset \mathbb{R}$ is a set, but $(a,b) \in \mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is also a point on the Cartesian plane or an ordered pair.
     \end{itemize}
 \end{enumerate}
-\textbf{Definition}: sets $A$ and $B$ are equal if they contain exactly the same elements, and is denoted by $A=B$.\\
-\textbf{Definition}: $(w\in A \implies w\in B)\implies (A \subset B)$ for sets $A$ and $B$ where $A \subset B$ means $A$ is a subset of $B$.\\
-\textit{Note}: we will not distinguish between proper subsets (($A\subset B) \&( A \neq B)$) and subsets.
+\defn{Equal sets}{sets $A$ and $B$ are equal if they contain exactly the same elements, and is denoted by $A=B$.}
+\defn{$\mathbf{A \subset B}$}{$(w\in A \implies w\in B)\implies (A \subset B)$ for sets $A$ and $B$ where $A \subset B$ means $A$ is a subset of $B$.}
+\note{ we will not distinguish between proper subsets: 
+\begin{equation*}
+    (A\subset B) \&( A \neq B)
+\end{equation*}
+and subsets.}
 \begin{equation*}
     A = B \iff (A \subset B) \& (B \subset A)
 \end{equation*}
@@ -145,4 +185,54 @@ $\cup$ is distributive over $\cap$ and vice versa:
     \item $A \cap (B\cup C) = (A\cap B) \cup (A\cap C)$
     \item $A \cup (B\cap C) = (A\cup B) \cap (A\cup C)$
 \end{itemize}
+\note{ when translating between Set Theory and English
+    \begin{itemize}
+        \item $\cup = $ OR  
+        \item $\cap = $ AND  
+    \end{itemize}
+}
+\subsection{Venn Diagram}
+A Venn diagram is a graphical representation of a universal set and its subsets.
+For example:
+\begin{center}
+    \includegraphics*[width = 100px]{images/venn_example.png}
+\end{center}
+
+\note{ A Venn diagram does not represent arbitrary sets, and thus, is not a proof by itself.}
+
+\subsection{Set Types}
+There are three kinds of sets:
+\begin{enumerate}
+    \item Finite: a set is finite if it has a finite number of elements.
+    \item Countably Infinite: a set is countably infinite if it can be placed into one-to-one correspondance with the integers. Can be written as \begin{equation*}
+        A = \{x_1,x_2,\ldots\} \text{ where } x_i \neq x_j \forall i \neq j
+    \end{equation*}
+    \item Uncountable: set that is neither countable nor finite. 
+    \note{For the context of this class, the uncountably infinite sets will only be $\mathbb{R}$ or intervals of the same.}
+    They cannot be written as $\{x_1,x_2,\ldots\}$
+\end{enumerate}
+\subsection{Collections of Sets}
+\begin{itemize}
+    \item Finite Collections:
+            \begin{equation*}
+                A_1, A_2, \ldots, A_n
+            \end{equation*}
+            where $A_i \subset S$
+    \item Countably Infinite Collection:
+            \begin{equation*}
+                A_1, A_2, \ldots
+            \end{equation*}
+            where $A_i \subset S$
+    \item Uncountable Collection: out of bounds for this class!
+\end{itemize}
+\defn{Union of collection}{$\bigcup_i^{\infty,n} A_i = \{w \in S$: $\exists i | w \in A_i$\}}
+\defn{Intersection of collection}{$\bigcap_i^{\infty,n} A_i = \{w \in S$: $w \in A_i \forall i$\}}
+
+\section{Modelling Random Experiments Pt.2}
+We use a probability space to model (almost) any random experiment.
+Three parts make up a probability space: 
+\begin{enumerate}
+    \item Sample Space (S): nonempty set of elements called outcomes. Each time an experiment is run, exactly one outcome occurs.
+    \item 
+\end{enumerate}
 \end{document}

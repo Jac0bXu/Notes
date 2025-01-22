@@ -100,4 +100,23 @@ Cylindrical:
     \item $\nabla \cdot (\nabla \times A) = 0$: the curl of a vector function does not diverge (grow).
     \item A vector field whose divergence and curl are known is completely determined.
 \end{enumerate}
+\section{Electrostatics and Coulomb's Law}
+Coulomb's law was determined using a torsion pendulum.\\
+Using his experimental results, the following properties were derived:
+\begin{itemize}
+    \item Direction is always along $\mathbf{r_2-r_1}$
+    \item Decreases in magnitude proportional to $|\mathbf{r_2-r_1}|^{-2}$
+    \item It can be repulsive or attractive depending on the sign of $q_1q_2$.
+\end{itemize}
+\begin{equation*}
+    \mathbf{F_{12}} = \frac{q_1 q_2 \mathbf{a_{12}}}{4 \pi  \epsilon_0 |\mathbf{r_2-r_1}|^2}
+\end{equation*}
+On the other hand the electric field at a point, due to a charge is defined as:
+\begin{equation*}
+    \mathbf{E}(r_2) = \frac{q_1\mathbf{a_{12}}}{4 \pi \epsilon_0 |\mathbf{r_2-r_1}|^2} = \frac{q_1(\mathbf{r_2-r_1})}{4 \pi \epsilon_0 |\mathbf{r_2-r_1}|^3} 
+\end{equation*}
+Which in turn leads to the superposition property, which states:
+\begin{equation*}
+    \mathbf{E_{\mathit{total}} = \sum_{\text{all charges},\mathit{i}}E_\mathit{i}}
+\end{equation*}
 \end{document}
