@@ -212,10 +212,17 @@ input directly.
         x(t)\rightarrow &[TSc]\rightarrow x(\alpha t)\\
         x[n]\rightarrow &[TSc]\rightarrow x[c n]
     \end{align*}
-    Assume $\alpha, c >0$
+    Assume $\alpha, c >0$. If they corresponded to something negative, it can be considered as a scaling and a reversal together.\\
+    \note{ $c$ must be a value such that $cn$ is an integer. We are also assured of the fact that we will be losing information for any value of $c\neq 1$.}
     \begin{itemize}
         \item $\alpha, c >1$: shorter timescale, or faster
         \item $\alpha, c <1$: longer timescale, or slower
     \end{itemize}
+    \item Composite Transformation: a transformation that involves multiple transformations from 1., 2., 3.\\
+    For example:
+    \begin{align*}
+        x(t)\rightarrow[CT]\rightarrow x(-\alpha t + \beta)
+    \end{align*}
+    Usually, to decompose these transformations, we shift, then scale, then reverse, as and if necessary.
 \end{enumerate}
 \end{document}
