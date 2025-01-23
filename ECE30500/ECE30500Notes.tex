@@ -37,6 +37,7 @@
 
 % Small sections of multiple columns
 \usepackage{multicol}
+\usepackage{mdframed}
 
 % These commands are used to pretty-print LaTeX commands
 \newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
@@ -48,8 +49,42 @@
 \newcommand{\doccls}[1]{\texttt{#1}}% document class name
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
-% Define a custom command for definitions
-\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+\newmdenv[
+    backgroundcolor=black!10, % Light blue shading inside the box
+    linecolor=black,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+    ]{defbox}
+
+\newmdenv[
+    backgroundcolor=cyan!10, % Light blue shading inside the box
+    linecolor=cyan,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+    ]{notebox}
+    
+\newcommand{\defn}[2]{
+        \begin{defbox}
+        \noindent\textbf{#1}:\ #2
+        \end{defbox}
+}
+\newcommand{\note}[1]{
+        \begin{notebox}
+        \noindent\textit{Note}:\ #1
+        \end{notebox}
+}
 
 \begin{document}
 
@@ -84,7 +119,7 @@ Some examples of cells are the following:
 \begin{center}
     \includegraphics[width = 250px]{images/unit_cell_cube.png}
 \end{center}
-\textit{Note: the image is missing a corner atom.}\\
+\note{the image is missing a corner atom.}
 Another important cubic unit cell is the diamond cubic unit cell with 8 silicon atoms in the cell:
 \begin{center}
     \includegraphics[width = 175px]{images/diamond_cube_cell.png}
@@ -124,7 +159,7 @@ This is the base of the silicon lattice, from which more complex lattices can be
 where a line is a shared valence electron and a circle is the core of the semiconductor.\\
 \subsection{Energy Levels}
 When going from a single Si atom to a Si crystal with many atoms, the atoms are closely packed enough that we cannot treat them as individual atoms. The structure that is formed is very stable as all the atoms and their energy levels are completely filled.\\
-\textbf{Note}: Current cannot flow from full energy levels.\\
+\note{Current cannot flow from full energy levels.}
 The energy levels of these atoms are in the following order:
 \begin{eqnarray*}
     &\text{conduction band}\\
@@ -146,7 +181,11 @@ The band representation can be further abstracted to look like this:
     \includegraphics*[width = 100px]{images/band_diagram_abstraction.png}
 \end{center}
 Where the red dots are conduction band electrons (n) and the blue dots are valence band holes (p).
-\textbf{Note}: an intrinsic semiconductor is that in which $n = p = n_i$.
+\note{an intrinsic semiconductor is that in which $n = p = n_i$. 
+\begin{equation*}
+n_i = BT^{\frac{3}{2}}e^{-\frac{E_g}{2k_B T}}
+\end{equation*}
+}
 \subsection*{Constants to Remember}
 \begin{align*}
     E_G(Si) &= 1.12eV \\
@@ -160,5 +199,56 @@ Where the red dots are conduction band electrons (n) and the blue dots are valen
 \begin{center}
     \includegraphics*[width = 250px]{images/material_representations.png}
 \end{center}
-Note that the main difference between an insulator and a semiconductor is the size of the band gap. On the other hand, metals have no band gap at all, and all the electrons are free by default.
+Note that the main difference between an insulator and a semiconductor is the size of the band gap. On the other hand, metals have no band gap at all, and all the electrons are free by default.\\
+\section{Carrier Properties}
+Electrons are in the conduction band, and they can move between states.\\
+Holes are in the valence band, and they can move between states.\\
+Electrons and holes can recombine and regenerate.\\
+\textbf{When there are no perturbing forces, equilibrium occurs.}\\
+When a highly energetic photon hits an electron in the valence band, it pushes it into the conduction band and leaves a hole behind in the valence band.\\
+\begin{equation*}
+    E_{ph} = hf \gg E_G
+\end{equation*}
+Usually, the force on an object is defined by $F = m_0 a$, but, this cannot be so simply applied to the case of forces on electrons. Instead, the formula is:
+\begin{equation*}
+    F = m_n^* a
+\end{equation*}
+where $m_n^*$ is the effective mass of the electrons, and it includes
+\begin{itemize}
+    \item Cyclotron
+    \item Conductivity
+    \item \textbf{Density of States}
+\end{itemize}
+Similarly, for a hole, $F = m_p^* a$.
+\begin{center}
+\begin{tabular}{|c|c|c|}
+        \hline
+        Materials & $m_n^*/m_0$ & $m_p^*/m_0$\\
+        \hline
+        Si & 1.18 & 0.81 \\
+        \hline
+        Ge & 0.55 & 0.36 \\
+        \hline
+        GaAs & 0.066 & 0.52\\
+        \hline
+\end{tabular}
+\end{center}
+The energy of electrons in vacuum resemble a parabola when compared with momentum:
+\begin{align*}
+    E = \frac{p^2}{2m_0} &\rightarrow E_n = E_C+\frac{p^2}{2m_n^*}\\
+    p = m_0 v &\rightarrow p = \hbar k = \hbar \frac{2\pi}{\lambda}
+\end{align*}
+\subsection{Doping}
+The following is the process to n-dope a semiconductor sample:
+\begin{center}
+    \includegraphics*[width = 100px]{images/ndope.png}
+\end{center}
+and the process for p-doping:
+\begin{center}
+    \includegraphics*[width = 100px]{images/pdope.png}
+\end{center}
+\begin{itemize}
+    \item N-doping: When n-doping, with group V elements, very little energy is necessary to break the fifth electron from the element.\\
+    The ionized donor is then left with 4 electrons and is bound to the lattice
+\end{itemize}
 \end{document}

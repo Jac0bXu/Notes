@@ -9,7 +9,7 @@
 
 % Fixes captions and images being cut off
 \usepackage{marginfix}
-
+\usepackage{enumitem}
 \usepackage{pgfplots}
 \usepackage[americancurrents, americaninductors, americanvoltages, americanresistors]{circuitikz}
 \usepackage{siunitx}
@@ -60,6 +60,7 @@
     innerbottommargin=5pt,  % Inner bottom margin
     innerleftmargin=10pt,   % Inner left margin
     innerrightmargin=10pt   % Inner right margin
+    framemethod=tikz % Disable problematic referencing
     ]{defbox}
 
 \newmdenv[
@@ -73,6 +74,7 @@
     innerbottommargin=5pt,  % Inner bottom margin
     innerleftmargin=10pt,   % Inner left margin
     innerrightmargin=10pt   % Inner right margin
+    framemethod=tikz % Disable problematic referencing
     ]{notebox}
     
 \newcommand{\defn}[2]{
@@ -123,8 +125,8 @@ On the other hand, a DT is of the form:
 \begin{equation*}
     x[n] \rightarrow [DT] \rightarrow y[n]
 \end{equation*}
-\textit{Note : For most of the course, continuous and discrete will be analyzed separately. That is, only a couple topics will have CT inputs with DT outputs, or DT inputs with CT outputs.}\\
-\textit{Note : Most of the analyzed systems we will be linear and time invariant.}\\
+\note{ For most of the course, continuous and discrete will be analyzed separately. That is, only a couple topics will have CT inputs with DT outputs, or DT inputs with CT outputs.}
+\note{ Most of the analyzed systems we will be linear and time invariant.}
 
 \section{Linearity}
 A system is linear if superposition holds. That is, if it can be analyzed by
@@ -188,7 +190,7 @@ input directly.
             \item $P_\infty$ finite: Must have $e_\infty = \infty$, since we are integrating over time.
             \item Neither $E_\infty$ nor $P_\infty$ are finite: not practical, but mathematically possible.
           \end{enumerate}
-          \textit{Note: We cannot have finite energy, $\infty$ power signals.}
+          \note{ We cannot have finite energy, $\infty$ power signals.}
           
 \end{enumerate}
 \section{Transformations in Time}
@@ -224,5 +226,11 @@ input directly.
         x(t)\rightarrow[CT]\rightarrow x(-\alpha t + \beta)
     \end{align*}
     Usually, to decompose these transformations, we shift, then scale, then reverse, as and if necessary.
+\end{enumerate}
+\section{More Signal Classifications}
+\begin{enumerate}[start = 3]
+    \item By the period (symmetry under time shift)\\
+    CT signal is periodic $\iff \exists T\neq 0 | x(t)=x(t+T) \forall T$. That signal is periodic with period $t$.\\
+    DT signal is periodic $\iff \exists N\neq 0 | x[n]=x[n+N] \forall N$. That signal is periodic with period $n$.
 \end{enumerate}
 \end{document}
