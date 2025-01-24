@@ -9,7 +9,7 @@
 
 % Fixes captions and images being cut off
 \usepackage{marginfix}
-
+\usepackage{mdframed}
 \usepackage{pgfplots}
 \usepackage[americancurrents, americaninductors, americanvoltages, americanresistors]{circuitikz}
 \usepackage{siunitx}
@@ -23,7 +23,7 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{.}}
 
-\title{Notes for ECE 30500 - Semiconductor Devices}
+\title{Notes for ECE 30411 - Electromagnetics I}
 \author[Shubham Saluja Kumar Agarwal]{Shubham Saluja Kumar Agarwal}
 \date{\today}  % if the \date{} command is left out, the current date will be used
 
@@ -49,7 +49,25 @@
 \newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
 
 % Define a custom command for definitions
-\newcommand{\defn}[2]{\noindent\textbf{#1}:\ #2}
+\newmdenv[
+    backgroundcolor=black!10, % Light blue shading inside the box
+    linecolor=black,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+]{defbox}
+
+
+\newcommand{\defn}[2]{
+        \begin{defbox}
+        \noindent\textbf{#1}:\ #2
+        \end{defbox}
+}
 
 \begin{document}
 
@@ -119,4 +137,12 @@ Which in turn leads to the superposition property, which states:
 \begin{equation*}
     \mathbf{E_{\mathit{total}} = \sum_{\text{all charges},\mathit{i}}E_\mathit{i}}
 \end{equation*}
+\section{Mathematical properties of $E$}
+The electric field has the following properties:
+\begin{itemize}
+    \item $\nabla \times E = 0$: this is later modified and becomes Faraday's Law
+    \item $\nabla \cdot E = \frac{\rho_v}{\epsilon_0}$: Also known as Gauss's Law
+\end{itemize}
+These two laws allow for the creation of Coulomb's Law, as well as superposition.
+\defn{Surface Integral $\int_s A\cdot ds$}{it is the integral across a surface $A$. In it $A\cdot ds = A_n ds$. That is, it integrates across the normal components of the surface. It is also known as the flux across the surface.}
 \end{document}

@@ -75,7 +75,20 @@
     innerleftmargin=10pt,   % Inner left margin
     innerrightmargin=10pt   % Inner right margin
     ]{notebox}
-    
+
+\newmdenv[
+    backgroundcolor=red!10, % Light blue shading inside the box
+    linecolor=red,         % Border color
+    linewidth=1pt,          % Border thickness
+    roundcorner=5pt,        % Rounded corners
+    skipabove=10pt,         % Space above the box
+    skipbelow=10pt,         % Space below the box
+    innertopmargin=5pt,     % Inner top margin
+    innerbottommargin=5pt,  % Inner bottom margin
+    innerleftmargin=10pt,   % Inner left margin
+    innerrightmargin=10pt   % Inner right margin
+]{sidenotebox}    
+
 \newcommand{\defn}[2]{
         \begin{defbox}
         \noindent\textbf{#1}:\ #2
@@ -85,6 +98,11 @@
         \begin{notebox}
         \noindent\textit{Note}:\ #1
         \end{notebox}
+}
+\newcommand{\sidenoteclass}[1]{
+        \begin{sidenotebox}
+        \noindent\textit{Sidenote}:\ #1
+        \end{sidenotebox}
 }
 
 \begin{document}
@@ -102,7 +120,7 @@
 \section{Modelling Random Experiments}
 Examples:
 \begin{itemize}
-    \item Flip a coin 
+    \item Flip a coin
     \item Rolling dice
     \item Generate a bit from a random binary source
     \item Generate a sequence of $n$ bits from a random binary source
@@ -113,9 +131,11 @@ All of these examples could be at a fixed time, or over an interval of time.\\~\
 There is a very precise framework that can be used to model any random experiment.\\
 Overview:
 \begin{itemize}
-    \item The outcome that occurs each time a random experiment is run is not known in advance, but \textbf{the set of all possible outcomes is assumed to be known}.
+    \item The outcome that occurs each time a random experiment is run is not known in
+          advance, but \textbf{the set of all possible outcomes is assumed to be known}.
     \item Subsets of the set of all possible outcomes are called events.
-    \item Probabilities are assigned to events, not outcomes, using a probability measure.
+    \item Probabilities are assigned to events, not outcomes, using a probability
+          measure.
 \end{itemize}
 We need to use set theory to work with these sets.
 \section{Set Theory}
@@ -132,48 +152,52 @@ Notation:
 There are two ways to specify a set:
 \begin{enumerate}
     \item Comma-separated list:
-    \begin{itemize}
-        \item $A = \{1,3,A,C\}$
-        \item $A = \{ x_1, x_2, \ldots, x_n\}$ (that is, $n$ elements for some finite $n \geq 1$ and the $i$th element is $x_i$)
-        \item $A = \{x_1,x_2, \ldots\}$ (an infinite number of elements)
-    \end{itemize}
+          \begin{itemize}
+              \item $A = \{1,3,A,C\}$
+              \item $A = \{ x_1, x_2, \ldots, x_n\}$ (that is, $n$ elements for some finite $n \geq 1$ and the $i$th element is $x_i$)
+              \item $A = \{x_1,x_2, \ldots\}$ (an infinite number of elements)
+          \end{itemize}
     \item  Rule for membership or set builder notation:
-    \begin{itemize}
-        \item $A = \{w \in \mathbb{Z} : 1\leq w \leq 6\}$
-        \item Special notation for intervals $\in \mathbb{R}$:
-        \begin{itemize}
-            \item $(a,b)$ represents $\{x \in \mathbb{R}: a < x < b\}$
-            \item $[a,b]$ represents $\{x \in \mathbb{R}: a \leq x \leq b\}$
-        \end{itemize}
-        \textit{Note}: $(a,b) \subset \mathbb{R}$ is a set, but $(a,b) \in \mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is also a point on the Cartesian plane or an ordered pair.
-    \end{itemize}
+          \begin{itemize}
+              \item $A = \{w \in \mathbb{Z} : 1\leq w \leq 6\}$
+              \item Special notation for intervals $\in \mathbb{R}$:
+                    \begin{itemize}
+                        \item $(a,b)$ represents $\{x \in \mathbb{R}: a < x < b\}$
+                        \item $[a,b]$ represents $\{x \in \mathbb{R}: a \leq x \leq b\}$
+                    \end{itemize}
+                    \textit{Note}: $(a,b) \subset \mathbb{R}$ is a set, but $(a,b) \in \mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is also a point on the Cartesian plane or an ordered pair.
+          \end{itemize}
 \end{enumerate}
 \defn{Equal sets}{sets $A$ and $B$ are equal if they contain exactly the same elements, and is denoted by $A=B$.}
 \defn{$\mathbf{A \subset B}$}{$(w\in A \implies w\in B)\implies (A \subset B)$ for sets $A$ and $B$ where $A \subset B$ means $A$ is a subset of $B$.}
-\note{ we will not distinguish between proper subsets: 
-\begin{equation*}
-    (A\subset B) \&( A \neq B)
-\end{equation*}
-and subsets.}
+\note{ we will not distinguish between proper subsets:
+    \begin{equation*}
+        (A\subset B) \&( A \neq B)
+    \end{equation*}
+    and subsets.}
 \begin{equation*}
     A = B \iff (A \subset B) \& (B \subset A)
 \end{equation*}
 \subsection{Special Sets}
-The set with no elements is called the empty set or the null set.\\
-Denoted by $\emptyset \text{ or } \{\}$ which is not the same as $\{\emptyset\}$.\\~\\
-The set containing all possible elements of interest is called the universal set $S$. It is known as the sample space within probability, and will contain all possible outcomes of a random experiment.\\
+The set with no elements is called the empty set or the null set.\\ Denoted by
+$\emptyset \text{ or } \{\}$ which is not the same as $\{\emptyset\}$.\\~\\ The
+set containing all possible elements of interest is called the universal set
+$S$. It is known as the sample space within probability, and will contain all
+possible outcomes of a random experiment.\\
 \subsection{Set Operations}
 \begin{itemize}
     \item Intersect ($\cap$): $A\cap B = \{w \in S: (w \in A) \& (w \in B) \}$
     \item Union ($\cup$): $A\cap B = \{w \in S: (w \in A) | (w\in B)\}$
-    \item Complement ($\fbox{\phantom{}}^c$, $\fbox{\phantom{}}'$, $\bar{\fbox{\phantom{}}}$): $A^c = \{w \in S: w \not \in A\}$
+    \item Complement ($\fbox{\phantom{}}^c$, $\fbox{\phantom{}}'$,
+          $\bar{\fbox{\phantom{}}}$): $A^c = \{w \in S: w \not \in A\}$
     \item Disjoint: $A\cap B = \emptyset$
     \item \textit{Difference}: $A-B = A\cap B^c$
 \end{itemize}
 \subsection{Set Algebra}
-Set algebra provides us with a second method to prove that two sets $A,B$ are equal.\\
-It uses the fact that both union and intersection are commutative and associative to prove the statement.\\
-The following are a few properties that come from commutativity and associativity:
+Set algebra provides us with a second method to prove that two sets $A,B$ are
+equal.\\ It uses the fact that both union and intersection are commutative and
+associative to prove the statement.\\ The following are a few properties that
+come from commutativity and associativity:
 \begin{itemize}
     \item $A\cup B = B\cup A$
     \item $A\cap B = B\cap A$
@@ -187,13 +211,13 @@ $\cup$ is distributive over $\cap$ and vice versa:
 \end{itemize}
 \note{ when translating between Set Theory and English
     \begin{itemize}
-        \item $\cup = $ OR  
-        \item $\cap = $ AND  
+        \item $\cup = $ OR
+        \item $\cap = $ AND
     \end{itemize}
 }
 \subsection{Venn Diagram}
-A Venn diagram is a graphical representation of a universal set and its subsets.
-For example:
+A Venn diagram is a graphical representation of a universal set and its
+subsets. For example:
 \begin{center}
     \includegraphics*[width = 100px]{images/venn_example.png}
 \end{center}
@@ -204,35 +228,55 @@ For example:
 There are three kinds of sets:
 \begin{enumerate}
     \item Finite: a set is finite if it has a finite number of elements.
-    \item Countably Infinite: a set is countably infinite if it can be placed into one-to-one correspondance with the integers. Can be written as \begin{equation*}
-        A = \{x_1,x_2,\ldots\} \text{ where } x_i \neq x_j \forall i \neq j
-    \end{equation*}
-    \item Uncountable: set that is neither countable nor finite. 
-    \note{For the context of this class, the uncountably infinite sets will only be $\mathbb{R}$ or intervals of the same.}
-    They cannot be written as $\{x_1,x_2,\ldots\}$
+    \item Countably Infinite: a set is countably infinite if it can be placed into
+          one-to-one correspondance with the integers. Can be written as \begin{equation*}
+              A = \{x_1,x_2,\ldots\} \text{ where } x_i \neq x_j \forall i \neq j
+          \end{equation*}
+    \item Uncountable: set that is neither countable nor finite. \note{For the context of
+              this class, the uncountably infinite sets will only be $\mathbb{R}$ or
+              intervals of the same.} They cannot be written as $\{x_1,x_2,\ldots\}$
 \end{enumerate}
 \subsection{Collections of Sets}
 \begin{itemize}
     \item Finite Collections:
-            \begin{equation*}
-                A_1, A_2, \ldots, A_n
-            \end{equation*}
-            where $A_i \subset S$
+          \begin{equation*}
+              A_1, A_2, \ldots, A_n
+          \end{equation*}
+          where $A_i \subset S$
     \item Countably Infinite Collection:
-            \begin{equation*}
-                A_1, A_2, \ldots
-            \end{equation*}
-            where $A_i \subset S$
+          \begin{equation*}
+              A_1, A_2, \ldots
+          \end{equation*}
+          where $A_i \subset S$
     \item Uncountable Collection: out of bounds for this class!
 \end{itemize}
+\note{All the collections mentioned above are denoted by $\{A_i\}$.}
 \defn{Union of collection}{$\bigcup_i^{\infty,n} A_i = \{w \in S$: $\exists i | w \in A_i$\}}
 \defn{Intersection of collection}{$\bigcap_i^{\infty,n} A_i = \{w \in S$: $w \in A_i \forall i$\}}
 
 \section{Modelling Random Experiments Pt.2}
-We use a probability space to model (almost) any random experiment.
-Three parts make up a probability space: 
+We use a probability space to model (almost) any random experiment. Three parts
+make up a probability space:
 \begin{enumerate}
-    \item Sample Space (S): nonempty set of elements called outcomes. Each time an experiment is run, exactly one outcome occurs.
+    \item Sample Space ($\mathcal{S}$): nonempty set of elements called outcomes. Each
+          time an experiment is run, exactly one outcome occurs. \note{If the outcome is
+              outside $\mathcal{S}$, either the sample space is incomplete, or the case is
+              enough of an outlier to be ignored.} The sample space will be a set that falls
+          under one of the categories that were mentioned before.\\ For infinite sets,
+          the probability cannot be treated as simply the number of times an outcome
+          occurs over the number of possible outcomes.
+    \item Event Space ($\mathcal{F}$): collection of all events (collection of all possible subsets, also known as the power set) in the random experiment.
+          An event is a set of outcomes to which a probability is assigned.\\ An event is
+          a subset of $\mathcal{S}$.\\ An event either occurs or does not occur every time an experiment is run. We can define the occurence of an event as the presence of the occuring outcome within the event.
+          \note{More than one event can occur in a single experiment. That is, an outcome can be in multiple events at once.}
+          \note{It can be assumed that any subset of $\mathcal{S}$ is a valid event for the context of this class. This is not strictly true in practice, but it rarely matters.}
+          \defn{Elementary Event}{and event containing only one outcome.}
+          In the case of uncountably infinite sets, $\mathcal{F}$ cannot be explicitly written. However, certain specific events of interest can be defined and analyzed.
+        %   \sidenoteclass{An event must fulfill the following conditions:
+        %   \begin{enumerate}
+        %     \item 
+        %   \end{enumerate}  
+        %     }
     \item 
 \end{enumerate}
 \end{document}

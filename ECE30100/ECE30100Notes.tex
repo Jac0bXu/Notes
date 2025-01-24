@@ -232,5 +232,23 @@ input directly.
     \item By the period (symmetry under time shift)\\
     CT signal is periodic $\iff \exists T\neq 0 | x(t)=x(t+T) \forall T$. That signal is periodic with period $t$.\\
     DT signal is periodic $\iff \exists N\neq 0 | x[n]=x[n+N] \forall N$. That signal is periodic with period $n$.
+    \defn{Fundamental Period}{Smallest $T$ such that $x(t)=x(t+T)\forall t$, and similar for discrete. These are delineated by $T_0,N_0$.}
+    \note{If a signal is periodic, it means that both its real and imaginary parts are periodic.}
+    If there are two periodic signals, their sum $x_1(t)+x_2(t)$ is periodic if $T = LCM(x_1,x_2)$ exists.
+    \note{$T$ might not exist, if the ration between the signals is irrational.}
+    \item Even and Odd Signals:
+    \defn{Even Signal}{$x(t) = x(-t)$, or, the reversal of the signal is identical.}
+    \defn{Odd Signal}{$x(t) = -x(-t)$, or, it is symmetric across the $x=y$. This has, as a requirement, $x(0) = 0$.}
+    If we were to assign (+1) to EVEN, and (-1) to ODD:
+    \begin{itemize}
+        \item EVEN*EVEN=EVEN
+        \item EVEN*ODD=ODD
+        \item ODD*ODD = EVEN
+    \end{itemize}
+    Any signal can be decomposed as $EVEN+ODD$:
+    \begin{equation*}
+        x(t) = \frac{x(t)+x(-t)}{2}+\frac{x(t)-x(-t)}{2}
+    \end{equation*}
 \end{enumerate}
+
 \end{document}
