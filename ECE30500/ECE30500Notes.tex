@@ -323,7 +323,33 @@ The concentration can be approximated to \begin{equation*}
     N_C = 2 \left[\frac{m_n^* k_B T}{2 \pi \hbar^2}\right]^{\frac{3}{2}}
 \end{equation*}
 and the equivalent for holes.
-\subsection{Carrier Concentration in terms of $E_F$}
-\subsection{Intrinsic Density and $np$ product}
-\subsection{Calculations and Temperature dependancy}
+\subsection*{Carrier Concentration in terms of $E_F$}
+\subsection*{Intrinsic Density and $np$ product}
+\subsection*{Calculations and Temperature dependency}
+\subsection{Carrier Action: Drift}
+Devices depend on the motion of free carriers within semiconductors. We know how to calculate the number of free carriers, now we focus on their movement between regions.\\
+\defn{Thermal Motion}{Thermal Energy
+\begin{equation*}
+    E_T = \frac{3}{2}k_B T
+\end{equation*}
+Motion is completely random in thermal equilibrium, so, there is zero net current.
+}
+The average distance between collisions is known as the mean free path $l_m$.
+$l_m\approx 10nm - 1\mu m$ in Si. By assuming $V_{th} = 10^7 cm/s$, we can get the mean free time, which is $\approx 1ps$.\\
+\defn{Drift}{Motion within Electric Field.\\
+On a macroscopic scale, the carriers are moving in a certain direction ($e^-$ towards $+$ and holes in the opposite direction). \\
+On a microscopic scale, the carriers are bouncing around much more. However, they are still moving in the same general direction.
+}
+The electrons are moving opposite the electric field. The energy bands are thus modified to account for this by having a slope.
+
+\subsection{Band Bending}
+The electric field effectively bends the band diagrams.\\
+$E_c$ and $E_v$ vary in the opposite direction of the voltage, that is, they are higher at lower voltages.
+\begin{equation*}
+    E(x) = -\frac{dV}{dx} = \frac{1}{q}\frac{dE_C}{dx} = \frac{1}{q}\frac{dE_v}{dE_x}
+\end{equation*}
+\note{In equilibrium, $E(x) = 0 \implies E_F = constant$}
+\subsection*{Electrostatic Potential}
+\subsection*{Electric Field within Semiconductor}
+
 \end{document}
