@@ -300,4 +300,30 @@ It can move up and down based on the compositionn of the material, being affecte
 Looking at the Fermi function allows us to notice the temperature dependance of the probability, with probabilties of high energies increasing with higher temperatures.\\~\\
 In an intrinsic semiconductor, the Fermi level is exactly between the conduction and valence bands, making the fermi function probabilties have the following property: $f(E_C) = 1-f(E_V)$.
 \subsection{Carrier Distributions}
+Carriers within a band are distributed as follows:
+\begin{align*}
+    n(E)dE &=g_C(E)dE \times f(E)\\
+    p(E)dE &=g_V(E)dE \times (1-f(E))
+\end{align*}
+This leads to a distribution that looks like this:
+\begin{center}
+    \includegraphics[height = 120px]{images/carrier_distribution.png}
+\end{center}
+That is, at energies slightly higher than (or lower than) there are the most carriers.
+\section{Carrier Concentration}
+\subsection{Non-Degenerate Semiconductor}
+For these, semiconductors, the following approximation can be made:
+\begin{align*}
+    E_F-E_V\geq 3k_B t &\implies f_h(E) \approx e^{(E-E_F)/k_B T}\\
+    E_C-E_F\geq 3k_B t &\implies f_h(E) \approx e^{(E_F-E)/k_B T}
+\end{align*}
+The concentration can be approximated to \begin{equation*}
+    n = N_C e^{(E_F-E_C)/k_B T}
+\end{equation*} where \begin{equation*}
+    N_C = 2 \left[\frac{m_n^* k_B T}{2 \pi \hbar^2}\right]^{\frac{3}{2}}
+\end{equation*}
+and the equivalent for holes.
+\subsection{Carrier Concentration in terms of $E_F$}
+\subsection{Intrinsic Density and $np$ product}
+\subsection{Calculations and Temperature dependancy}
 \end{document}

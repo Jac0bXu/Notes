@@ -277,6 +277,43 @@ make up a probability space:
         %     \item 
         %   \end{enumerate}  
         %     }
-    \item 
+    \item Probability Function or Probability Measure ($\mathit{P}$): a set function that assigns probabilities to events.
+    \begin{equation*}
+        \mathit{P}:\mathcal{F} \rightarrow \mathbb{R}
+    \end{equation*}
+    That is, the probability measure maps the event space to the real numbers. These valid functions are restricted by probability axioms:
+    \defn{Axiom}{ a fundamental rl or assumption that can be used to prove all other properties of the relevant math. They are not proven, but stated.}
+    \begin{enumerate}
+        \item $P(A) \geq 0 ~\forall A\in \mathcal{F}$
+        \item $P(S) = 1 ~\forall~ S$
+        \item $\forall~ A,B: A\cap B = \{\} \implies P(A\cup B)= P(A)+P(B)$
+        \item Same as previous but for countably infinite collection.
+        \note{The reason axiom 3 exists is because it proves axiom 4 for a finite collection. It does not, however, prove it for infinite n.}
+        \note{Axiom (c) is not truly necessary.}
+    \end{enumerate}
+    The axioms can be used to prove properties such as:
+    \begin{itemize}
+        \item $P(\emptyset) = 0$
+        \item $P(A^c) = 1-P(A) ~\forall~A\in\mathcal{F}$
+        \item $\forall~A,B \in \mathcal{F}| P(A\cup B) = P(A)+P(B)-P(A\cap B)$
+        \item $A \subset B \implies P(A) \leq P(B)$
+    \end{itemize}
 \end{enumerate}
+\section{Probability}
+There are several ways to define probabilities.
+\defn{Counting Approach Probability}{$P(A) = \frac{N_A}{N}$ where $N_A$ the number of times event A occurs in all instances of the experiment.}
+\defn{Relative Approach Probability}{$P(A)=\lim_{n\rightarrow\infty}\frac{n_A}{n}$ where $n_A$ is the number of times event occurred during the experiments.}
+Both of these approaches satisfy the axioms we defined before.
+\defn{Conditional Probability}{for any two events $A,B$ with $P(B)\neq 0$, the conditional probability of $A$ given $B$ is:\begin{equation*}
+    P(A|B) = \frac{P(A\cap B)}{P(B)}
+\end{equation*}}
+The previous definition leads to Bayes Theorem, which states:
+\begin{align*}
+    P(A\cap B) = P(A|B)P(B) &= P(B|A)P(A) \text{ if } P(A),P(B) \neq 0\\
+    P(B|A) &= \frac{P(A|B)P(B)}{P(A)}
+\end{align*}
+In case we do not have enough information to get three of the variables in Bayes Theorem, we can use the Total Probability Law (TPL):
+\begin{equation*}
+    P(B) = \sum_{i=1}^{n}P(B|A_i)P(A_i) \text{ if } P(A_i)\neq 0
+\end{equation*}
 \end{document}

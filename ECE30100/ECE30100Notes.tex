@@ -17,6 +17,7 @@
 \usetikzlibrary{shapes}
 \usetikzlibrary{positioning}
 \usetikzlibrary{arrows}
+\usepackage{steinmetz}
 
 % Set up the images/graphics package
 \usepackage{graphicx}
@@ -249,6 +250,83 @@ input directly.
     \begin{equation*}
         x(t) = \frac{x(t)+x(-t)}{2}+\frac{x(t)-x(-t)}{2}
     \end{equation*}
+    \item Complex Exponential Signal: signals of the form
+    \begin{equation*}
+        x(t) = Ce^{\alpha t} \text{ where C and $\alpha$ tend to be complex}
+    \end{equation*}
+    This is often rewritten as
+    \begin{align*}
+        C &= |C|e^{j\phi} = |C|\phase{\phi} \\
+        \alpha &= \sigma + j\omega \\
+        \implies x(t) &= |C|e^{\sigma t}e^{j(\omega t + \phi)}
+    \end{align*}
+    The resulting equation can then be divided into three terms:
+    \begin{enumerate}
+        \item $|C|$ scales the signal
+        \item $e^{\phi t}$ is a real exponential signal:
+        \begin{itemize}
+            \item $\sigma < 0$: exponential decay
+            \item $\sigma > 0$: exponential growth
+            \item $\sigma = 0$: constant 1
+        \end{itemize}
+        \item $e^{j(\omega t + \phi)}$ is a periodic complex exponential:
+        \begin{equation*}
+            e^{j(\omega t + \phi)} = \cos(\omega t +\phi)+j\sin(\omega t + \phi)
+        \end{equation*}
+        This means we have a period of $T = \frac{2\pi}{\omega}$.\\
+        The real part will be the imaginary part shifted by $\pi/2$.\\
+        $\omega$ is known as the fundamental frequency, and $\phi$ is known as the phase.\\
+        So, the resulting function is a scaled sinusoidal of frequency $\omega$ which either grows or decays exponentially, and is phase shifted by $\phi$.\\
+        The instantaneous power of such a function is $|C|^2e^{2\sigma t}$.\\
+        If 
+    \end{enumerate}
 \end{enumerate}
-
+\section{Harmonically Related Complex Exponential (HRCE) Signals}
+Defined by
+\begin{equation*}
+    x_k(t) = e^{jk\omega_0 t}
+\end{equation*}
+Where $k \in \mathbb{Z}$, $\omega_0$ is the fundamental frequency, and $\omega_k=|k|\omega_0$.\\
+The fundamental period of $k$ can be defined as:
+\begin{equation*}
+    T_k = \frac{2\pi}{|k|\omega_0} = \frac{T_0}{|k|}
+\end{equation*}
+In general, we can consider
+\begin{equation*}
+    \cos(\omega t) = \frac{e^{j\omega t}+e^{-j\omega t}}{2}
+\end{equation*}
+\subsection{Discrete Time Complex Exponentials}
+$x[n] = Ce^{\alpha n}$ where $\alpha$ is not necessarily $e$.
+But, when it is, we can rewrite the previous equation as:
+\begin{equation*}
+    x[n]=Ce^{\beta n}, \beta\in\mathbb{C}
+\end{equation*}
+We can then decompose these variables into their components:
+\begin{align*}
+    C &= |C|\phase{\phi}\\
+    B &= \sigma + j\omega
+\end{align*}
+as we mentioned before.\\
+Thus:
+\begin{equation*}
+    x[n] = x_{Re}[n]+jx_{Im}[n] = |C|e^{\sigma n}\cos(\omega n+\phi)+j|C|e^{\sigma n}\sin(\omega n+\phi)
+\end{equation*}
+This signal can be surrounded by an "envelope" defined by the equation(s) $\pm |C|e^{\sigma t}$.
+\subsection{Periodicity in Discrete Time}
+The periodicity in discrete time is not entirely analogous to that of continuous time.
+\note{Let us remember that in CT, if $\omega$ increases, the oscillation rate increases.}
+The difference can be seen in non-integer periods for CT.\\
+Instead of the fundamental period being $T_0=\frac{2\pi}{\omega}$, it will be
+\begin{equation*}
+    N_0 = LCM(T_0=\frac{2\pi}{\omega},1) \text{ if } x[n] = e^{j\omega_0 n}
+\end{equation*}
+If instead we had multiple added frequencies, with different fundamental frequencies, added, the fundamental period would be:
+\begin{equation*}
+    N_0 = LCM(LCM(T_1=\frac{2\pi}{\omega_1},1), LCM(T_2=\frac{2\pi}{\omega_2},1), \cdots)
+\end{equation*}
+If this LCM does not exist, that is, if the period is irrational, $x[n]$ will be aperiodic.
+\subsection{Rate of Oscillation}
+\note{Just increasing $\omega$ does not continuously increase the rate of oscillation of $x[n]$. \\For example, increasing  it by $2\pi$ would produce an identical signal.}
+\note{Due to the previous note, we can conclude that $x[n]$ is not necessarily unique as a function of $\omega$. Due to this, $\omega$ is usually restricted to intervals of length $2\pi$.}
+When $\omega=k\pi$ with $k = 2n+1 | n\in\mathbb{Z}^+$ will always be $(-1)^n$.
 \end{document}
